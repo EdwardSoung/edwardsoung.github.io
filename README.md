@@ -1,11 +1,9 @@
-# Millennial
+# Introduction
 
-Millennial is a minimalist Jekyll theme for running a simple, clean, content-focused publishing platform for your publication site or blog through [Github Pages](https://pages.github.com/), or on your own server. Everything that you will ever need to know about this Jekyll theme is included in the README below, which you can also find in [the demo site](https://lenpaul.github.io/Millennial/). For a guide on how to deploy a Jekyll site using GitHub Pages, please check out [this article](https://paulle.ca/jekyll-tutorials/deploy-jekyll-site-github-pages).
+This repository is for a personal blog page.
+Using Jekyll with theme[Referenced theme](https://lenpaul.github.io/Millennial/).
 
-If you like my work then please consider supporting me with [Ko-fi](https://ko-fi.com/paulle).
-
-![alt text](https://user-images.githubusercontent.com/8409329/32801138-33a72030-c94a-11e7-8a62-6184e6df5a8f.png "Millennial Demo Image")
-
+<!--
 ## Notable features
 
 * Compatible with GitHub Pages.
@@ -267,3 +265,5 @@ This theme is completely free and open source software. You may use it however y
 ## License
 
 Open sourced under the [MIT license](https://github.com/LeNPaul/Millennial/blob/gh-pages/LICENSE.md).
+
+-->
