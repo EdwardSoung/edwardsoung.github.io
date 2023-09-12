@@ -1,7 +1,7 @@
 # Introduction
 
 This repository is for a personal blog page.
-Using Jekyll with theme[Referenced theme](https://lenpaul.github.io/Millennial/).
+Using Jekyll with theme [[Referenced theme](https://lenpaul.github.io/Millennial/)].
 
 <!--
 ## Notable features
