@@ -6,7 +6,7 @@ categories: portfolio
 tags:
   - Portfolio
   - VR
-image: Western_Gunfight.png
+image: Western_Gunfight.jpg
 published: true
 ---
 
