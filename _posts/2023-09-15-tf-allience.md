@@ -27,6 +27,7 @@ image: cuba-2.jpg
  - 로딩 UI 연출 수정(Spine -> Unity Animation)
  - 상점 UI 및 구매 시스템 구현
  - 아이템 획득 연출 UI 구현
+ - 치트 UI 리뉴얼(inputfield -> dropdown형태)
  
 3. 시스템 구현
  - 사운드 매니저 구현(Audio Mixer 사용)
@@ -35,3 +36,4 @@ image: cuba-2.jpg
  - Localize 시스템 구현(컴포넌트 및 코드 호출)
  - WebView 적용 구현(gree webview)
  - Infinity ScrollVeiw 구현(Github 코드 참조)
+ - 전투 모니터링 툴 구현
