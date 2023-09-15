@@ -1,5 +1,13 @@
 ---
 published: false
+layout: post
+author: Hyunwoo Soung
+categories: portfolio
+tags:
+  - Portfolio
+  - Unity
+  - AR
+image: cuba-2.jpg
 ---
 ## [근무 정보]  
 기간 : 2022.11 ~ 개발중
