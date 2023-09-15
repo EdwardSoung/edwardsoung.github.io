@@ -1,5 +1,5 @@
 ---
-published: false
+published: tru
 layout: post
 author: Hyunwoo Soung
 categories: portfolio
