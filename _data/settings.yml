@@ -16,7 +16,7 @@ menu:
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
 social:
-- {icon: 'git', link:    'http://git.firstvillain.com'}
+- {icon: 'git', link:    'http://git.firstvillain.com/Public'}
 - {icon: 'facebook', link:   'https://www.facebook.com/edwardsoung'}
 - {icon: 'instagram', link:  'https://instagram.com/edeward_soung'}
 - {icon: 'envelope', link:   'mailto:dev@firstvillain.com'}
