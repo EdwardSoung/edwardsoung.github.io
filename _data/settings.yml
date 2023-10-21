@@ -9,7 +9,7 @@ google-ID: 'UA-112060364-2'
 menu:
 - {name: 'Portfolio',  url: 'portfolio'}
 - {name: 'Unity', url: 'unity'}
-#- {name: 'Sample Posts',       url: 'sample-posts'}
+- {name: 'Study',       url: 'study'}
 #- {name: 'Documentation',      url: 'documentation'}
 - {name: 'About',              url: 'about'}
 #- {name: 'Contact',            url: 'contact'}
