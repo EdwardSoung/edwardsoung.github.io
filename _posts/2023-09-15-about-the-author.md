@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Intro
+title: GetUserInfo()
 author: Hyunwoo Soung
 categories: about
 tags: []
