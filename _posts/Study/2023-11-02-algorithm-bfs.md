@@ -9,6 +9,8 @@ tags:
 image: algorithm.jpg
 published: true
 ---
+[내용 참조 : https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html](https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html)   
+이해 후 정리 필요   
 
 ## BFS[너비 우선 탐색]   
    
@@ -25,7 +27,7 @@ published: true
 - 너비 우선 탐색(BFS)이 깊이 우선 탐색(DFS)보다 좀 더 복잡하다.  
 <br><br>
 
-#### 너비 우선 탐색(BFS)의 특징  
+#### 2. 너비 우선 탐색(BFS)의 특징  
 - 직관적이지 않은 면이 있다.  
 - BFS는 시작 노드에서 시작해서 거리에 따라 단계별로 탐색한다고 볼 수 있다.  
 - BFS는 재귀적으로 동작하지 않는다.  
@@ -59,7 +61,7 @@ void search(Node root)
 }
  ```
 
-### 너비 우선 탐색(BFS)의 시간 복잡도  
+### 3. 너비 우선 탐색(BFS)의 시간 복잡도  
    
 인접 리스트로 표현된 그래프: O(N+E)  
 인접 행렬로 표현된 그래프: O(N^2)  
