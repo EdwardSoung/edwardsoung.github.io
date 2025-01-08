@@ -16,7 +16,7 @@ menu:
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
 social:
-- {icon: 'git', link:    'http://github.com/EdwardSoung'}
+- {icon: 'git', link:    'https://github.com/EdwardSoung/MiniGame-PushPush'}
 - {icon: 'facebook', link:   'https://www.facebook.com/edwardsoung'}
 - {icon: 'instagram', link:  'https://instagram.com/edward_soung'}
 - {icon: 'envelope', link:   'mailto:allegoria88@gmail.com'}
