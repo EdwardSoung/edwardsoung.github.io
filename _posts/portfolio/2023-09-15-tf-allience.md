@@ -1,5 +1,6 @@
 ---
 layout: post
+title: 트랜스포머
 author: Hyunwoo Soung
 categories: portfolio
 tags:
@@ -11,7 +12,7 @@ published: true
 ---
 ## [근무 정보]  
 사명 : 스노우파이프  
-기간 : 2022.11 ~ 개발중  
+기간 : 2022.11 ~ 2023.12  
 직책 : 팀원  
 내용 : 트랜스포머 IP 기반 AR게임 개발  
   
