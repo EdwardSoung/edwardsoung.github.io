@@ -40,4 +40,6 @@ published: true
  - Localize 시스템 구현(컴포넌트 및 코드 호출)
  - WebView 적용 구현(gree webview)
  - Infinity ScrollVeiw 구현(Github 코드 참조)
- - 전투 모니터링 툴 구현
+  
+ 4. 툴 작업
+ - 전투 모니터링 툴 구현(스탯 및 데미지, 효과에 따른 데미지 등)
