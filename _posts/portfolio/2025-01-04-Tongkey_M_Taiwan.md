@@ -9,6 +9,7 @@ tags:
   - RPG
 image: Tongkey_Taiwan.jpg
 published: true
+noindex: true
 ---
 ## [근무 정보]
 사명 : 스노우파이프  
