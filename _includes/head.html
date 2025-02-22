@@ -7,8 +7,10 @@
     {% endif %}
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
+  {% if page.noindex %}
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex, nofollow">
+  {% endif %}
   <meta charset="utf-8">
   <link rel="stylesheet" href="{{ site.github.url }}/assets/css/main.css">
   <link rel="stylesheet" href="{{ site.github.url }}/assets/css/syntax.css">
