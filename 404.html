@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Level Not Found</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow: hidden; /* 배경 애니메이션을 위해 스크롤 방지 */
+        }
+
+        /* 픽셀 폰트 (게임 오버 텍스트용) */
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* 글리치 효과 애니메이션 */
+        .glitch {
+            position: relative;
+        }
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(18px, 9999px, 81px, 0); }
+            20% { clip: rect(66px, 9999px, 14px, 0); }
+            40% { clip: rect(6px, 9999px, 86px, 0); }
+            60% { clip: rect(38px, 9999px, 5px, 0); }
+            80% { clip: rect(93px, 9999px, 66px, 0); }
+            100% { clip: rect(27px, 9999px, 6px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 92px, 0); }
+            20% { clip: rect(10px, 9999px, 2px, 0); }
+            40% { clip: rect(95px, 9999px, 22px, 0); }
+            60% { clip: rect(32px, 9999px, 88px, 0); }
+            80% { clip: rect(18px, 9999px, 43px, 0); }
+            100% { clip: rect(9px, 9999px, 5px, 0); }
+        }
+
+        /* 배경 장식 애니메이션 */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center relative">
+
+    <!-- 배경 장식 (떠다니는 도형들) -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="floating-shape" style="left: 10%; top: 100%; width: 50px; height: 50px; background: var(--accent); animation-delay: 0s;"></div>
+        <div class="floating-shape" style="left: 30%; top: 100%; width: 80px; height: 80px; border: 2px solid #3b82f6; border-radius: 50%; animation-delay: 5s;"></div>
+        <div class="floating-shape" style="left: 70%; top: 100%; width: 40px; height: 40px; background: #ef4444; animation-delay: 2s;"></div>
+        <div class="floating-shape" style="left: 85%; top: 100%; width: 60px; height: 60px; border: 2px solid var(--accent); transform: rotate(45deg); animation-delay: 8s;"></div>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="relative z-10 text-center px-4">
+        
+        <!-- 404 텍스트 (글리치 효과) -->
+        <h1 class="pixel-font text-6xl md:text-9xl font-bold text-white mb-4 glitch" data-text="404">
+            404
+        </h1>
+        
+        <h2 class="text-2xl md:text-4xl font-bold text-emerald-400 mb-6 tracking-tight">
+            Level Not Found
+        </h2>
+        
+        <p class="text-sub text-lg mb-12 max-w-md mx-auto">
+            죄송합니다. 요청하신 퀘스트 지역을 찾을 수 없습니다.<br>
+            삭제되었거나 아직 구현되지 않은 맵입니다.
+        </p>
+
+        <!-- 버튼 그룹 -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="index.html" class="px-8 py-3 rounded-full font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 group">
+                <i data-lucide="refresh-ccw" class="w-5 h-5 group-hover:rotate-180 transition duration-500"></i>
+                Respawn (Home)
+            </a>
+            <a href="javascript:history.back()" class="px-8 py-3 rounded-full font-bold border border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white transition flex items-center justify-center gap-2">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                Check Point (Back)
+            </a>
+        </div>
+    </div>
+
+    <!-- 하단 장식 -->
+    <div class="absolute bottom-8 text-slate-600 text-sm font-mono">
+        Error Code: MAP_LOAD_FAILED
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
