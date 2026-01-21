@@ -7,7 +7,8 @@
     "gradient": "from-green-800 to-slate-900",
     "badges": ["Unity", "OBT", "CBT"],
     "summary": "모바일 2D MMORPG. 컨텐츠 시스템 개발 및 레거시 코드 리팩토링, 최적화 작업을 수행했습니다.",
-    "tags": ["C#", "Optimization", "Supercat"],
+    "company": "슈퍼캣",
+    "tags": ["C#", "Optimization"],
     "url": "posts/portfolio/unity/tigeronline.html"
   },
   {
@@ -18,29 +19,60 @@
     "gradient": "from-indigo-900 to-purple-900",
     "badges": ["Unity", "Dev"],
     "summary": "트랜스포머 IP를 사용한 수집형 AR 게임으로, 개발 초기에 찹여했습니다.",
+    "company": "스노우파이프",
     "tags": ["C#", "AR", "Unity"],
     "url": "posts/portfolio/unity/tf-alience.html"
   },
   {
     "id": 3,
-    "title": "오픈월드 액션 RPG",
-    "category": "unreal",
-    "imageText": "Ethereal Blade",
-    "gradient": "from-slate-900 to-gray-700",
-    "badges": ["UE5"],
-    "summary": "언리얼 엔진 5의 GAS(Gameplay Ability System)를 활용한 액션 RPG 프로토타입. Behavior Tree 최적화에 집중했습니다.",
-    "tags": ["C++", "GAS", "AI"],
-    "url": "#"
+    "title": "피구왕 통키M(대만)",
+    "category": "unity",
+    "image": "../assets/img/Tongkey_Taiwan.jpg"
+    "imageText": "피구왕 통키",
+    "gradient": "from-indigo-900 to-purple-900",
+    "badges": ["Unity", "Dev"],
+    "summary": "피구왕 통키M 대만 런칭 및 라이브 서비스",
+    "company": "스노우파이프",
+    "tags": ["C#", "Unity", "3rd Party", "Live"],
+    "url": "posts/portfolio/unity/tf-alience.html"
   },
   {
     "id": 4,
-    "title": "멀티플레이어 FPS",
+    "title": "피구왕 통키M",
     "category": "unity",
-    "imageText": "FPS Project",
+    "image": "../assets/img/Tongkey.jpg"
+    "imageText": "",
+    "gradient": "from-indigo-900 to-purple-900",
+    "badges": ["Unity", "Dev"],
+    "summary": "피구왕 통키 M 라이브 서비스",
+    "company": "스노우파이프",
+    "tags": ["C#", "Unity", "Live"],
+    "url": "posts/portfolio/unity/tongkey.html"
+  },
+  {
+    "id": 5,
+    "title": "Western Gunfight VR",
+    "category": "unity",
+    "image": "../assets/img/western_gunfight.jpg"
+    "imageText": "Western Gunfight",
+    "gradient": "from-slate-900 to-gray-700",
+    "badges": ["Unity", "VR"],
+    "summary": "교육 과정 중 팀 프로젝트로 개발한 서부 총잡이 컨셉 VR 게임입니다.",
+    "company": "빌런게임즈(팀프로젝트)",
+    "tags": ["C#", "Unity", "VR"],
+    "url": "#"
+  },
+  {
+    "id": 6,
+    "title": "다이아데인",
+    "category": "unity",
+    "image": "../assets/img/Diadein.jpg"
+    "imageText": "다이아데인",
     "gradient": "from-gray-900 to-blue-900",
     "badges": ["Unity"],
-    "summary": "Netcode for GameObjects(NGO)를 사용한 4vs4 데스매치. 서버 권한 이동 및 레이턴시 보정 알고리즘 구현.",
-    "tags": ["C#", "Netcode", "FPS"],
+    "summary": "수집형 2D RPG 게임",
+    "company": "슈퍼앰프드",
+    "tags": ["C#", "RPG"],
     "url": "#"
   }
 ]

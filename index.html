@@ -306,28 +306,27 @@
                     }
 
                     const html = `
-                        <article class="fade-in-item group rounded-2xl overflow-hidden bg-sec border border-theme hover:border-emerald-500/50 transition duration-300 hover:shadow-2xl hover:shadow-emerald-900/20 flex flex-col h-full" style="animation-delay: ${index * 0.1}s;">
-                            <a href="${proj.url}" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
-                                ${imageContentHtml}
-                                ${badgesHtml}
+                         <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" 
+                             style="animation-delay: ${index * 0.05}s; background-color: var(--bg-secondary);">
+                        <a href="${proj.url}" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
+                            ${imageContentHtml}
+                            ${badgesHtml}
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <a href="${proj.url}" class="group">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition" style="color: var(--text-main);">${proj.title}</h3>
                             </a>
-                            <div class="p-8 flex flex-col flex-grow">
-                                <a href="${proj.url}">
-                                    <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition">${proj.title}</h3>
-                                </a>
-                                <p class="text-sub text-sm mb-6 leading-relaxed flex-grow line-clamp-3">
-                                    ${proj.summary}
-                                </p>
-                                <div class="flex flex-wrap gap-2 mb-6">
-                                    ${tagsHtml}
-                                </div>
-                                <div class="flex gap-4 pt-2 border-t border-slate-700 mt-auto">
-                                    <a href="#" class="text-sm font-medium hover:text-emerald-400 flex items-center gap-2 transition">
-                                        <i data-lucide="github" class="w-4 h-4"></i> Source
-                                    </a>
-                                </div>
+                            <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">${proj.summary}</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                ${tagsHtml}
                             </div>
-                        </article>
+                            <div class="flex gap-4 pt-2 border-t border-slate-700 mt-auto items-center">
+                                <span class="text-sm font-medium text-sub flex items-center gap-2">
+                                    <i data-lucide="building-2" class="w-4 h-4"></i> ${proj.company || 'Personal Project'}
+                                </span>
+                            </div>
+                        </div>
+                    </article>
                     `;
                     container.innerHTML += html;
                 });
