@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "title": "Algorithm Study - Sorting",
+    "date": "2026. 01. 21",
+    "category": "cs",
+    "summary": "컴퓨터 과학의 기초가 되는 정렬 알고리즘의 개념(Selection, Bubble, Merge, Quick 등)과 C# 구현 코드를 정리했습니다.",
+    "tags": ["Sort", "Algorithm", "CSharp"],
+    "url": "study_sorting.html",
+    "iconType": "lucide",
+    "iconValue": "binary"
+  },
+  {
+    "id": 2,
+    "title": "[Unreal] 가비지 컬렉션과 스마트 포인터 심층 분석",
+    "date": "2023. 10. 24",
+    "category": "unreal",
+    "summary": "언리얼 엔진의 UObject GC 메커니즘과 일반 C++ 객체를 위한 스마트 포인터(SharedPtr, WeakPtr)의 차이점과 올바른 사용법을 정리했습니다.",
+    "tags": ["Unreal", "Memory"],
+    "url": "#",
+    "iconType": "text",
+    "iconValue": "U"
+  },
+  {
+    "id": 3,
+    "title": "[Unity] Coroutine vs UniTask 성능 벤치마킹",
+    "date": "2023. 09. 15",
+    "category": "unity",
+    "summary": "Unity 코루틴의 오버헤드를 분석하고, 구조체 기반의 UniTask로 전환했을 때의 메모리 할당량 감소와 성능 이점을 비교했습니다.",
+    "tags": ["Unity", "Async"],
+    "url": "#",
+    "iconType": "text",
+    "iconValue": "Ut"
+  },
+  {
+    "id": 4,
+    "title": "멀티플레이어 이동 동기화: 추측 항법(Dead Reckoning)",
+    "date": "2023. 08. 02",
+    "category": "cs",
+    "summary": "네트워크 지연(Lag) 상황에서도 끊김 없는 움직임을 보여주기 위한 추측 항법 알고리즘 구현 원리와 보간(Interpolation) 처리 방법.",
+    "tags": ["Network", "Algorithm"],
+    "url": "#",
+    "iconType": "lucide",
+    "iconValue": "network"
+  },
+  {
+    "id": 5,
+    "title": "상태 패턴(State Pattern)으로 스파게티 코드 리팩토링하기",
+    "date": "2023. 07. 10",
+    "category": "cs",
+    "summary": "if-else문으로 점철된 캐릭터 컨트롤러를 상태 패턴을 적용하여 유한 상태 머신(FSM) 구조로 변경한 리팩토링 과정 기록.",
+    "tags": ["DesignPattern", "Refactoring"],
+    "url": "#",
+    "iconType": "lucide",
+    "iconValue": "layout-template"
+  },
+  {
+    "id": 6,
+    "title": "URP 쉐이더 그래프로 물(Water) 효과 만들기",
+    "date": "2023. 06. 20",
+    "category": "unity",
+    "summary": "Depth Texture를 활용한 깊이감 표현과 노멀 맵 스크롤링을 통한 파도 움직임 구현. 모바일 최적화를 위한 팁 포함.",
+    "tags": ["Unity", "Shader"],
+    "url": "#",
+    "iconType": "lucide",
+    "iconValue": "palette"
+  },
+  {
+    "id": 7,
+    "title": "C++ 이동 시멘틱(Move Semantics)과 rvalue 참조 완벽 이해",
+    "date": "2023. 05. 05",
+    "category": "cs",
+    "summary": "불필요한 복사를 줄여 성능을 높이는 이동 생성자와 이동 대입 연산자의 원리, std::move의 역할에 대한 정리.",
+    "tags": ["Cpp", "ModernCpp"],
+    "url": "#",
+    "iconType": "text",
+    "iconValue": "C++"
+  }
+]
