@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - Transformer AR</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 상세 페이지 전용 스타일 */
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tech-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
+                </a>
+                <div class="flex gap-4">
+                    <a href="#" class="p-2 text-sub hover:text-white hover:bg-white/10 rounded-full transition" title="Company Website">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-20 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-red-900 via-slate-900 to-blue-900 opacity-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">스노우파이프 (Snowpipe)</span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> 2022.11 - 2023.12
+                </span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4"></i> 클라이언트 팀원
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Project: 트랜스포머 IP 기반 AR 게임<br>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">Augmented Reality Action RPG</span>
+            </h1>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-pill">Unity C#</span>
+                <span class="tech-pill">AR</span>
+                <span class="tech-pill">CineMachine</span>
+                <span class="tech-pill">AssetBundle</span>
+                <span class="tech-pill">Developing</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 (목차 & 요약) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
+            <div>
+                <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
+                <nav class="space-y-1">
+                    <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
+                    <a href="#combat" class="toc-link hover:text-white">주요 업무: 전투 시스템</a>
+                    <a href="#system" class="toc-link hover:text-white">주요 업무: 시스템 구현</a>
+                    <a href="#content" class="toc-link hover:text-white">주요 업무: 컨텐츠 & 툴</a>
+                </nav>
+            </div>
+            
+            <div class="p-6 rounded-xl bg-secondary border border-theme" style="background-color: var(--bg-secondary); border-color: var(--border);">
+                <h4 class="font-bold text-white mb-3">내 역할 (My Role)</h4>
+                <ul class="text-sm text-sub space-y-2 list-disc list-inside">
+                    <li>AR 슈팅 전투 및 스킬 로직 구현</li>
+                    <li>시네머신 연출 및 미니게임 개발</li>
+                    <li>핵심 시스템(사운드, 로컬라이징, 풀링) 구축</li>
+                    <li>유니티 에디터 툴 제작</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 오른쪽: 본문 콘텐츠 -->
+        <div class="lg:col-span-9 space-y-16">
+            
+            <!-- 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-6 h-6 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub">
+                    <p class="mb-4">
+                        글로벌 IP인 '트랜스포머(Transformers)'를 활용한 AR(증강현실) 기반의 액션 게임 개발 프로젝트입니다. 
+                        스노우파이프에서 팀원으로 참여하여 2022년 11월부터 2023년 12월까지 약 1년 1개월간 개발을 진행했습니다.
+                    </p>
+                    <p>
+                        AR 환경에서의 실감 나는 전투 경험을 위한 슈팅 및 스킬 시스템 구현을 주도했으며, 
+                        안정적인 라이브 서비스를 위한 기반 시스템(에셋 로드, IAP, 사운드 등)과 개발 효율을 높이는 내부 툴 제작을 담당했습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 전투 개발 -->
+            <section id="combat" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Core Gameplay: 전투 시스템 개발</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        AR 게임의 핵심 재미인 '슈팅 전투'와 캐릭터성을 강조하는 '스킬 연출' 부분을 중점적으로 구현했습니다.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="crosshair" class="w-4 h-4 text-emerald-500"></i> 전투 로직 구현
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>기본 슈팅 전투:</strong> 터치 입력을 기반으로 한 발사체 로직 및 피격 판정 처리.</li>
+                                <li><strong>적 AI 패턴:</strong> 상태 머신 기반의 적 AI(이동, 기본 공격, 스킬 사용) 구현으로 전투 다양성 확보.</li>
+                                <li><strong>스킬 시스템:</strong> 캐릭터별 고유 스킬 로직 구현 및 쿨타임, 데미지 계산 처리.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="video" class="w-4 h-4 text-emerald-500"></i> 연출 및 미니게임
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>CineMachine 연출:</strong> 스킬 사용 및 태그(캐릭터 교체) 시 Unity CineMachine을 활용한 역동적인 카메라 연출 작업.</li>
+                                <li><strong>스킬 미니게임:</strong> 단순히 버튼을 누르는 것을 넘어, 스킬 발동 시 재미를 더하는 QTE 방식의 미니게임 로직 구현.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 시스템 작업 -->
+            <section id="system" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">System Architecture: 기반 시스템 구축</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        게임의 성능 최적화와 안정적인 리소스 관리를 위한 클라이언트 코어 시스템들을 구현했습니다.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="package" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">리소스 관리 시스템</h4>
+                                <p class="text-sm mt-1">
+                                    초기 앱 용량을 줄이고 유연한 패치를 위해 <strong>번들 다운로드 및 에셋 로드 시스템</strong>을 구현했습니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="cpu" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">성능 최적화 (Pooling)</h4>
+                                <p class="text-sm mt-1">
+                                    빈번하게 생성/파괴되는 투사체 및 이펙트 처리를 위해 <strong>Unity ObjectPool</strong>을 활용한 풀링 시스템을 구축하여 가비지 컬렉션(GC) 부하를 최소화했습니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="music" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">사운드 & 로컬라이징</h4>
+                                <p class="text-sm mt-1">
+                                    BGM/SFX를 효율적으로 제어하는 사운드 매니저와 글로벌 서비스를 위한 다국어(Localize) 시스템을 구현했습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 컨텐츠 및 툴 -->
+            <section id="content" class="scroll-mt-24">
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Feature & Tools: 컨텐츠 및 툴 개발</h2>
+                </div>
+                <div class="space-y-4 text-sub">
+                    <p>
+                        사용자 경험(UX) 향상을 위한 UI 구현과 개발 효율성을 높이기 위한 내부 툴 작업을 수행했습니다.
+                    </p>
+                    
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <li class="bg-secondary p-4 rounded-lg border border-theme">
+                            <h4 class="font-bold text-white mb-2">UI/UX 구현</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>전투 편성 화면 및 결과 화면(Result) 구현.</li>
+                                <li>인게임 설정 UI 리뉴얼 작업.</li>
+                                <li>대량의 리스트를 효율적으로 보여주기 위한 <strong>Infinity ScrollView</strong> 구현 (Github 참조 최적화).</li>
+                            </ul>
+                        </li>
+                        <li class="bg-secondary p-4 rounded-lg border border-theme">
+                            <h4 class="font-bold text-white mb-2">BM & 서드파티</h4>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>상점 UI 및 <strong>IAP(In-App Purchase)</strong> 결제 모듈 연동.</li>
+                                <li>공지사항 및 이벤트 표시를 위한 웹뷰(gree WebView) 연동 작업.</li>
+                            </ul>
+                        </li>
+                        <li class="bg-secondary p-4 rounded-lg border border-theme col-span-1 md:col-span-2">
+                            <h4 class="font-bold text-white mb-2">개발 생산성 도구 (Unity Editor Tool)</h4>
+                            <p class="text-sm">
+                                QA 및 밸런스 테스트 효율을 위해 <strong>전투 모니터링 툴</strong>을 제작하여 실시간 데이터를 시각화하고, 개발자용 <strong>치트 UI</strong>를 리뉴얼하여 테스트 접근성을 개선했습니다.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
