@@ -6,7 +6,7 @@
     "category": "cs",
     "summary": "정렬 알고리즘의 개념(Selection, Bubble, Merge, Quick 등)과 C# 구현 코드를 정리했습니다.",
     "tags": ["Sort", "Algorithm", "CSharp"],
-    "url": "posts/study/algorithm/algorithm-sort.html",
+    "url": "../posts/study/algorithm/algorithm-sort.html",
     "iconType": "lucide",
     "iconValue": "binary"
   },
