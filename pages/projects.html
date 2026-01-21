@@ -198,15 +198,28 @@
                     return `<span class="tech-tag">${tag}</span>`;
                 }).join('');
 
-                // 뱃지 HTML 생성
+                // 뱃지 HTML 처리 (수정됨: 그룹화)
                 let badgesHtml = '';
-                proj.badges.forEach(badge => {
-                    if (badge === 'LIVE SERVICE') {
-                        badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">LIVE SERVICE</div>`;
-                    } else {
-                        badgesHtml += `<div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">${badge}</div>`;
-                    }
-                });
+                let topRightBadges = []; // 우측 상단 뱃지들을 모을 배열
+
+                if (proj.badges) {
+                    proj.badges.forEach(badge => {
+                        if (badge === 'LIVE SERVICE') {
+                            // LIVE SERVICE는 왼쪽 하단 고정
+                            badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg z-10">LIVE</div>`;
+                        } else {
+                            // 나머지는 배열에 html string으로 저장 (absolute 제거)
+                            topRightBadges.push(`<span class="bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10 whitespace-nowrap">${badge}</span>`);
+                        }
+                    });
+                }
+
+                // 우측 상단 뱃지들을 하나의 컨테이너로 묶어서 추가 (flex gap-2 적용)
+                if (topRightBadges.length > 0) {
+                    badgesHtml += `<div class="absolute top-3 right-3 flex gap-2 flex-wrap justify-end z-10 max-w-[80%]">
+                        ${topRightBadges.join('')}
+                    </div>`;
+                }
 
                 // 카드 HTML 생성
                 const cardHtml = `
