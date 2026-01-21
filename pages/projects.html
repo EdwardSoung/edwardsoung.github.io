@@ -75,16 +75,6 @@
             color: #ffffff;
             border-color: var(--accent);
         }
-
-        /* 태그 스타일 */
-        .tech-tag {
-            font-size: 0.75rem;
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-sub);
-        }
         
         /* 스크롤바 */
         ::-webkit-scrollbar { width: 8px; }
@@ -190,13 +180,6 @@
                 grid.innerHTML = '<div class="col-span-full text-center text-sub py-8">해당하는 프로젝트가 없습니다.</div>';
                 return;
             }
-
-            projects.forEach((proj, index) => {
-                // 태그 HTML 생성
-                const tagsHtml = proj.tags.map(tag => {
-                    return `<span class="tech-tag">${tag}</span>`;
-                }).join('');
-
                 // 뱃지 HTML 처리 (수정됨: 그룹화)
                 let badgesHtml = '';
                 let topRightBadges = []; // 우측 상단 뱃지들을 모을 배열
