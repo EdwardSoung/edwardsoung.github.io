@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - 환세취호전 온라인</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Syntax Highlighting (Prism.js) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 상세 페이지 전용 스타일 */
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        /* 네비게이션바 그라데이션 */
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* 기술 태그 스타일 */
+        .tech-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* 목차(TOC) 스타일 */
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
+                </a>
+                <div class="flex gap-4">
+                    <a href="#" class="p-2 text-sub hover:text-white hover:bg-white/10 rounded-full transition" title="Company Website">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 (프로젝트 헤더) -->
+    <header class="relative py-20 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <!-- 배경: RPG 게임 분위기 -->
+            <div class="w-full h-full bg-gradient-to-br from-green-900 via-emerald-950 to-slate-900 opacity-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">슈퍼캣 (Supercat)</span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> 2023.12 - 2025.01
+                </span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4"></i> 클라이언트 팀원
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Project: 환세취호전 온라인<br>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">Mobile MMORPG</span>
+            </h1>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-pill">Unity C#</span>
+                <span class="tech-pill">System Optimization</span>
+                <span class="tech-pill">UI/UX Implementation</span>
+                <span class="tech-pill">Refactoring</span>
+                <span class="tech-pill">Live Service</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 (목차 & 요약) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
+            <div>
+                <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
+                <nav class="space-y-1">
+                    <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
+                    <a href="#features" class="toc-link hover:text-white">주요 업무: 컨텐츠</a>
+                    <a href="#technical-1" class="toc-link hover:text-white">⚡ Tech: 리팩토링</a>
+                    <a href="#technical-2" class="toc-link hover:text-white">⚡ Tech: 코드 최적화</a>
+                    <a href="#technical-3" class="toc-link hover:text-white">⚡ Tech: 시스템 대응</a>
+                    <a href="#retrospective" class="toc-link hover:text-white">회고 및 성과</a>
+                </nav>
+            </div>
+            
+            <div class="p-6 rounded-xl bg-secondary border border-theme" style="background-color: var(--bg-secondary); border-color: var(--border);">
+                <h4 class="font-bold text-white mb-3">내 역할 (My Role)</h4>
+                <ul class="text-sm text-sub space-y-2 list-disc list-inside">
+                    <li>컨텐츠 시스템 개발 및 유지보수</li>
+                    <li>레거시 코드 리팩토링</li>
+                    <li>게임 시스템 예외 처리</li>
+                    <li>LINQ 최적화 및 성능 개선</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 오른쪽: 본문 콘텐츠 -->
+        <div class="lg:col-span-9 space-y-16">
+            
+            <!-- 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-6 h-6 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub">
+                    <p class="mb-4">
+                        <strong>환세취호전 온라인</strong>은 고전 명작 IP를 현대적인 모바일 MMORPG로 재해석한 프로젝트입니다.
+                        슈퍼캣에서 팀원으로 참여하여 약 1년 1개월간 라이브 서비스 중 발생하는 신규 컨텐츠 개발과 기존 시스템의 구조 개선(리팩토링) 업무를 수행했습니다.
+                    </p>
+                    <p>
+                        특히 방대한 데이터를 다루는 도감 시스템 구축과 복잡한 팀 편성 로직의 효율화, 그리고 모바일 환경 특화 시스템 처리(오디오, 팝업)에 기여했습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 주요 컨텐츠 개발 -->
+            <section id="features" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">주요 업무: 컨텐츠 시스템 개발</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sub">
+                    <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                        <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                            <i data-lucide="book" class="w-4 h-4 text-emerald-500"></i> 도감 및 수집 시스템
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li><strong>몬스터 도감:</strong> 처치한 몬스터 정보를 기록하고 보상을 지급하는 UI 및 데이터 처리 로직 구현.</li>
+                            <li><strong>장비 도감:</strong> 획득한 장비의 히스토리를 관리하고 세트 효과를 활성화하는 로직 개발.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                        <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                            <i data-lucide="users" class="w-4 h-4 text-emerald-500"></i> 캐릭터 및 팀 관리
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li><strong>팀 편성 버프:</strong> 특정 캐릭터 조합 시 발생하는 시너지 버프 시스템 구현.</li>
+                            <li><strong>스킨 변경:</strong> 캐릭터 외형 변경 및 능력치 적용 시스템 개발.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 리팩토링 -->
+            <section id="technical-1" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Technical: 레거시 리팩토링</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        기존 코드의 유지보수성을 높이고 확장성을 확보하기 위해 주요 시스템의 구조를 개선했습니다.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">업적 시스템 리팩토링</h4>
+                                <p class="text-sm mt-1">하드코딩된 업적 조건을 제거하고, 데이터 테이블 기반의 이벤트 트리거 방식으로 변경하여 기획자의 데이터 수정만으로 신규 업적 추가가 가능하도록 개선.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="layers" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">팀 편성 로직 개선</h4>
+                                <p class="text-sm mt-1">복잡한 조건문으로 얽혀있던 팀 편성 로직을 분리하고, UI 업데이트와 데이터 처리 로직을 비동기적으로 분리하여 반응 속도 개선.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 최적화 (LINQ) -->
+            <section id="technical-2" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Technical: 코드 최적화 (LINQ 정리)</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        모바일 환경에서의 GC(Garbage Collection) 스파이크를 줄이기 위해, 매 프레임 호출되거나 빈번하게 실행되는 핫 패스(Hot path) 구간의 <strong>LINQ</strong> 사용을 제거했습니다.
+                    </p>
+
+                    <div class="bg-slate-950 rounded-xl p-6 border border-theme">
+                        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wide flex items-center gap-2">
+                            <i data-lucide="code" class="w-4 h-4 text-emerald-500"></i> Optimization Example
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-red-400 mb-2 font-mono">// Before: LINQ (Allocation 발생)</p>
+                                <pre class="overflow-x-auto text-xs code-font text-gray-300 p-3 bg-slate-900 rounded border border-red-900/50"><code class="language-csharp">var activeBuffs = allBuffs
+    .Where(b => b.IsActive)
+    .Select(b => b.Id)
+    .ToList(); // 매 호출마다 새 List 할당</code></pre>
+                            </div>
+                            <div>
+                                <p class="text-xs text-emerald-400 mb-2 font-mono">// After: Loop (Zero Allocation)</p>
+                                <pre class="overflow-x-auto text-xs code-font text-gray-300 p-3 bg-slate-900 rounded border border-emerald-900/50"><code class="language-csharp">_tempBuffIds.Clear(); // 재사용 리스트
+for (int i = 0; i < allBuffs.Count; i++) {
+    if (allBuffs[i].IsActive) {
+        _tempBuffIds.Add(allBuffs[i].Id);
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-400">
+                            ▲ 편리함보다 성능이 중요한 인게임 로직에서 LINQ를 제거하여 불필요한 메모리 할당을 방지했습니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 시스템 처리 -->
+            <section id="technical-3" class="scroll-mt-24">
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">System: 예외 상황 및 OS 대응</h2>
+                </div>
+                <div class="space-y-4 text-sub">
+                    <p>
+                        게임의 완성도를 높이고 마켓 검수 통과를 위해 OS 레벨의 이벤트를 처리했습니다.
+                    </p>
+                    
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <li class="bg-secondary p-4 rounded-lg border border-theme">
+                            <h4 class="font-bold text-white mb-2">오디오 기기 변경 감지</h4>
+                            <p class="text-sm">블루투스 이어폰 연결/해제 시 사운드 출력이 끊기거나 볼륨이 초기화되는 문제를 방지하기 위해, 오디오 장치 변경 이벤트를 감지하고 사운드 엔진을 재초기화하는 로직 추가.</p>
+                        </li>
+                        <li class="bg-secondary p-4 rounded-lg border border-theme">
+                            <h4 class="font-bold text-white mb-2">게임 종료 팝업 처리</h4>
+                            <p class="text-sm">안드로이드 백버튼 등의 입력으로 게임 종료 시도 시, 실수로 종료되는 것을 막기 위한 시스템 팝업 및 종료 프로세스 구현.</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 회고 -->
+            <section id="retrospective" class="py-8 bg-slate-900/50 rounded-2xl border border-theme px-8 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-4">Post Mortem</h2>
+                <div class="space-y-4">
+                    <p class="text-sub">
+                        라이브 서비스 중인 프로젝트에 투입되어, 기존 코드의 맥락을 빠르게 파악하고 안정적으로 신규 컨텐츠를 추가하는 경험을 했습니다. 
+                        단순 구현을 넘어 <strong>"왜 이 코드를 고쳐야 하는가(최적화, 유지보수)"</strong>에 대해 고민하며 리팩토링을 수행했습니다.
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2024 Client Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
