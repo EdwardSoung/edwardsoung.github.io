@@ -42,16 +42,5 @@
     "summary": "Netcode for GameObjects(NGO)를 사용한 4vs4 데스매치. 서버 권한 이동 및 레이턴시 보정 알고리즘 구현.",
     "tags": ["C#", "Netcode", "FPS"],
     "url": "#"
-  },
-  {
-    "id": 5,
-    "title": "HLSL & Shader Graph",
-    "category": "tech",
-    "imageText": "Shader Study",
-    "gradient": "from-purple-900 to-pink-900",
-    "badges": ["Tech"],
-    "summary": "카툰 렌더링, 물 표면 효과, 볼류메트릭 포그 등 다양한 쉐이더 기법 연구 및 구현 모음집.",
-    "tags": ["HLSL", "URP", "Compute Shader"],
-    "url": "#"
   }
 ]
