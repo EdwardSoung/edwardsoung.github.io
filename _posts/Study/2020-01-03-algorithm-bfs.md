@@ -1,14 +1,4 @@
----
-layout: post
-title: Algorithm - BFS[Breadth-First Serch]
-author: Hyunwoo Soung
-categories: study
-tags:
-  - Sort
-  - Algorithm
-image: algorithm.jpg
-published: true
----
+
 [내용 참조 : https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html](https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html)   
 이해 후 정리 필요   
 
