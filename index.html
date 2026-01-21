@@ -257,8 +257,8 @@
         // 1. 프로젝트 데이터 가져오기 (상위 3개만 표시)
         async function loadProjects() {
             try {
-                // 만약 json 파일이 'data' 폴더 안에 있다면 'data/projects.json'으로 수정하세요.
-                const response = await fetch('data/projects-data.json?t=' + Date.now());
+                // 캐시 방지를 위해 timestamp 추가
+                const response = await fetch('../data/projects-data.json?t=' + Date.now());
                 if (!response.ok) throw new Error('Failed to load projects');
                 
                 const projects = await response.json();
@@ -269,16 +269,27 @@
                 const recentProjects = projects.slice(0, 3);
 
                 recentProjects.forEach((proj, index) => {
-                    // 뱃지 HTML
+                    // 뱃지 HTML 처리 수정 (여러 개일 경우 겹치지 않게 그룹화)
                     let badgesHtml = '';
+                    let topRightBadges = []; // 우측 상단 뱃지들을 모을 배열
+
                     if (proj.badges) {
                         proj.badges.forEach(badge => {
                             if (badge === 'LIVE SERVICE') {
-                                badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">LIVE</div>`;
+                                // LIVE SERVICE는 왼쪽 하단 고정 (z-10 추가)
+                                badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg z-10">LIVE</div>`;
                             } else {
-                                badgesHtml += `<div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">${badge}</div>`;
+                                // 나머지는 배열에 html string으로 저장 (absolute 제거)
+                                topRightBadges.push(`<span class="bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10 whitespace-nowrap">${badge}</span>`);
                             }
                         });
+                    }
+
+                    // 우측 상단 뱃지들을 하나의 컨테이너로 묶어서 추가
+                    if (topRightBadges.length > 0) {
+                        badgesHtml += `<div class="absolute top-3 right-3 flex gap-2 flex-wrap justify-end z-10 max-w-[80%]">
+                            ${topRightBadges.join('')}
+                        </div>`;
                     }
 
                     // 태그 HTML
@@ -325,8 +336,8 @@
         // 2. 로그 데이터 가져오기 (상위 3개만 표시)
         async function loadLogs() {
             try {
-                // 만약 json 파일이 'data' 폴더 안에 있다면 'data/data.json'으로 수정하세요.
-                const response = await fetch('data/logs-data.json?t=' + Date.now());
+                // 캐시 방지를 위해 timestamp 추가
+                const response = await fetch('../data/logs-data.json?t=' + Date.now());
                 if (!response.ok) throw new Error('Failed to load logs');
                 
                 const logs = await response.json();
