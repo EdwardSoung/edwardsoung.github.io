@@ -1,15 +1,4 @@
----
-layout: post
-title: 피구왕통키M - 대만
-author: Hyunwoo Soung
-categories: portfolio
-tags:
-  - Portfolio
-  - Unity
-  - RPG
-image: Tongkey_Taiwan.jpg
-published: true
----
+
 ## [근무 정보]
 사명 : 스노우파이프  
 기간 : 2021.04 ~ 2022.11  
