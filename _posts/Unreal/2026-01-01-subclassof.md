@@ -1,3 +1,14 @@
+---
+layout: post
+title: TSubClassOf
+author: Hyunwoo Soung
+categories: unreal
+tags: []
+image: unreal-logo.png
+published: true
+noindex: true
+---
+
 TSubClassOf
 
 1. UClass 객체
