@@ -39,6 +39,8 @@
         .log-card {
             transition: all 0.3s ease;
             border: 1px solid var(--border);
+            opacity: 0; /* 초기 로딩 애니메이션용 */
+            animation: fadeIn 0.5s forwards;
         }
         .log-card:hover {
             transform: translateY(-3px);
@@ -51,6 +53,10 @@
         .log-card:hover .log-icon-box {
             background-color: var(--accent);
             color: white;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         /* 필터 버튼 스타일 */
@@ -89,7 +95,8 @@
     <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <a href="index.html" class="flex items-center gap-2 group">
+                <!-- 상위 폴더로 이동(../) 하도록 설정 -->
+                <a href="../index.html" class="flex items-center gap-2 group">
                     <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
                     <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
                 </a>
@@ -112,7 +119,7 @@
                 </div>
                 
                 <!-- 필터 버튼 그룹 -->
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2" id="filter-container">
                     <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium" onclick="filterLogs('all', this)">All</button>
                     <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" onclick="filterLogs('unreal', this)">Unreal</button>
                     <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" onclick="filterLogs('unity', this)">Unity</button>
@@ -120,117 +127,13 @@
                 </div>
             </div>
 
-            <!-- 로그 리스트 (그리드 형태) -->
+            <!-- 로그 리스트 (데이터 로딩 전) -->
             <div id="log-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                <!-- 1. Unreal GC -->
-                <a href="#" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" data-category="unreal">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
-                            <span class="font-bold text-lg">U</span>
-                        </div>
-                        <span class="text-xs text-sub">2023. 10. 24</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">가비지 컬렉션과 스마트 포인터 심층 분석</h3>
-                    <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">
-                        언리얼 엔진의 UObject GC 메커니즘과 일반 C++ 객체를 위한 스마트 포인터(SharedPtr, WeakPtr)의 차이점과 올바른 사용법을 정리했습니다.
-                    </p>
-                    <div class="flex gap-2 mt-auto">
-                        <span class="tag bg-slate-700 text-blue-300">#Unreal</span>
-                        <span class="tag bg-slate-700 text-blue-300">#Memory</span>
-                    </div>
-                </a>
-
-                <!-- 2. Unity UniTask -->
-                <a href="#" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" data-category="unity">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
-                            <span class="font-bold text-lg">Ut</span>
-                        </div>
-                        <span class="text-xs text-sub">2023. 09. 15</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">Coroutine vs UniTask 성능 벤치마킹</h3>
-                    <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">
-                        Unity 코루틴의 오버헤드를 분석하고, 구조체 기반의 UniTask로 전환했을 때의 메모리 할당량 감소와 성능 이점을 비교했습니다.
-                    </p>
-                    <div class="flex gap-2 mt-auto">
-                        <span class="tag bg-slate-700 text-white">#Unity</span>
-                        <span class="tag bg-slate-700 text-white">#Async</span>
-                    </div>
-                </a>
-
-                <!-- 3. Network Dead Reckoning -->
-                <a href="#" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" data-category="cs">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
-                            <i data-lucide="network" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-xs text-sub">2023. 08. 02</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">멀티플레이어 이동 동기화: 추측 항법(Dead Reckoning)</h3>
-                    <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">
-                        네트워크 지연(Lag) 상황에서도 끊김 없는 움직임을 보여주기 위한 추측 항법 알고리즘 구현 원리와 보간(Interpolation) 처리 방법.
-                    </p>
-                    <div class="flex gap-2 mt-auto">
-                        <span class="tag bg-slate-700 text-purple-300">#Network</span>
-                        <span class="tag bg-slate-700 text-purple-300">#Algorithm</span>
-                    </div>
-                </a>
-
-                <!-- 4. Design Pattern FSM -->
-                <a href="#" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" data-category="cs">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
-                            <i data-lucide="layout-template" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-xs text-sub">2023. 07. 10</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">상태 패턴(State Pattern)으로 스파게티 코드 리팩토링하기</h3>
-                    <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">
-                        if-else문으로 점철된 캐릭터 컨트롤러를 상태 패턴을 적용하여 유한 상태 머신(FSM) 구조로 변경한 리팩토링 과정 기록.
-                    </p>
-                    <div class="flex gap-2 mt-auto">
-                        <span class="tag bg-slate-700 text-yellow-300">#DesignPattern</span>
-                        <span class="tag bg-slate-700 text-yellow-300">#Refactoring</span>
-                    </div>
-                </a>
-
-                <!-- 5. Shader Graph -->
-                <a href="#" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" data-category="unity">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
-                            <i data-lucide="palette" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-xs text-sub">2023. 06. 20</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">URP 쉐이더 그래프로 물(Water) 효과 만들기</h3>
-                    <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">
-                        Depth Texture를 활용한 깊이감 표현과 노멀 맵 스크롤링을 통한 파도 움직임 구현. 모바일 최적화를 위한 팁 포함.
-                    </p>
-                    <div class="flex gap-2 mt-auto">
-                        <span class="tag bg-slate-700 text-white">#Unity</span>
-                        <span class="tag bg-slate-700 text-white">#Shader</span>
-                    </div>
-                </a>
-
-                <!-- 6. C++ Move Semantics -->
-                <a href="#" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" data-category="cs">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
-                            <span class="font-bold text-lg">C++</span>
-                        </div>
-                        <span class="text-xs text-sub">2023. 05. 05</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">C++ 이동 시멘틱(Move Semantics)과 rvalue 참조 완벽 이해</h3>
-                    <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">
-                        불필요한 복사를 줄여 성능을 높이는 이동 생성자와 이동 대입 연산자의 원리, std::move의 역할에 대한 정리.
-                    </p>
-                    <div class="flex gap-2 mt-auto">
-                        <span class="tag bg-slate-700 text-pink-300">#Cpp</span>
-                        <span class="tag bg-slate-700 text-pink-300">#ModernCpp</span>
-                    </div>
-                </a>
-
+                <!-- 자바스크립트로 데이터가 로드되면 이곳에 카드가 채워집니다 -->
+                <div class="col-span-full text-center py-12 text-sub">
+                    <div class="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-emerald-500 rounded-full mb-2" role="status" aria-label="loading"></div>
+                    <p>Loading logs...</p>
+                </div>
             </div>
         </div>
     </main>
@@ -243,32 +146,99 @@
     </footer>
 
     <script>
-        lucide.createIcons();
+        // 전역 변수로 로그 데이터 저장
+        let allLogs = [];
+
+        // 페이지 로드 시 데이터 가져오기
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchLogs();
+        });
+
+        async function fetchLogs() {
+            try {
+                // data.json 파일이 logs.html과 같은 폴더에 있다고 가정
+                const response = await fetch('logs_data.json');
+                if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다.');
+                
+                allLogs = await response.json();
+                
+                // 초기 렌더링 (전체 보기)
+                renderLogs(allLogs);
+                
+                // 아이콘 갱신 (Lucide)
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('log-grid').innerHTML = `
+                    <div class="col-span-full text-center text-red-400 py-8">
+                        <p>로그 목록을 불러오지 못했습니다. (로컬 환경에서는 보안 문제로 보이지 않을 수 있습니다)</p>
+                        <p class="text-xs mt-2 text-slate-500">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderLogs(logs) {
+            const grid = document.getElementById('log-grid');
+            grid.innerHTML = ''; // 기존 내용 초기화
+
+            if (logs.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center text-sub py-8">해당하는 로그가 없습니다.</div>';
+                return;
+            }
+
+            logs.forEach((log, index) => {
+                // 태그 HTML 생성
+                const tagsHtml = log.tags.map(tag => {
+                    // 태그 색상은 랜덤 혹은 고정값 사용 (여기서는 간단히 고정)
+                    return `<span class="tag bg-slate-700 text-emerald-300">#${tag}</span>`;
+                }).join('');
+
+                // 아이콘 HTML 생성
+                let iconHtml = '';
+                if (log.iconType === 'lucide') {
+                    iconHtml = `<i data-lucide="${log.iconValue}" class="w-5 h-5"></i>`;
+                } else {
+                    iconHtml = `<span class="font-bold text-lg">${log.iconValue}</span>`;
+                }
+
+                // 카드 HTML 생성
+                const cardHtml = `
+                    <a href="${log.url}" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" style="animation-delay: ${index * 0.05}s; background-color: var(--bg-secondary);">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="log-icon-box w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-emerald-500">
+                                ${iconHtml}
+                            </div>
+                            <span class="text-xs text-sub">${log.date}</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition" style="color: var(--text-main);">${log.title}</h3>
+                        <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">${log.summary}</p>
+                        <div class="flex gap-2 mt-auto flex-wrap">
+                            ${tagsHtml}
+                        </div>
+                    </a>
+                `;
+                
+                grid.innerHTML += cardHtml;
+            });
+
+            // 동적으로 추가된 Lucide 아이콘 렌더링
+            lucide.createIcons();
+        }
 
         function filterLogs(category, btn) {
             // 버튼 활성화 상태 변경
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // 그리드 아이템 필터링
-            const items = document.querySelectorAll('.log-card');
-            
-            items.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'flex';
-                    // 부드러운 전환 효과
-                    item.style.opacity = '0';
-                    setTimeout(() => item.style.opacity = '1', 50);
-                } else {
-                    if (item.dataset.category === category || (category === 'cs' && (item.dataset.category === 'cs'))) {
-                        item.style.display = 'flex';
-                        item.style.opacity = '0';
-                        setTimeout(() => item.style.opacity = '1', 50);
-                    } else {
-                        item.style.display = 'none';
-                    }
-                }
-            });
+            // 데이터 필터링
+            if (category === 'all') {
+                renderLogs(allLogs);
+            } else {
+                const filtered = allLogs.filter(log => log.category === category);
+                renderLogs(filtered);
+            }
         }
     </script>
 </body>
