@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Study - DFS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Syntax Highlighting (Prism.js) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* 테마 변수 (Visual Showcase) */
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+            --accent: #10b981;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        
+        .section-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .algo-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="logs.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Logs</span>
+                </a>
+                <div class="flex gap-4">
+                    <span class="text-sm font-mono text-emerald-500 border border-emerald-500/30 px-3 py-1 rounded-full bg-emerald-500/10">Algorithm / Graph</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="py-16 border-b border-theme relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-slate-900 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                DFS (Depth-First Search)
+            </h1>
+            <p class="text-lg text-sub max-w-2xl">
+                깊이 우선 탐색: 다음 분기(Branch)로 넘어가기 전에 해당 분기를 완벽하게 탐색하는 방법.<br>
+                미로 탐색이나 트리 순회에 주로 사용됩니다.
+            </p>
+            <div class="flex gap-2 mt-6">
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Search</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Graph</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Recursion</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 (목차) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit hidden lg:block">
+            <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Contents</h3>
+            <nav class="space-y-1">
+                <a href="#definition" class="toc-link hover:text-white">1. 깊이 우선 탐색이란?</a>
+                <a href="#features" class="toc-link hover:text-white">2. 특징 및 주의점</a>
+                <a href="#implementation" class="toc-link hover:text-white">3. 구현 (Code)</a>
+                <a href="#complexity" class="toc-link hover:text-white">4. 시간 복잡도</a>
+            </nav>
+        </aside>
+
+        <!-- 오른쪽: 본문 -->
+        <div class="lg:col-span-9 space-y-12">
+
+            <!-- 1. 정의 -->
+            <section id="definition">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        1. 깊이 우선 탐색이란?
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4">
+                        루트 노드(혹은 다른 임의의 노드)에서 시작해서 다음 분기(branch)로 넘어가기 전에 <span class="highlight-text">해당 분기를 완벽하게 탐색</span>하는 방법입니다.
+                    </p>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                        <h4 class="font-bold text-white mb-2 text-sm">💡 개념적 이해</h4>
+                        <ul class="list-disc list-inside text-sm text-sub mt-2 space-y-2">
+                            <li>미로 탐색 시 한 방향으로 갈 수 있을 때까지 계속 가다가, 더 이상 갈 수 없으면 다시 가장 가까운 갈림길로 돌아와서 다른 방향을 탐색하는 것과 유사합니다.</li>
+                            <li>즉, 넓게(Wide) 탐색하기 전에 <span class="highlight-text">깊게(Deep)</span> 탐색하는 방식입니다.</li>
+                            <li><strong>사용 예시:</strong> 모든 노드를 방문하고자 하는 경우에 주로 선택합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 특징 -->
+            <section id="features">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        2. 특징 및 주의점
+                    </h2>
+                </div>
+                <ul class="list-disc list-inside space-y-3 text-sub ml-2">
+                    <li><span class="text-white font-bold">순환 알고리즘:</span> 자기 자신을 호출하는 재귀(Recursive) 형태를 가집니다.</li>
+                    <li><span class="text-white font-bold">트리 순회:</span> 전위 순회(Pre-Order)를 포함한 다른 트리 순회 방식은 모두 DFS의 한 종류입니다.</li>
+                    <li><span class="text-white font-bold">방문 검사 필수:</span> 그래프 탐색 시 어떤 노드를 방문했는지 여부(visited)를 반드시 검사해야 무한 루프를 방지할 수 있습니다.</li>
+                    <li><span class="text-white font-bold">속도 비교:</span> 단순 검색 속도 자체는 너비 우선 탐색(BFS)에 비해 느릴 수 있습니다.</li>
+                </ul>
+            </section>
+
+            <!-- 3. 구현 -->
+            <section id="implementation">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        3. 구현 (Code)
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- Pseudo Code -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 mb-2">Pseudo Code</p>
+                        <pre class="rounded bg-slate-950 p-4 text-xs h-80 overflow-auto border border-slate-700 text-slate-300">
+void search(Node root) {
+  if (root == null) return;
+  
+  // 1. root 노드 방문
+  visit(root);
+  root.visited = true; // 방문 표시
+
+  // 2. 인접 정점 방문
+  foreach (Node n in root.adjacent) {
+    if (n.visited == false) { 
+      search(n); // 재귀 호출
+    }
+  }
+}</pre>
+                    </div>
+                    <!-- C# Code -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                        <pre class="rounded bg-slate-950 p-4 text-xs h-80 overflow-auto border border-slate-700"><code class="language-csharp">public void DFS(Node root)
+{
+    if (root == null) return;
+
+    // 1. 노드 방문 처리
+    Visit(root);
+    root.Visited = true;
+
+    // 2. 인접 노드 순회 (재귀)
+    foreach (Node n in root.Adjacent)
+    {
+        // 방문하지 않은 정점만 탐색
+        if (n.Visited == false)
+        {
+            DFS(n); // 재귀 호출로 깊게 탐색
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 시간 복잡도 -->
+            <section id="complexity">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        4. 시간 복잡도
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4 text-sm">DFS는 그래프(정점의 수: N, 간선의 수: E)의 모든 간선을 조회합니다.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-emerald-400 mb-2">인접 리스트 (Adjacency List)</h4>
+                            <p class="text-2xl font-mono text-white">\(O(N + E)\)</p>
+                            <p class="text-xs text-sub mt-1">간선이 적은 희소 그래프(Sparse Graph)에서 유리함.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-400 mb-2">인접 행렬 (Adjacency Matrix)</h4>
+                            <p class="text-2xl font-mono text-white">\(O(N^2)\)</p>
+                            <p class="text-xs text-sub mt-1">모든 노드 쌍을 확인해야 하므로 간선이 많을 때 고려.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reference -->
+            <section class="mt-8 pt-8 border-t border-slate-800">
+                <p class="text-xs text-slate-500">
+                    참고: <a href="https://gmlwjd9405.github.io/2018/08/14/algorithm-dfs.html" target="_blank" class="hover:text-emerald-500 underline">gmlwjd9405.github.io - BFS/DFS</a>
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js & MathJax Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

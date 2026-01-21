@@ -12,26 +12,27 @@
   },
   {
     "id": 2,
-    "title": "[Unreal] 가비지 컬렉션과 스마트 포인터 심층 분석",
-    "date": "2023. 10. 24",
-    "category": "unreal",
-    "summary": "언리얼 엔진의 UObject GC 메커니즘과 일반 C++ 객체를 위한 스마트 포인터(SharedPtr, WeakPtr)의 차이점과 올바른 사용법을 정리했습니다.",
-    "tags": ["Unreal", "Memory"],
-    "url": "#",
-    "iconType": "text",
-    "iconValue": "U"
+    "title": "Algorithm Study - BFS (너비 우선 탐색)",
+    "date": "2026. 01. 21",
+    "category": "cs",
+    "summary": "루트 노드에서 시작하여 인접한 노드를 먼저 탐색하는 BFS 알고리즘의 개념, 구현 코드(Queue), 그리고 시간 복잡도를 정리했습니다.",
+    "tags": ["BFS", "Graph", "Search"],
+    "url": "posts/study/algorithm/algorithm-bfs.html",
+    "iconType": "lucide",
+    "iconValue": "share-2"
   },
   {
-    "id": 3,
-    "title": "[Unity] Coroutine vs UniTask 성능 벤치마킹",
-    "date": "2023. 09. 15",
-    "category": "unity",
-    "summary": "Unity 코루틴의 오버헤드를 분석하고, 구조체 기반의 UniTask로 전환했을 때의 메모리 할당량 감소와 성능 이점을 비교했습니다.",
-    "tags": ["Unity", "Async"],
-    "url": "#",
-    "iconType": "text",
-    "iconValue": "Ut"
+    "id":3,
+    "title": "Algorithm Study - DFS (깊이 우선 탐색)",
+    "date": "2026. 01. 21",
+    "category": "cs",
+    "summary": "루트 노드에서 시작하여 인접한 노드를 먼저 탐색하는 BFS 알고리즘의 개념, 구현 코드(Queue), 그리고 시간 복잡도를 정리했습니다.",
+    "tags": ["DFS", "Graph", "Search"],
+    "url": "posts/study/algorithm/algorithm-dfs.html",
+    "iconType": "lucide",
+    "iconValue": "share-2"
   },
+
   {
     "id": 4,
     "title": "멀티플레이어 이동 동기화: 추측 항법(Dead Reckoning)",
