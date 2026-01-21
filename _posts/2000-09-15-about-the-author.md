@@ -1,13 +1,3 @@
----
-layout: post
-title: GetUserInfo()
-author: Hyunwoo Soung
-categories: about
-tags: []
-image: cuba-2.jpg
-published: true
-noindex: true
----
 
 # 성현우  
 
