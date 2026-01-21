@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "환세취호전 온라인",
+    "category": "unity",
+    "imageText": "환세취호전 Online",
+    "gradient": "from-green-800 to-slate-900",
+    "badges": ["Unity", "OBT", "CBT"],
+    "summary": "모바일 2D MMORPG. 컨텐츠 시스템 개발 및 레거시 코드 리팩토링, 최적화 작업을 수행했습니다.",
+    "tags": ["C#", "Optimization", "Supercat"],
+    "url": "posts/portfolio/unity/tigeronline.html"
+  },
+  {
+    "id": 2,
+    "title": "Tiger Online",
+    "category": "unity",
+    "imageText": "Tiger Online",
+    "gradient": "from-indigo-900 to-purple-900",
+    "badges": ["Unity"],
+    "summary": "1인 개발한 캐주얼 멀티플레이어 RPG. 자체 소켓 통신을 이용한 위치 동기화 및 모바일 네트워크 지연 보정 기술을 적용했습니다.",
+    "tags": ["C#", "Socket", "Android/iOS"],
+    "url": "#"
+  },
+  {
+    "id": 3,
+    "title": "오픈월드 액션 RPG",
+    "category": "unreal",
+    "imageText": "Ethereal Blade",
+    "gradient": "from-slate-900 to-gray-700",
+    "badges": ["UE5"],
+    "summary": "언리얼 엔진 5의 GAS(Gameplay Ability System)를 활용한 액션 RPG 프로토타입. Behavior Tree 최적화에 집중했습니다.",
+    "tags": ["C++", "GAS", "AI"],
+    "url": "#"
+  },
+  {
+    "id": 4,
+    "title": "멀티플레이어 FPS",
+    "category": "unity",
+    "imageText": "FPS Project",
+    "gradient": "from-gray-900 to-blue-900",
+    "badges": ["Unity"],
+    "summary": "Netcode for GameObjects(NGO)를 사용한 4vs4 데스매치. 서버 권한 이동 및 레이턴시 보정 알고리즘 구현.",
+    "tags": ["C#", "Netcode", "FPS"],
+    "url": "#"
+  },
+  {
+    "id": 5,
+    "title": "HLSL & Shader Graph",
+    "category": "tech",
+    "imageText": "Shader Study",
+    "gradient": "from-purple-900 to-pink-900",
+    "badges": ["Tech"],
+    "summary": "카툰 렌더링, 물 표면 효과, 볼류메트릭 포그 등 다양한 쉐이더 기법 연구 및 구현 모음집.",
+    "tags": ["HLSL", "URP", "Compute Shader"],
+    "url": "#"
+  }
+]
