@@ -1,27 +1,96 @@
----
----
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
-	<channel>
-		<title>{{ site.title | xml_escape }}</title>
-		<description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
-		<link>{{ site.github.url }}</link>
-		<atom:link href="{{ site.github.url }}/{{ page.path }}" rel="self" type="application/rss+xml" />
-		{% for post in site.posts limit:10 %}
-			<item>
-				<title>{{ post.title | xml_escape }}</title>
-				{% if post.author %}
-					<dc:creator>{{ post.author | xml_escape }}</dc:creator>
-				{% endif %}
-				{% if post.excerpt %}
-					<description>{{ post.excerpt | xml_escape }}</description>
-				{% else %}
-					<description>{{ post.content | xml_escape }}</description>
-				{% endif %}
-				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-				<link>{{ site.url }}{{ post.url }}</link>
-				<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
-			</item>
-		{% endfor %}
-	</channel>
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>Game Developer Dev Log</title>
+    <link>https://edwardsoung.github.io</link>
+    <description>게임 클라이언트 개발자의 학습 기록입니다.</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Wed, 21 Jan 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://your-id.github.io/rss-feed.xml" rel="self" type="application/rss+xml" />
+
+    <!-- Log Item 1 -->
+    <item>
+        <title>[Algorithm] 정렬 알고리즘</title>
+        <link>https://edwardsoung.github.io/posts/study/algorithm/algorithm-sort.html#altorithm-sort</link>
+        <guid>https://edwardsoung.github.io/posts/study/algorithm/algorithm-sort.html#altorithm-sort</guid>
+        <pubDate>Tue, 24 Oct 2023 00:00:00 +0900</pubDate>
+        <description>
+            <![CDATA[
+            주요 정렬 알고리즘을 C# 예시 코드로 정리했습니다.
+            ]]>
+        </description>
+        <category>Unreal</category>
+    </item>
+
+    <!-- Log Item 2 -->
+    <item>
+        <title>[Unity] Coroutine vs UniTask 성능 벤치마킹</title>
+        <link>https://your-id.github.io/logs.html#unity-unitask</link>
+        <guid>https://your-id.github.io/logs.html#unity-unitask</guid>
+        <pubDate>Fri, 15 Sep 2023 00:00:00 +0900</pubDate>
+        <description>
+            <![CDATA[
+            Unity 코루틴의 오버헤드를 분석하고, 구조체 기반의 UniTask로 전환했을 때의 메모리 할당량 감소와 성능 이점을 비교했습니다.
+            ]]>
+        </description>
+        <category>Unity</category>
+    </item>
+
+    <!-- Log Item 3 -->
+    <item>
+        <title>멀티플레이어 이동 동기화: 추측 항법(Dead Reckoning)</title>
+        <link>https://your-id.github.io/logs.html#dead-reckoning</link>
+        <guid>https://your-id.github.io/logs.html#dead-reckoning</guid>
+        <pubDate>Wed, 02 Aug 2023 00:00:00 +0900</pubDate>
+        <description>
+            <![CDATA[
+            네트워크 지연(Lag) 상황에서도 끊김 없는 움직임을 보여주기 위한 추측 항법 알고리즘 구현 원리와 보간(Interpolation) 처리 방법입니다.
+            ]]>
+        </description>
+        <category>Algorithm</category>
+    </item>
+
+    <!-- Log Item 4 -->
+    <item>
+        <title>상태 패턴(State Pattern)으로 스파게티 코드 리팩토링하기</title>
+        <link>https://your-id.github.io/logs.html#state-pattern</link>
+        <guid>https://your-id.github.io/logs.html#state-pattern</guid>
+        <pubDate>Mon, 10 Jul 2023 00:00:00 +0900</pubDate>
+        <description>
+            <![CDATA[
+            if-else문으로 점철된 캐릭터 컨트롤러를 상태 패턴을 적용하여 유한 상태 머신(FSM) 구조로 변경한 리팩토링 과정 기록입니다.
+            ]]>
+        </description>
+        <category>Refactoring</category>
+    </item>
+
+    <!-- Log Item 5 -->
+    <item>
+        <title>URP 쉐이더 그래프로 물(Water) 효과 만들기</title>
+        <link>https://your-id.github.io/logs.html#urp-water</link>
+        <guid>https://your-id.github.io/logs.html#urp-water</guid>
+        <pubDate>Tue, 20 Jun 2023 00:00:00 +0900</pubDate>
+        <description>
+            <![CDATA[
+            Depth Texture를 활용한 깊이감 표현과 노멀 맵 스크롤링을 통한 파도 움직임 구현 방법을 소개합니다.
+            ]]>
+        </description>
+        <category>Unity</category>
+    </item>
+
+    <!-- Log Item 6 -->
+    <item>
+        <title>C++ 이동 시멘틱(Move Semantics)과 rvalue 참조 완벽 이해</title>
+        <link>https://your-id.github.io/logs.html#cpp-move</link>
+        <guid>https://your-id.github.io/logs.html#cpp-move</guid>
+        <pubDate>Fri, 05 May 2023 00:00:00 +0900</pubDate>
+        <description>
+            <![CDATA[
+            불필요한 복사를 줄여 성능을 높이는 이동 생성자와 이동 대입 연산자의 원리, std::move의 역할에 대한 정리입니다.
+            ]]>
+        </description>
+        <category>C++</category>
+    </item>
+
+</channel>
 </rss>
