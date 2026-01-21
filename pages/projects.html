@@ -160,8 +160,8 @@
 
         async function fetchProjects() {
             try {
-                // projects.json 파일 로드
-                const response = await fetch('projects_data.json');
+                // projects.json 파일 로드 (캐시 방지: ?t=timestamp 추가)
+                const response = await fetch('projects.json?t=' + Date.now());
                 if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다.');
                 
                 allProjects = await response.json();
