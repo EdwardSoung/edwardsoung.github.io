@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Study - Sorting</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Syntax Highlighting (Prism.js) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <!-- MathJax (LaTeX 수식 렌더링) -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* 테마 변수 (Visual Showcase) */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        /* 네비게이션바 그라데이션 */
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* 목차(TOC) 스타일 */
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        
+        /* 섹션 헤더 스타일 */
+        .section-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 알고리즘 설명 박스 */
+        .algo-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 스크롤바 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../pages/logs.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Logs</span>
+                </a>
+                <div class="flex gap-4">
+                    <span class="text-sm font-mono text-emerald-500 border border-emerald-500/30 px-3 py-1 rounded-full bg-emerald-500/10">CS / Algorithm</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="py-16 border-b border-theme relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-slate-900 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                Sorting Algorithms
+            </h1>
+            <p class="text-lg text-sub max-w-2xl">
+                정렬 알고리즘의 개념과 C# 구현을 정리한 노트입니다.<br>
+                시간 복잡도와 동작 원리를 비교하며 학습합니다.
+            </p>
+            <div class="flex gap-2 mt-6">
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Sort</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Algorithm</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#C#</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 (목차) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit hidden lg:block">
+            <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Contents</h3>
+            <nav class="space-y-1">
+                <div class="text-xs font-bold text-slate-500 uppercase mt-4 mb-2 px-4">Basic Sorts \(O(n^2)\)</div>
+                <a href="#selection" class="toc-link hover:text-white">1. Selection Sort</a>
+                <a href="#bubble" class="toc-link hover:text-white">2. Bubble Sort</a>
+                <a href="#insertion" class="toc-link hover:text-white">3. Insertion Sort</a>
+                
+                <div class="text-xs font-bold text-slate-500 uppercase mt-6 mb-2 px-4">Advanced \(O(n \log n)\)</div>
+                <a href="#merge" class="toc-link hover:text-white">1. Merge Sort</a>
+                <a href="#quick" class="toc-link hover:text-white">2. Quick Sort</a>
+                <a href="#heap" class="toc-link hover:text-white">3. Heap Sort</a>
+
+                <div class="text-xs font-bold text-slate-500 uppercase mt-6 mb-2 px-4">Special Sorts \(O(n)\)</div>
+                <a href="#radix" class="toc-link hover:text-white">1. Radix Sort</a>
+                <a href="#counting" class="toc-link hover:text-white">2. Counting Sort</a>
+            </nav>
+        </aside>
+
+        <!-- 오른쪽: 본문 -->
+        <div class="lg:col-span-9 space-y-12">
+
+            <!-- 1. 기본 정렬 알고리즘 -->
+            <section>
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        기본 정렬 알고리즘
+                        <span class="text-sm font-normal text-sub ml-2 bg-slate-800 px-2 py-0.5 rounded">평균 \(\Theta(n^2)\)</span>
+                    </h2>
+                </div>
+
+                <!-- Selection Sort -->
+                <div id="selection" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">1. Selection Sort (선택 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">배열에서 가장 큰(또는 작은) 수를 찾아 배열의 정해진 위치와 교환하는 방식입니다.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 mb-2">Pseudo Code</p>
+                            <pre class="rounded bg-slate-950 p-4 text-xs h-64 overflow-auto border border-slate-700 text-slate-300">
+SelectionSort(A[], n)
+{
+  for last <- n downto 2
+  {
+    k <- TheLargest(A, last);
+    A[k] <-> A[last];
+  }
+}</pre>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                            <pre class="rounded bg-slate-950 p-4 text-xs h-64 overflow-auto border border-slate-700"><code class="language-csharp">public void SelectionSort(int[] arr)
+{
+    int n = arr.Length;
+    // 뒤에서부터 채워나가는 방식 (Pseudo Code 기준)
+    for (int last = n - 1; last > 0; last--)
+    {
+        int largest = 0;
+        // 최댓값 인덱스 찾기
+        for (int i = 1; i <= last; i++)
+        {
+            if (arr[i] > arr[largest])
+                largest = i;
+        }
+        
+        // Swap
+        int temp = arr[last];
+        arr[last] = arr[largest];
+        arr[largest] = temp;
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bubble Sort -->
+                <div id="bubble" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">2. Bubble Sort (버블 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">인접한 두 원소를 비교하여 정렬합니다. 최적화를 위해 교환 발생 여부를 체크할 수 있습니다.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 mb-2">Pseudo Code (Optimized)</p>
+                            <pre class="rounded bg-slate-950 p-4 text-xs h-64 overflow-auto border border-slate-700 text-slate-300">
+BubbleSort(A[], n)
+{
+  for last <- n downto 2
+  {
+    sorted <- TRUE;
+    for i <- 1 to last - 1
+    {
+      if(A[i] > A[i+1]) then
+        A[i] <-> A[i+1];
+        sorted <- FALSE;
+    }
+    if(sorted == TRUE) return;
+  } 
+}</pre>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                            <pre class="rounded bg-slate-950 p-4 text-xs h-64 overflow-auto border border-slate-700"><code class="language-csharp">public void BubbleSort(int[] arr)
+{
+    int n = arr.Length;
+    for (int last = n - 1; last > 0; last--)
+    {
+        bool sorted = true;
+        for (int i = 0; i < last; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                // Swap
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                sorted = false;
+            }
+        }
+        // 교환이 없었다면 이미 정렬된 상태
+        if (sorted) return;
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insertion Sort -->
+                <div id="insertion" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">3. Insertion Sort (삽입 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">이미 정렬된 배열 부분에 새로운 원소를 적절한 위치에 삽입하여 정렬 범위를 넓혀갑니다.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 mb-2">Pseudo Code</p>
+                            <pre class="rounded bg-slate-950 p-4 text-xs h-64 overflow-auto border border-slate-700 text-slate-300">
+InsertionSort(A[], n)
+{
+  for i <- 1 to n
+  {
+    loc <- i - 1;
+    newItem <- A[i];
+    while(loc >= 0 and newItem < A[loc])
+    {
+      A[loc + 1] <- A[loc];
+      loc--;
+    }
+    A[loc + 1] <- newItem;
+  }
+}</pre>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                            <pre class="rounded bg-slate-950 p-4 text-xs h-64 overflow-auto border border-slate-700"><code class="language-csharp">public void InsertionSort(int[] arr)
+{
+    int n = arr.Length;
+    for (int i = 1; i < n; i++)
+    {
+        int newItem = arr[i];
+        int loc = i - 1;
+
+        // 자신의 위치를 찾을 때까지 밀어내기
+        while (loc >= 0 && newItem < arr[loc])
+        {
+            arr[loc + 1] = arr[loc];
+            loc--;
+        }
+        arr[loc + 1] = newItem;
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 2. 고급 정렬 알고리즘 -->
+            <section>
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        고급 정렬 알고리즘
+                        <span class="text-sm font-normal text-sub ml-2 bg-slate-800 px-2 py-0.5 rounded">평균 \(\Theta(n\log n)\)</span>
+                    </h2>
+                </div>
+
+                <!-- Merge Sort -->
+                <div id="merge" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">1. Merge Sort (병합 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">분할 정복(Divide and Conquer) 방식을 사용하여 배열을 반으로 나누고, 다시 합치며 정렬합니다.</p>
+                    
+                    <div class="mb-4">
+                        <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                        <pre class="rounded bg-slate-950 p-4 text-xs border border-slate-700"><code class="language-csharp">public void MergeSort(int[] arr, int p, int r)
+{
+    if (p < r)
+    {
+        int q = (p + r) / 2;
+        MergeSort(arr, p, q);      // 왼쪽 정렬
+        MergeSort(arr, q + 1, r);  // 오른쪽 정렬
+        Merge(arr, p, q, r);       // 병합
+    }
+}
+
+public void Merge(int[] arr, int p, int q, int r)
+{
+    int i = p;
+    int j = q + 1;
+    int t = 0;
+    int[] temp = new int[r - p + 1]; // 임시 배열
+
+    while (i <= q && j <= r)
+    {
+        if (arr[i] <= arr[j]) temp[t++] = arr[i++];
+        else temp[t++] = arr[j++];
+    }
+
+    // 남은 원소 처리
+    while (i <= q) temp[t++] = arr[i++];
+    while (j <= r) temp[t++] = arr[j++];
+
+    // 원본 배열에 복사
+    for (int k = 0; k < temp.Length; k++)
+        arr[p + k] = temp[k];
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Quick Sort -->
+                <div id="quick" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">2. Quick Sort (퀵 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">피벗(Pivot)을 기준으로 작은 값은 왼쪽, 큰 값은 오른쪽으로 보내는 분할 정복 알고리즘입니다.</p>
+                    
+                    <div class="mb-4">
+                        <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                        <pre class="rounded bg-slate-950 p-4 text-xs border border-slate-700"><code class="language-csharp">public void QuickSort(int[] arr, int p, int r)
+{
+    if (p < r)
+    {
+        int q = Partition(arr, p, r);
+        QuickSort(arr, p, q - 1);
+        QuickSort(arr, q + 1, r);
+    }
+}
+
+public int Partition(int[] arr, int p, int r)
+{
+    int pivot = arr[r]; // 마지막 원소를 피벗으로 선택
+    int i = p - 1;
+
+    for (int j = p; j < r; j++)
+    {
+        if (arr[j] <= pivot)
+        {
+            i++;
+            // Swap arr[i] and arr[j]
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+    // Swap pivot to correct position
+    int temp2 = arr[i + 1];
+    arr[i + 1] = arr[r];
+    arr[r] = temp2;
+
+    return i + 1;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Heap Sort -->
+                <div id="heap" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">3. Heap Sort (힙 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">최대 힙(Max Heap) 자료구조를 구성하여 최댓값을 계속해서 끝으로 보내는 방식으로 정렬합니다.</p>
+                    
+                    <div class="mb-4">
+                        <p class="text-xs font-bold text-slate-500 mb-2">C# Implementation</p>
+                        <pre class="rounded bg-slate-950 p-4 text-xs border border-slate-700"><code class="language-csharp">public void HeapSort(int[] arr)
+{
+    int n = arr.Length;
+    BuildHeap(arr, n);
+
+    for (int i = n - 1; i > 0; i--)
+    {
+        // 루트(최댓값)를 끝으로 보냄
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        // 힙 속성 유지 (사이즈를 줄여가며)
+        Heapify(arr, 0, i);
+    }
+}
+
+public void BuildHeap(int[] arr, int n)
+{
+    // 마지막 부모 노드부터 위로 올라가며 Heapify
+    for (int i = n / 2 - 1; i >= 0; i--)
+    {
+        Heapify(arr, i, n);
+    }
+}
+
+public void Heapify(int[] arr, int i, int n)
+{
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    if (largest != i)
+    {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+
+        Heapify(arr, largest, n);
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 특수 정렬 알고리즘 -->
+            <section>
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        특수 정렬 알고리즘
+                        <span class="text-sm font-normal text-sub ml-2 bg-slate-800 px-2 py-0.5 rounded">평균 \(\Theta(n)\)</span>
+                    </h2>
+                </div>
+
+                <div id="radix" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">1. Radix Sort (기수 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">낮은 자릿수부터 높은 자릿수까지 차례대로 정렬합니다. 비교 연산을 하지 않는 것이 특징입니다.</p>
+                    <pre class="rounded bg-slate-950 p-4 text-xs border border-slate-700"><code class="language-csharp">// C# Implementation (LSD: Least Significant Digit)
+public void RadixSort(int[] arr)
+{
+    int max = GetMax(arr);
+    
+    // 자릿수(exp)별로 Counting Sort 수행 (1, 10, 100...)
+    for (int exp = 1; max / exp > 0; exp *= 10)
+    {
+        CountingSortForRadix(arr, exp);
+    }
+}
+
+private void CountingSortForRadix(int[] arr, int exp)
+{
+    int n = arr.Length;
+    int[] output = new int[n];
+    int[] count = new int[10]; // 0~9
+
+    for (int i = 0; i < n; i++)
+        count[(arr[i] / exp) % 10]++;
+
+    for (int i = 1; i < 10; i++)
+        count[i] += count[i - 1];
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
+    }
+
+    for (int i = 0; i < n; i++)
+        arr[i] = output[i];
+}</code></pre>
+                </div>
+
+                <div id="counting" class="algo-box scroll-mt-24">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-2">2. Counting Sort (계수 정렬)</h3>
+                    <p class="text-sub mb-4 text-sm">데이터의 값을 직접 세어서 정렬합니다. 데이터의 범위(k)가 작을 때 매우 효율적입니다.</p>
+                    <pre class="rounded bg-slate-950 p-4 text-xs border border-slate-700"><code class="language-csharp">public void CountingSort(int[] arr)
+{
+    int n = arr.Length;
+    if (n == 0) return;
+
+    // 범위 찾기 (음수가 없다고 가정)
+    int max = arr[0];
+    for(int i = 1; i < n; i++)
+        if (arr[i] > max) max = arr[i];
+
+    int[] count = new int[max + 1];
+    int[] output = new int[n];
+
+    // 1. 개수 세기
+    for (int i = 0; i < n; i++)
+        count[arr[i]]++;
+
+    // 2. 누적 합 계산
+    for (int i = 1; i <= max; i++)
+        count[i] += count[i - 1];
+
+    // 3. 출력 배열 배치 (안정성 보장을 위해 역순 순회)
+    for (int i = n - 1; i >= 0; i--)
+    {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    // 복사
+    for (int i = 0; i < n; i++)
+        arr[i] = output[i];
+}</code></pre>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js & MathJax Scripts are loaded in Head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
