@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>void GetUserInfo()</title>
+    <title>Game Dev Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -78,6 +78,15 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-sub); 
         }
+
+        /* 로딩 애니메이션 */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .fade-in-item {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -88,13 +97,13 @@
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
                     <i data-lucide="monitor-play" class="w-6 h-6 accent-text"></i>
-                    <span class="font-bold text-xl tracking-tight">dev-void</span>
+                    <span class="font-bold text-xl tracking-tight">Dev_Portfolio</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#about" class="text-sub hover-accent transition-colors font-medium">소개</a>
                     <a href="#portfolio" class="text-sub hover-accent transition-colors font-medium">프로젝트</a>
                     <a href="#study" class="text-sub hover-accent transition-colors font-medium">DevLog</a>
-                    <a href="https://github.com/EdwardSoung" target="_blank" class="text-sub hover-accent transition-colors">
+                    <a href="https://github.com" target="_blank" class="text-sub hover-accent transition-colors">
                         <i data-lucide="github" class="w-5 h-5"></i>
                     </a>
                 </div>
@@ -124,13 +133,13 @@
                     </h1>
                     <p class="text-lg text-sub max-w-2xl leading-relaxed">
                         상상을 플레이 가능한 현실로 만듭니다.<br>
-                        언리얼 엔진과 유니티를 활용해 게임을 개발합니다.
+                        언리얼 엔진과 유니티를 활용해 최적화된 시스템과 몰입감 있는 경험을 설계합니다.
                     </p>
                     <div class="flex gap-4 pt-6">
-                        <a href="#portfolio" class="px-8 py-3 rounded-full font-bold text-white accent-bg hover:opacity-90 transition shadow-lg shadow-emerald-500/20">
+                        <a href="projects.html" class="px-8 py-3 rounded-full font-bold text-white accent-bg hover:opacity-90 transition shadow-lg shadow-emerald-500/20">
                             View Works
                         </a>
-                        <a href="#study" class="px-8 py-3 rounded-full font-bold border border-theme bg-transparent hover:bg-slate-800 transition text-white">
+                        <a href="logs.html" class="px-8 py-3 rounded-full font-bold border border-theme bg-transparent hover:bg-slate-800 transition text-white">
                             Read Logs
                         </a>
                     </div>
@@ -141,13 +150,12 @@
                          <div class="absolute inset-0 flex items-center justify-center text-white">
                             <i data-lucide="code-2" class="w-24 h-24 opacity-30"></i>
                          </div>
-                         <!-- 여기에 실제 프로필 이미지를 넣으세요: <img src="me.jpg" class="w-full h-full object-cover"> -->
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Tech Stack (아이콘 강조형) -->
+        <!-- Tech Stack -->
         <section class="py-16 bg-sec border-y border-theme">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-wrap justify-center gap-10 md:gap-20">
@@ -179,105 +187,23 @@
                         <span class="text-emerald-500 font-bold tracking-wider text-sm uppercase">Portfolio</span>
                         <h2 class="text-4xl font-bold mt-2">Selected Works</h2>
                     </div>
-                    <a href="pages/projects.html" class="group flex items-center gap-2 text-sub hover:text-emerald-400 transition">
+                    <a href="projects.html" class="group flex items-center gap-2 text-sub hover:text-emerald-400 transition">
                         View All <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Project 1 -->
-                    <article class="group rounded-2xl overflow-hidden bg-sec border border-theme hover:border-emerald-500/50 transition duration-300 hover:shadow-2xl hover:shadow-emerald-900/20 flex flex-col h-full">
-                         <a href="posts/portfolio/unity/tigeronline.html" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
-                           <div class="w-full h-full bg-gradient-to-t from-slate-900 via-slate-800 to-slate-700 flex items-center justify-center project-img">
-                                    <span class="text-white font-bold text-2xl">환세취호전 온라인</span>
-                                </div>
-                                <div class="absolute top-4 right-4 bg-black/80 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10">Unity</div>
-                        </a>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <!-- 제목에도 링크 추가 -->
-                            <a href="posts/portfolio/unity/tigeronline.html" class="inline-block">
-                                <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition">2D MMORPG</h3>
-                            </a>
-                            <p class="text-sub text-sm mb-6 leading-relaxed flex-grow">
-                                유니티 엔진으로 개발된 2D MMORPG 게임입니다.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="tech-tag">C++</span>
-                                <span class="tech-tag">GAS</span>
-                                <span class="tech-tag">AI Tech</span>
-                            </div>
-                            <div class="flex gap-4 pt-2 border-t border-slate-700 mt-auto">                                
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 2 -->
-                    <article class="group rounded-2xl overflow-hidden bg-sec border border-theme hover:border-emerald-500/50 transition duration-300 hover:shadow-2xl hover:shadow-emerald-900/20 flex flex-col h-full">
-                         <a href="project_detail.html" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
-                            <div class="w-full h-full bg-gradient-to-t from-slate-900 via-slate-800 to-slate-700 flex items-center justify-center project-img">
-                                <span class="text-white font-bold text-2xl">Action RPG</span>
-                            </div>
-                            <div class="absolute top-4 right-4 bg-black/80 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10">UE5</div>
-                        </a>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <!-- 제목에도 링크 추가 -->
-                            <a href="project_detail.html" class="inline-block">
-                                <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition">오픈월드 액션 RPG</h3>
-                            </a>
-                            <p class="text-sub text-sm mb-6 leading-relaxed flex-grow">
-                                언리얼 엔진 5의 GAS(Gameplay Ability System)를 활용한 액션 RPG입니다. 비동기 에셋 로딩 시스템과 AI 행동 트리 최적화를 통해 60프레임 방어를 목표로 개발했습니다.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="tech-tag">C++</span>
-                                <span class="tech-tag">GAS</span>
-                                <span class="tech-tag">AI Tech</span>
-                            </div>
-                            <div class="flex gap-4 pt-2 border-t border-slate-700 mt-auto">
-                                <a href="#" class="text-sm font-medium hover:text-emerald-400 flex items-center gap-2 transition">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Source
-                                </a>
-                                <a href="#" class="text-sm font-medium hover:text-emerald-400 flex items-center gap-2 transition">
-                                    <i data-lucide="youtube" class="w-4 h-4"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 3 -->
-                    <article class="group rounded-2xl overflow-hidden bg-sec border border-theme hover:border-emerald-500/50 transition duration-300 hover:shadow-2xl hover:shadow-emerald-900/20 flex flex-col h-full">
-                        <div class="h-56 overflow-hidden bg-gray-900 relative project-img-container">
-                            <div class="w-full h-full bg-gradient-to-t from-slate-900 via-purple-900 to-purple-800 flex items-center justify-center project-img">
-                                <span class="text-white font-bold text-2xl">Shader Graph</span>
-                            </div>
-                            <div class="absolute top-4 right-4 bg-black/80 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10">Tech Art</div>
-                        </div>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition">HLSL & Shader Graph</h3>
-                            <p class="text-sub text-sm mb-6 leading-relaxed flex-grow">
-                                카툰 렌더링, 스타일라이즈드 워터, 볼류메트릭 포그 등 다양한 쉐이더 기법 연구 모음집입니다. URP 파이프라인 최적화에 중점을 두었습니다.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="tech-tag">HLSL</span>
-                                <span class="tech-tag">URP</span>
-                                <span class="tech-tag">Compute Shader</span>
-                            </div>
-                            <div class="flex gap-4 pt-2 border-t border-slate-700 mt-auto">
-                                <a href="#" class="text-sm font-medium hover:text-emerald-400 flex items-center gap-2 transition">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Source
-                                </a>
-                                <a href="#" class="text-sm font-medium hover:text-emerald-400 flex items-center gap-2 transition">
-                                    <i data-lucide="file-text" class="w-4 h-4"></i> Docs
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
+                <!-- 동적으로 채워질 그리드 -->
+                <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 로딩 중 표시 -->
+                    <div class="col-span-full text-center py-12 text-sub">
+                        <div class="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-emerald-500 rounded-full mb-2"></div>
+                        <p>Loading projects...</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Study Log Section (간소화된 리스트) -->
+        <!-- Study Log Section -->
         <section id="study" class="py-24 bg-sec border-t border-theme">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
@@ -286,40 +212,17 @@
                     <p class="text-sub mt-4">개발 과정에서 마주친 기술적 난관과 해결 과정을 기록합니다.</p>
                 </div>
 
-                <div class="space-y-6">
-                    <!-- Log Item 1 -->
-                    <a href="#" class="block p-8 rounded-2xl bg-slate-900 border border-theme hover:border-emerald-500 transition group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">[Unreal] 가비지 컬렉션과 스마트 포인터 심층 분석</h3>
-                            <span class="text-sm text-sub">2023. 10. 24</span>
-                        </div>
-                        <p class="text-sub text-sm leading-relaxed mb-4">
-                            UObject의 GC 메커니즘과 일반 C++ 포인터의 혼용 시 발생하는 댕글링 포인터 문제 해결 사례. TSharedPtr, TWeakPtr의 올바른 사용법 정리.
-                        </p>
-                        <div class="flex gap-3">
-                            <span class="text-xs font-mono text-emerald-500">#Cpp</span>
-                            <span class="text-xs font-mono text-emerald-500">#MemoryManagement</span>
-                        </div>
-                    </a>
-
-                    <!-- Log Item 2 -->
-                    <a href="#" class="block p-8 rounded-2xl bg-slate-900 border border-theme hover:border-emerald-500 transition group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">[Unity] Coroutine vs UniTask 성능 벤치마킹</h3>
-                            <span class="text-sm text-sub">2023. 09. 15</span>
-                        </div>
-                        <p class="text-sub text-sm leading-relaxed mb-4">
-                            대량의 비동기 오브젝트 스폰 시 발생하는 GC 스파이크를 잡기 위해 Coroutine을 UniTask로 전환하며 얻은 프레임 타임 이득 분석.
-                        </p>
-                        <div class="flex gap-3">
-                            <span class="text-xs font-mono text-emerald-500">#Optimization</span>
-                            <span class="text-xs font-mono text-emerald-500">#Async</span>
-                        </div>
-                    </a>
+                <!-- 동적으로 채워질 로그 리스트 -->
+                <div id="log-list" class="space-y-6">
+                    <!-- 로딩 중 표시 -->
+                    <div class="text-center py-12 text-sub">
+                        <div class="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-emerald-500 rounded-full mb-2"></div>
+                        <p>Loading logs...</p>
+                    </div>
                 </div>
                 
                 <div class="text-center mt-12">
-                    <a href="pages/logs.html" class="inline-block px-8 py-3 border border-theme rounded-full hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition text-sm font-medium">
+                    <a href="logs.html" class="inline-block px-8 py-3 border border-theme rounded-full hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition text-sm font-medium">
                         View All Logs
                     </a>
                 </div>
@@ -344,8 +247,122 @@
     </footer>
 
     <script>
-        // 아이콘 렌더링
-        lucide.createIcons();
+        // DOM 로드 시 데이터 가져오기 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+            loadLogs();
+            lucide.createIcons();
+        });
+
+        // 1. 프로젝트 데이터 가져오기 (상위 3개만 표시)
+        async function loadProjects() {
+            try {
+                // 만약 json 파일이 'data' 폴더 안에 있다면 'data/projects.json'으로 수정하세요.
+                const response = await fetch('data/projects-data.json?t=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load projects');
+                
+                const projects = await response.json();
+                const container = document.getElementById('portfolio-grid');
+                container.innerHTML = ''; // 초기화
+
+                // 상위 3개만 자르기
+                const recentProjects = projects.slice(0, 3);
+
+                recentProjects.forEach((proj, index) => {
+                    // 뱃지 HTML
+                    let badgesHtml = '';
+                    if (proj.badges) {
+                        proj.badges.forEach(badge => {
+                            if (badge === 'LIVE SERVICE') {
+                                badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">LIVE</div>`;
+                            } else {
+                                badgesHtml += `<div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">${badge}</div>`;
+                            }
+                        });
+                    }
+
+                    // 태그 HTML
+                    const tagsHtml = proj.tags.slice(0, 3).map(tag => 
+                        `<span class="tech-tag">${tag}</span>`
+                    ).join('');
+
+                    const html = `
+                        <article class="fade-in-item group rounded-2xl overflow-hidden bg-sec border border-theme hover:border-emerald-500/50 transition duration-300 hover:shadow-2xl hover:shadow-emerald-900/20 flex flex-col h-full" style="animation-delay: ${index * 0.1}s;">
+                            <a href="${proj.url}" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
+                                <div class="w-full h-full bg-gradient-to-br ${proj.gradient || 'from-slate-800 to-black'} flex items-center justify-center project-img">
+                                    <span class="text-white font-bold text-2xl">${proj.imageText}</span>
+                                </div>
+                                ${badgesHtml}
+                            </a>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <a href="${proj.url}">
+                                    <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition">${proj.title}</h3>
+                                </a>
+                                <p class="text-sub text-sm mb-6 leading-relaxed flex-grow line-clamp-3">
+                                    ${proj.summary}
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    ${tagsHtml}
+                                </div>
+                                <div class="flex gap-4 pt-2 border-t border-slate-700 mt-auto">
+                                    <a href="#" class="text-sm font-medium hover:text-emerald-400 flex items-center gap-2 transition">
+                                        <i data-lucide="github" class="w-4 h-4"></i> Source
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                    container.innerHTML += html;
+                });
+                lucide.createIcons(); // 새로 추가된 아이콘 렌더링
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('portfolio-grid').innerHTML = '<p class="text-center col-span-full text-red-400">Failed to load projects.</p>';
+            }
+        }
+
+        // 2. 로그 데이터 가져오기 (상위 3개만 표시)
+        async function loadLogs() {
+            try {
+                // 만약 json 파일이 'data' 폴더 안에 있다면 'data/data.json'으로 수정하세요.
+                const response = await fetch('data/logs-data.json?t=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load logs');
+                
+                const logs = await response.json();
+                const container = document.getElementById('log-list');
+                container.innerHTML = '';
+
+                // 상위 3개만 자르기
+                const recentLogs = logs.slice(0, 3);
+
+                recentLogs.forEach((log, index) => {
+                    const tagsHtml = log.tags.map(tag => 
+                        `<span class="text-xs font-mono text-emerald-500">#${tag}</span>`
+                    ).join('');
+
+                    const html = `
+                        <a href="${log.url}" class="fade-in-item block p-8 rounded-2xl bg-slate-900 border border-theme hover:border-emerald-500 transition group" style="animation-delay: ${index * 0.1}s;">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">${log.title}</h3>
+                                <span class="text-sm text-sub">${log.date}</span>
+                            </div>
+                            <p class="text-sub text-sm leading-relaxed mb-4 line-clamp-2">
+                                ${log.summary}
+                            </p>
+                            <div class="flex gap-3">
+                                ${tagsHtml}
+                            </div>
+                        </a>
+                    `;
+                    container.innerHTML += html;
+                });
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('log-list').innerHTML = '<p class="text-center text-red-400">Failed to load logs.</p>';
+            }
+        }
     </script>
 </body>
 </html>
