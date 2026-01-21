@@ -156,26 +156,37 @@
 
         async function fetchLogs() {
             try {
-                // data.json 파일이 logs.html과 같은 폴더에 있다고 가정
+                // [수정] ?t=timestamp 제거
+                // 로컬 파일 시스템이나 특정 환경에서 쿼리 스트링이 오류를 유발할 수 있어 기본 경로로 수정했습니다.
                 const response = await fetch('logs_data.json');
-                if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다.');
+                
+                if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다. (Status: ' + response.status + ')');
                 
                 allLogs = await response.json();
                 
+                // 디버깅용 로그
+                console.log("Loaded Log Data:", allLogs);
+
                 // 초기 렌더링 (전체 보기)
                 renderLogs(allLogs);
                 
-                // 아이콘 갱신 (Lucide)
-                lucide.createIcons();
-
             } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('log-grid').innerHTML = `
-                    <div class="col-span-full text-center text-red-400 py-8">
-                        <p>로그 목록을 불러오지 못했습니다. (로컬 환경에서는 보안 문제로 보이지 않을 수 있습니다)</p>
-                        <p class="text-xs mt-2 text-slate-500">${error.message}</p>
+                console.error('Error details:', error);
+                
+                // 에러 메시지를 화면에 표시
+                const grid = document.getElementById('log-grid');
+                grid.innerHTML = `
+                    <div class="col-span-full text-center text-red-400 py-8 bg-slate-900/50 rounded-xl border border-red-900/50">
+                        <i data-lucide="alert-circle" class="w-8 h-8 mx-auto mb-2 text-red-500"></i>
+                        <p class="font-bold">데이터 로드 실패</p>
+                        <p class="text-xs mt-2 text-slate-400">${error.message}</p>
+                        <p class="text-xs mt-4 text-slate-500">
+                            * 로컬에서 실행 중이라면, VS Code의 'Live Server' 등을 이용해 주세요.<br>
+                            * data.json 파일이 logs.html과 같은 폴더에 있는지 확인해 주세요.
+                        </p>
                     </div>
                 `;
+                lucide.createIcons();
             }
         }
 
@@ -189,13 +200,10 @@
             }
 
             logs.forEach((log, index) => {
-                // 태그 HTML 생성
                 const tagsHtml = log.tags.map(tag => {
-                    // 태그 색상은 랜덤 혹은 고정값 사용 (여기서는 간단히 고정)
                     return `<span class="tag bg-slate-700 text-emerald-300">#${tag}</span>`;
                 }).join('');
 
-                // 아이콘 HTML 생성
                 let iconHtml = '';
                 if (log.iconType === 'lucide') {
                     iconHtml = `<i data-lucide="${log.iconValue}" class="w-5 h-5"></i>`;
@@ -203,7 +211,6 @@
                     iconHtml = `<span class="font-bold text-lg">${log.iconValue}</span>`;
                 }
 
-                // 카드 HTML 생성
                 const cardHtml = `
                     <a href="${log.url}" class="log-card block p-6 rounded-xl bg-secondary group h-full flex flex-col" style="animation-delay: ${index * 0.05}s; background-color: var(--bg-secondary);">
                         <div class="flex justify-between items-start mb-4">
@@ -223,16 +230,14 @@
                 grid.innerHTML += cardHtml;
             });
 
-            // 동적으로 추가된 Lucide 아이콘 렌더링
+            // 아이콘 갱신
             lucide.createIcons();
         }
 
         function filterLogs(category, btn) {
-            // 버튼 활성화 상태 변경
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // 데이터 필터링
             if (category === 'all') {
                 renderLogs(allLogs);
             } else {
