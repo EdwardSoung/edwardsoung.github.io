@@ -18,7 +18,7 @@
     "imageText": "트랜스포머 얼라이언스",
     "gradient": "from-indigo-900 to-purple-900",
     "badges": ["Unity", "Dev"],
-    "summary": "트랜스포머 IP를 사용한 수집형 AR 게임으로, 개발 초기에 찹여했습니다.",
+    "summary": "트랜스포머 IP를 사용한 수집형 AR 게임으로, 개발 초기에 참여했습니다.",
     "company": "스노우파이프",
     "tags": ["C#", "AR", "Unity"],
     "url": "posts/portfolio/unity/tf-alience.html"
@@ -27,7 +27,7 @@
     "id": 3,
     "title": "피구왕 통키M(대만)",
     "category": "unity",
-    "image": "../assets/img/Tongkey_Taiwan.jpg"
+    "image": "../assets/img/Tongkey_Taiwan.jpg",
     "imageText": "피구왕 통키",
     "gradient": "from-indigo-900 to-purple-900",
     "badges": ["Unity", "Dev"],
@@ -40,7 +40,7 @@
     "id": 4,
     "title": "피구왕 통키M",
     "category": "unity",
-    "image": "../assets/img/Tongkey.jpg"
+    "image": "../assets/img/Tongkey.jpg",
     "imageText": "",
     "gradient": "from-indigo-900 to-purple-900",
     "badges": ["Unity", "Dev"],
@@ -53,7 +53,7 @@
     "id": 5,
     "title": "Western Gunfight VR",
     "category": "unity",
-    "image": "../assets/img/western_gunfight.jpg"
+    "image": "../assets/img/western_gunfight.jpg",
     "imageText": "Western Gunfight",
     "gradient": "from-slate-900 to-gray-700",
     "badges": ["Unity", "VR"],
@@ -66,7 +66,7 @@
     "id": 6,
     "title": "다이아데인",
     "category": "unity",
-    "image": "../assets/img/Diadein.jpg"
+    "image": "../assets/img/Diadein.jpg",
     "imageText": "다이아데인",
     "gradient": "from-gray-900 to-blue-900",
     "badges": ["Unity"],
