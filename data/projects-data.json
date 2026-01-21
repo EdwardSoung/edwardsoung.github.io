@@ -3,7 +3,7 @@
     "id": 1,
     "title": "환세취호전 온라인",
     "category": "unity",
-    "imageText": "환세취호전 온라인",
+    "image": "../assets/img/tiger-online.png",
     "gradient": "from-green-800 to-slate-900",
     "badges": ["Unity", "OBT", "CBT"],
     "summary": "모바일 2D MMORPG. 컨텐츠 시스템 개발 및 레거시 코드 리팩토링, 최적화 작업을 수행했습니다.",
