@@ -1,14 +1,3 @@
----
-layout: post
-title: Algorithm - Note
-author: Hyunwoo Soung
-categories: study
-tags:
-  - Sort
-  - Algorithm
-image: algorithm.jpg
-published: true
----
 
 ## 임시 정리용   
    
