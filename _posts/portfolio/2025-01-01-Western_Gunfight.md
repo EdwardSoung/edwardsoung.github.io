@@ -1,14 +1,3 @@
----
-layout: post
-title: WesternGunfight
-author: Hyunwoo Soung
-categories: portfolio
-tags:
-  - Portfolio
-  - VR
-image: western_gunfight.jpg
-published: true
----
 
 ## [개발 정보]
 1. Unity 교육과정 프로젝트로 제작(약 4개월 소요)  
