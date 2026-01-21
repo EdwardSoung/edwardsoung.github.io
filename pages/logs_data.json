@@ -4,9 +4,9 @@
     "title": "Algorithm Study - Sorting",
     "date": "2026. 01. 21",
     "category": "cs",
-    "summary": "컴퓨터 과학의 기초가 되는 정렬 알고리즘의 개념(Selection, Bubble, Merge, Quick 등)과 C# 구현 코드를 정리했습니다.",
+    "summary": "정렬 알고리즘의 개념(Selection, Bubble, Merge, Quick 등)과 C# 구현 코드를 정리했습니다.",
     "tags": ["Sort", "Algorithm", "CSharp"],
-    "url": "study_sorting.html",
+    "url": "posts/study/algorithm/algorithm-sort.html",
     "iconType": "lucide",
     "iconValue": "binary"
   },
