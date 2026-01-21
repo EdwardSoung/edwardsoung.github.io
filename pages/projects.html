@@ -38,11 +38,17 @@
         /* 카드 호버 효과 */
         .project-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
         }
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
             box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         /* 이미지 줌 효과 */
@@ -93,6 +99,7 @@
     <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
+                <!-- 상위 폴더로 이동(../) -->
                 <a href="../index.html" class="flex items-center gap-2 group">
                     <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
                     <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
@@ -126,124 +133,11 @@
 
             <!-- 프로젝트 그리드 -->
             <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- 1. 환세취호전 온라인 (Unity) -->
-                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" data-category="unity">
-                    <a href="posts/portfolio/unity/tigeronline.html" class="block h-48 card-img-container relative bg-slate-800">
-                        <div class="w-full h-full bg-gradient-to-br from-green-800 to-slate-900 flex items-center justify-center card-img">
-                            <span class="text-white font-bold text-lg">환세취호전 Online</span>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">Unity</div>
-                        <div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">LIVE SERVICE</div>
-                    </a>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition">환세취호전 온라인</h3>
-                        <p class="text-sub text-sm mb-4 line-clamp-3">
-                            슈퍼캣에서 개발한 모바일 MMORPG. 컨텐츠 시스템 개발 및 레거시 코드 리팩토링, 최적화 작업을 수행했습니다.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">Optimization</span>
-                            <span class="tech-tag">Supercat</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 2. Tiger Online (Unity) -->
-                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" data-category="unity">
-                    <a href="#" class="block h-48 card-img-container relative bg-slate-800">
-                        <div class="w-full h-full bg-gradient-to-br from-indigo-900 to-purple-900 flex items-center justify-center card-img">
-                            <span class="text-white font-bold text-lg">Tiger Online</span>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">Unity</div>
-                    </a>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Tiger Online</h3>
-                        <p class="text-sub text-sm mb-4 line-clamp-3">
-                            1인 개발한 캐주얼 멀티플레이어 RPG. 자체 소켓 통신을 이용한 위치 동기화 및 모바일 네트워크 지연 보정 기술을 적용했습니다.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">Socket</span>
-                            <span class="tech-tag">Android/iOS</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 3. Ethereal Blade (Unreal) -->
-                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" data-category="unreal">
-                    <a href="#" class="block h-48 card-img-container relative bg-slate-800">
-                        <div class="w-full h-full bg-gradient-to-t from-slate-900 to-gray-700 flex items-center justify-center card-img">
-                            <span class="text-white font-bold text-lg">Ethereal Blade</span>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">UE5</div>
-                    </a>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">오픈월드 액션 RPG</h3>
-                        <p class="text-sub text-sm mb-4 line-clamp-3">
-                            언리얼 엔진 5의 GAS(Gameplay Ability System)를 활용한 액션 RPG 프로토타입. Behavior Tree 최적화에 집중했습니다.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="tech-tag">C++</span>
-                            <span class="tech-tag">GAS</span>
-                            <span class="tech-tag">AI</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 4. Multiplayer FPS (Unity) -->
-                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" data-category="unity">
-                    <a href="#" class="block h-48 card-img-container relative bg-slate-800">
-                        <div class="w-full h-full bg-gradient-to-t from-gray-900 to-blue-900 flex items-center justify-center card-img">
-                            <span class="text-white font-bold text-lg">FPS Project</span>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">Unity</div>
-                    </a>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">멀티플레이어 FPS</h3>
-                        <p class="text-sub text-sm mb-4 line-clamp-3">
-                            Netcode for GameObjects(NGO)를 사용한 4vs4 데스매치. 서버 권한 이동 및 레이턴시 보정 알고리즘 구현.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">Netcode</span>
-                            <span class="tech-tag">FPS</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 5. Shader Graph Study (Tech Art) -->
-                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" data-category="tech">
-                    <a href="#" class="block h-48 card-img-container relative bg-slate-800">
-                        <div class="w-full h-full bg-gradient-to-t from-purple-900 to-pink-900 flex items-center justify-center card-img">
-                            <span class="text-white font-bold text-lg">Shader Study</span>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">Tech</div>
-                    </a>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">HLSL & Shader Graph</h3>
-                        <p class="text-sub text-sm mb-4 line-clamp-3">
-                            카툰 렌더링, 물 표면 효과, 볼류메트릭 포그 등 다양한 쉐이더 기법 연구 및 구현 모음집.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="tech-tag">HLSL</span>
-                            <span class="tech-tag">URP</span>
-                            <span class="tech-tag">Compute Shader</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 6. Placeholder (More) -->
-                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme border-dashed flex flex-col h-full opacity-50 hover:opacity-100 transition" data-category="all">
-                    <div class="h-48 flex items-center justify-center bg-slate-800/50">
-                        <i data-lucide="plus-circle" class="w-12 h-12 text-sub"></i>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow text-center justify-center">
-                        <h3 class="text-lg font-bold text-sub">Coming Soon</h3>
-                        <p class="text-xs text-sub mt-2">새로운 프로젝트가 준비 중입니다.</p>
-                    </div>
-                </article>
-
+                <!-- 자바스크립트로 데이터가 로드되면 이곳에 카드가 채워집니다 -->
+                <div class="col-span-full text-center py-12 text-sub">
+                    <div class="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-emerald-500 rounded-full mb-2" role="status" aria-label="loading"></div>
+                    <p>Loading projects...</p>
+                </div>
             </div>
         </div>
     </main>
@@ -256,32 +150,120 @@
     </footer>
 
     <script>
-        lucide.createIcons();
+        // 전역 변수로 데이터 저장
+        let allProjects = [];
+
+        // 페이지 로드 시 데이터 가져오기
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProjects();
+        });
+
+        async function fetchProjects() {
+            try {
+                // projects.json 파일 로드
+                const response = await fetch('projects_data.json');
+                if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다.');
+                
+                allProjects = await response.json();
+                
+                // 초기 렌더링 (전체 보기)
+                renderProjects(allProjects);
+                
+                // 아이콘 갱신
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('project-grid').innerHTML = `
+                    <div class="col-span-full text-center text-red-400 py-8">
+                        <p>프로젝트 목록을 불러오지 못했습니다.</p>
+                        <p class="text-xs mt-2 text-slate-500">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderProjects(projects) {
+            const grid = document.getElementById('project-grid');
+            grid.innerHTML = ''; // 기존 내용 초기화
+
+            if (projects.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center text-sub py-8">해당하는 프로젝트가 없습니다.</div>';
+                return;
+            }
+
+            projects.forEach((proj, index) => {
+                // 태그 HTML 생성
+                const tagsHtml = proj.tags.map(tag => {
+                    return `<span class="tech-tag">${tag}</span>`;
+                }).join('');
+
+                // 뱃지 HTML 생성
+                let badgesHtml = '';
+                proj.badges.forEach(badge => {
+                    if (badge === 'LIVE SERVICE') {
+                        badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">LIVE SERVICE</div>`;
+                    } else {
+                        badgesHtml += `<div class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10">${badge}</div>`;
+                    }
+                });
+
+                // 카드 HTML 생성
+                const cardHtml = `
+                    <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" 
+                             style="animation-delay: ${index * 0.05}s; background-color: var(--bg-secondary);">
+                        <a href="${proj.url}" class="block h-48 card-img-container relative bg-slate-800">
+                            <div class="w-full h-full bg-gradient-to-br ${proj.gradient} flex items-center justify-center card-img">
+                                <span class="text-white font-bold text-lg">${proj.imageText}</span>
+                            </div>
+                            ${badgesHtml}
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <a href="${proj.url}" class="group">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition" style="color: var(--text-main);">${proj.title}</h3>
+                            </a>
+                            <p class="text-sub text-sm mb-4 line-clamp-3 flex-grow">${proj.summary}</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                ${tagsHtml}
+                            </div>
+                        </div>
+                    </article>
+                `;
+                
+                grid.innerHTML += cardHtml;
+            });
+            
+            // "Coming Soon" 카드 추가 (항상 마지막에 표시)
+            const comingSoonHtml = `
+                <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme border-dashed flex flex-col h-full opacity-50 hover:opacity-100 transition" 
+                         style="animation-delay: ${projects.length * 0.05}s; background-color: var(--bg-secondary);">
+                    <div class="h-48 flex items-center justify-center bg-slate-800/50">
+                        <i data-lucide="plus-circle" class="w-12 h-12 text-sub"></i>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center justify-center">
+                        <h3 class="text-lg font-bold text-sub">Coming Soon</h3>
+                        <p class="text-xs text-sub mt-2">새로운 프로젝트가 준비 중입니다.</p>
+                    </div>
+                </article>
+            `;
+            grid.innerHTML += comingSoonHtml;
+
+            // 동적으로 추가된 아이콘 렌더링
+            lucide.createIcons();
+        }
 
         function filterProjects(category, btn) {
             // 버튼 활성화 상태 변경
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // 그리드 아이템 필터링
-            const items = document.querySelectorAll('.project-card');
-            
-            items.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'flex';
-                    // 애니메이션 효과 리셋을 위해 잠시 클래스 제거했다가 추가 (선택사항)
-                    item.style.opacity = '0';
-                    setTimeout(() => item.style.opacity = '1', 50);
-                } else {
-                    if (item.dataset.category === category) {
-                        item.style.display = 'flex';
-                        item.style.opacity = '0';
-                        setTimeout(() => item.style.opacity = '1', 50);
-                    } else {
-                        item.style.display = 'none';
-                    }
-                }
-            });
+            // 데이터 필터링
+            if (category === 'all') {
+                renderProjects(allProjects);
+            } else {
+                const filtered = allProjects.filter(proj => proj.category === category);
+                renderProjects(filtered);
+            }
         }
     </script>
 </body>
