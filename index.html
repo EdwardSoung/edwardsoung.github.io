@@ -264,44 +264,51 @@
                 const container = document.getElementById('portfolio-grid');
                 container.innerHTML = ''; // 초기화
 
-                // 상위 3개만 자르기
-                const recentProjects = projects.slice(0, 3);
+                // Tech 제외 및 상위 3개만 자르기
+                const recentProjects = projects.filter(p => p.category !== 'tech').slice(0, 3);
 
                 recentProjects.forEach((proj, index) => {
-                    // 뱃지 HTML 처리 수정 (여러 개일 경우 겹치지 않게 그룹화)
+                    // 태그 HTML 생성
+                    const tagsHtml = proj.tags.slice(0, 3).map(tag => 
+                        `<span class="tech-tag">${tag}</span>`
+                    ).join('');
+
+                    // 뱃지 HTML 처리 (그룹화 및 겹침 방지)
                     let badgesHtml = '';
-                    let topRightBadges = []; // 우측 상단 뱃지들을 모을 배열
+                    let topRightBadges = [];
 
                     if (proj.badges) {
                         proj.badges.forEach(badge => {
                             if (badge === 'LIVE SERVICE') {
-                                // LIVE SERVICE는 왼쪽 하단 고정 (z-10 추가)
                                 badgesHtml += `<div class="absolute bottom-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg z-10">LIVE</div>`;
                             } else {
-                                // 나머지는 배열에 html string으로 저장 (absolute 제거)
                                 topRightBadges.push(`<span class="bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded border border-white/10 whitespace-nowrap">${badge}</span>`);
                             }
                         });
                     }
 
-                    // 우측 상단 뱃지들을 하나의 컨테이너로 묶어서 추가
                     if (topRightBadges.length > 0) {
                         badgesHtml += `<div class="absolute top-3 right-3 flex gap-2 flex-wrap justify-end z-10 max-w-[80%]">
                             ${topRightBadges.join('')}
                         </div>`;
                     }
 
-                    // 태그 HTML
-                    const tagsHtml = proj.tags.slice(0, 3).map(tag => 
-                        `<span class="tech-tag">${tag}</span>`
-                    ).join('');
+                    // [수정] 이미지 렌더링 로직 추가 (이미지 유무에 따른 분기)
+                    let imageContentHtml = '';
+                    if (proj.image) {
+                        imageContentHtml = `<img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover card-img">`;
+                    } else {
+                        imageContentHtml = `
+                            <div class="w-full h-full bg-gradient-to-br ${proj.gradient || 'from-slate-800 to-black'} flex items-center justify-center project-img">
+                                <span class="text-white font-bold text-2xl">${proj.imageText}</span>
+                            </div>
+                        `;
+                    }
 
                     const html = `
                         <article class="fade-in-item group rounded-2xl overflow-hidden bg-sec border border-theme hover:border-emerald-500/50 transition duration-300 hover:shadow-2xl hover:shadow-emerald-900/20 flex flex-col h-full" style="animation-delay: ${index * 0.1}s;">
                             <a href="${proj.url}" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
-                                <div class="w-full h-full bg-gradient-to-br ${proj.gradient || 'from-slate-800 to-black'} flex items-center justify-center project-img">
-                                    <span class="text-white font-bold text-2xl">${proj.imageText}</span>
-                                </div>
+                                ${imageContentHtml}
                                 ${badgesHtml}
                             </a>
                             <div class="p-8 flex flex-col flex-grow">
