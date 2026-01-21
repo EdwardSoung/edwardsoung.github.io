@@ -257,7 +257,7 @@
         async function loadProjects() {
             try {
                 // 캐시 방지를 위해 timestamp 추가
-                const response = await fetch('../data/projects-data.json?t=' + Date.now());
+                const response = await fetch('data/projects-data.json?t=' + Date.now());
                 if (!response.ok) throw new Error('Failed to load projects');
                 
                 const projects = await response.json();
@@ -342,7 +342,7 @@
         async function loadLogs() {
             try {
                 // 캐시 방지를 위해 timestamp 추가
-                const response = await fetch('../data/logs-data.json?t=' + Date.now());
+                const response = await fetch('data/logs-data.json?t=' + Date.now());
                 if (!response.ok) throw new Error('Failed to load logs');
                 
                 const logs = await response.json();
