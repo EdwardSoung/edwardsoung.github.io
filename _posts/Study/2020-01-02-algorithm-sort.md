@@ -1,14 +1,3 @@
----
-layout: post
-title: Algorithm - Sort
-author: Hyunwoo Soung
-categories: study
-tags:
-  - Sort
-  - Algorithm
-image: algorithm.jpg
-published: true
----
 
 ## 기본 정렬 알고리즘
 > <b><span style="color:black">평균 소요시간이 $$\Theta(n^2)$$ 인 정렬 알고리즘</span></b>  
