@@ -123,7 +123,6 @@
                 <span class="tech-pill">System Optimization</span>
                 <span class="tech-pill">UI/UX Implementation</span>
                 <span class="tech-pill">Refactoring</span>
-                <span class="tech-pill">Live Service</span>
             </div>
         </div>
     </header>
@@ -166,10 +165,10 @@
                 <div class="prose prose-invert max-w-none text-sub">
                     <p class="mb-4">
                         <strong>환세취호전 온라인</strong>은 고전 명작 IP를 현대적인 모바일 MMORPG로 재해석한 프로젝트입니다.
-                        슈퍼캣에서 팀원으로 참여하여 약 1년 1개월간 라이브 서비스 중 발생하는 신규 컨텐츠 개발과 기존 시스템의 구조 개선(리팩토링) 업무를 수행했습니다.
+                        슈퍼캣에서 팀원으로 참여하여 약 1년 1개월간 신규 컨텐츠 개발과 기존 시스템의 구조 개선(리팩토링) 업무를 수행했습니다.
                     </p>
                     <p>
-                        특히 방대한 데이터를 다루는 도감 시스템 구축과 복잡한 팀 편성 로직의 효율화, 그리고 모바일 환경 특화 시스템 처리(오디오, 팝업)에 기여했습니다.
+                        특히 방대한 데이터를 다루는 업적 시스템 구축과 비효율적인 팀 편성 로직의 효율화, 그리고 환경 시스템 처리(오디오, 팝업)에 기여했습니다.
                     </p>
                 </div>
             </section>
@@ -187,7 +186,7 @@
                         </h3>
                         <ul class="list-disc list-inside space-y-2 text-sm">
                             <li><strong>몬스터 도감:</strong> 처치한 몬스터 정보를 기록하고 보상을 지급하는 UI 및 데이터 처리 로직 구현.</li>
-                            <li><strong>장비 도감:</strong> 획득한 장비의 히스토리를 관리하고 세트 효과를 활성화하는 로직 개발.</li>
+                            <li><strong>장비 도감:</strong> 획득한 장비의 히스토리를 관리하고 도감 버프를 활성화하는 로직 개발.</li>
                         </ul>
                     </div>
                     
@@ -197,7 +196,7 @@
                         </h3>
                         <ul class="list-disc list-inside space-y-2 text-sm">
                             <li><strong>팀 편성 버프:</strong> 특정 캐릭터 조합 시 발생하는 시너지 버프 시스템 구현.</li>
-                            <li><strong>스킨 변경:</strong> 캐릭터 외형 변경 및 능력치 적용 시스템 개발.</li>
+                            <li><strong>스킨 변경:</strong> 캐릭터 외형 변경 시스템 개발.</li>
                         </ul>
                     </div>
                 </div>
@@ -221,7 +220,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-white">업적 시스템 리팩토링</h4>
-                                <p class="text-sm mt-1">하드코딩된 업적 조건을 제거하고, 데이터 테이블 기반의 이벤트 트리거 방식으로 변경하여 기획자의 데이터 수정만으로 신규 업적 추가가 가능하도록 개선.</p>
+                                <p class="text-sm mt-1">신규 타입 업적을 추가하면서 기존의 타이트하게 제작된 시스템을 모듈화하여 범용성 개선</p>
                             </div>
                         </div>
 
@@ -231,7 +230,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-white">팀 편성 로직 개선</h4>
-                                <p class="text-sm mt-1">복잡한 조건문으로 얽혀있던 팀 편성 로직을 분리하고, UI 업데이트와 데이터 처리 로직을 비동기적으로 분리하여 반응 속도 개선.</p>
+                                <p class="text-sm mt-1">컨텐츠 별로 따로 작업되어 있던 팀 편성을 통합하여 효율적으로 개선</p>
                             </div>
                         </div>
                     </div>
@@ -248,7 +247,7 @@
                 
                 <div class="space-y-6 text-sub">
                     <p>
-                        모바일 환경에서의 GC(Garbage Collection) 스파이크를 줄이기 위해, 매 프레임 호출되거나 빈번하게 실행되는 핫 패스(Hot path) 구간의 <strong>LINQ</strong> 사용을 제거했습니다.
+                        모바일 환경에서의 GC(Garbage Collection) 스파이크를 줄이기 위해, <strong>LINQ</strong> 사용을 제거했습니다.
                     </p>
 
                     <div class="bg-slate-950 rounded-xl p-6 border border-theme">
@@ -285,11 +284,11 @@ for (int i = 0; i < allBuffs.Count; i++) {
             <!-- 시스템 처리 -->
             <section id="technical-3" class="scroll-mt-24">
                 <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
-                    <h2 class="text-2xl font-bold text-white">System: 예외 상황 및 OS 대응</h2>
+                    <h2 class="text-2xl font-bold text-white">System: 예외 처리</h2>
                 </div>
                 <div class="space-y-4 text-sub">
                     <p>
-                        게임의 완성도를 높이고 마켓 검수 통과를 위해 OS 레벨의 이벤트를 처리했습니다.
+                        게임 내 & OS 레벨의 예외처리 대응
                     </p>
                     
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -299,7 +298,7 @@ for (int i = 0; i < allBuffs.Count; i++) {
                         </li>
                         <li class="bg-secondary p-4 rounded-lg border border-theme">
                             <h4 class="font-bold text-white mb-2">게임 종료 팝업 처리</h4>
-                            <p class="text-sm">안드로이드 백버튼 등의 입력으로 게임 종료 시도 시, 실수로 종료되는 것을 막기 위한 시스템 팝업 및 종료 프로세스 구현.</p>
+                            <p class="text-sm">게임의 로그인 프로세스 수정에 따른 종료 프로세스 대응으로 종료 팝업 타이밍 이슈 수정.</p>
                         </li>
                     </ul>
                 </div>
@@ -310,8 +309,8 @@ for (int i = 0; i < allBuffs.Count; i++) {
                 <h2 class="text-2xl font-bold text-white mb-4">Post Mortem</h2>
                 <div class="space-y-4">
                     <p class="text-sub">
-                        라이브 서비스 중인 프로젝트에 투입되어, 기존 코드의 맥락을 빠르게 파악하고 안정적으로 신규 컨텐츠를 추가하는 경험을 했습니다. 
-                        단순 구현을 넘어 <strong>"왜 이 코드를 고쳐야 하는가(최적화, 유지보수)"</strong>에 대해 고민하며 리팩토링을 수행했습니다.
+                        신규 개발 중인 프로젝트에 투입되어, 기존 코드의 맥락을 빠르게 파악하고 안정적으로 신규 컨텐츠를 추가하는 경험을 했습니다. 
+                        단순 구현을 넘어 <strong>"왜 이 코드를 고쳐야 하는가(최적화, 유지보수)"</strong>에 대해 고민하며 작업을 수행했습니다.
                     </p>
                 </div>
             </section>
