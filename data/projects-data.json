@@ -34,7 +34,7 @@
     "summary": "피구왕 통키M 대만 런칭 및 라이브 서비스",
     "company": "스노우파이프",
     "tags": ["C#", "Unity", "3rd Party", "Live"],
-    "url": "../posts/portfolio/unity/tf-alience.html"
+    "url": "../posts/portfolio/unity/tongkey_taiwan.html"
   },
   {
     "id": 4,
@@ -51,19 +51,6 @@
   },
   {
     "id": 5,
-    "title": "Western Gunfight VR",
-    "category": "unity",
-    "image": "../assets/img/western_gunfight.jpg",
-    "imageText": "Western Gunfight",
-    "gradient": "from-slate-900 to-gray-700",
-    "badges": ["Unity", "VR"],
-    "summary": "교육 과정 중 팀 프로젝트로 개발한 서부 총잡이 컨셉 VR 게임입니다.",
-    "company": "빌런게임즈(팀프로젝트)",
-    "tags": ["C#", "Unity", "VR"],
-    "url": "#"
-  },
-  {
-    "id": 6,
     "title": "다이아데인",
     "category": "unity",
     "image": "../assets/img/Diadein.jpg",
@@ -73,6 +60,20 @@
     "summary": "수집형 2D RPG 게임",
     "company": "슈퍼앰프드",
     "tags": ["C#", "RPG"],
-    "url": "#"
+    "url": "../posts/portfolio/unity/diadein.html"
+  },
+  {
+    "id": 6,
+    "title": "Western Gunfight VR",
+    "category": "unity",
+    "image": "../assets/img/western_gunfight.jpg",
+    "imageText": "Western Gunfight",
+    "gradient": "from-slate-900 to-gray-700",
+    "badges": ["Unity", "VR"],
+    "summary": "교육 과정 중 팀 프로젝트로 개발한 서부 총잡이 컨셉 VR 게임입니다.",
+    "company": "빌런게임즈(팀프로젝트)",
+    "tags": ["C#", "Unity", "VR"],
+    "url": "../posts/portfolio/unity/western_gunfight.html"
   }
+ 
 ]
