@@ -32,49 +32,26 @@
     "iconType": "lucide",
     "iconValue": "share-2"
   },
-
   {
     "id": 4,
-    "title": "멀티플레이어 이동 동기화: 추측 항법(Dead Reckoning)",
-    "date": "2023. 08. 02",
-    "category": "cs",
-    "summary": "네트워크 지연(Lag) 상황에서도 끊김 없는 움직임을 보여주기 위한 추측 항법 알고리즘 구현 원리와 보간(Interpolation) 처리 방법.",
-    "tags": ["Network", "Algorithm"],
-    "url": "#",
-    "iconType": "lucide",
-    "iconValue": "network"
+    "title": "Unity Object의 Fake Null 이해",
+    "date": "2026. 01. 26",
+    "category": "unity",
+    "summary": "Unity의 UnityEngine.Object가 소멸될 때 발생하는 Fake Null 상태의 원리와 내부 동작(C++ vs C#), 그리고 성능 최적화를 위한 올바른 Null 체크 방법을 정리했습니다.",
+    "tags": ["Unity", "Optimization", "Memory"],
+    "url": "../posts/study/unity/fake-null.html",
+    "iconType": "text",
+    "iconValue": "Ut"
   },
   {
     "id": 5,
-    "title": "상태 패턴(State Pattern)으로 스파게티 코드 리팩토링하기",
-    "date": "2023. 07. 10",
-    "category": "cs",
-    "summary": "if-else문으로 점철된 캐릭터 컨트롤러를 상태 패턴을 적용하여 유한 상태 머신(FSM) 구조로 변경한 리팩토링 과정 기록.",
-    "tags": ["DesignPattern", "Refactoring"],
-    "url": "#",
-    "iconType": "lucide",
-    "iconValue": "layout-template"
-  },
-  {
-    "id": 6,
-    "title": "URP 쉐이더 그래프로 물(Water) 효과 만들기",
-    "date": "2023. 06. 20",
+    "title": "Unity Coroutine의 동작 원리와 구현",
+    "date": "2026. 01. 26",
     "category": "unity",
-    "summary": "Depth Texture를 활용한 깊이감 표현과 노멀 맵 스크롤링을 통한 파도 움직임 구현. 모바일 최적화를 위한 팁 포함.",
-    "tags": ["Unity", "Shader"],
-    "url": "#",
-    "iconType": "lucide",
-    "iconValue": "palette"
-  },
-  {
-    "id": 7,
-    "title": "C++ 이동 시멘틱(Move Semantics)과 rvalue 참조 완벽 이해",
-    "date": "2023. 05. 05",
-    "category": "cs",
-    "summary": "불필요한 복사를 줄여 성능을 높이는 이동 생성자와 이동 대입 연산자의 원리, std::move의 역할에 대한 정리.",
-    "tags": ["Cpp", "ModernCpp"],
-    "url": "#",
+    "summary": "Unity 코루틴의 개념(비선점형 멀티태스킹)과 IEnumerator/yield return을 통한 지연 및 재개 동작 원리를 심층 분석합니다.",
+    "tags": ["Unity", "Coroutine", "Async"],
+    "url": "../posts/study/unity/coroutine.html",
     "iconType": "text",
-    "iconValue": "C++"
-  }
+    "iconValue": "Ut"
+  },
 ]
