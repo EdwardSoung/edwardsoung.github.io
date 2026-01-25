@@ -9,7 +9,7 @@
     "summary": "모바일 2D MMORPG. 컨텐츠 시스템 개발 및 레거시 코드 리팩토링, 최적화 작업을 수행했습니다.",
     "company": "슈퍼캣",
     "tags": ["C#", "Optimization"],
-    "url": "../posts/portfolio/unity/tigeronline.html"
+    "url": "/posts/portfolio/unity/tigeronline.html"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "summary": "트랜스포머 IP를 사용한 수집형 AR 게임으로, 개발 초기에 참여했습니다.",
     "company": "스노우파이프",
     "tags": ["C#", "AR", "Unity"],
-    "url": "../posts/portfolio/unity/tf-alience.html"
+    "url": "/posts/portfolio/unity/tf-alience.html"
   },
   {
     "id": 3,
@@ -34,7 +34,7 @@
     "summary": "피구왕 통키M 대만 런칭 및 라이브 서비스",
     "company": "스노우파이프",
     "tags": ["C#", "Unity", "3rd Party", "Live"],
-    "url": "../posts/portfolio/unity/tongkey_taiwan.html"
+    "url": "/posts/portfolio/unity/tongkey_taiwan.html"
   },
   {
     "id": 4,
@@ -47,7 +47,7 @@
     "summary": "피구왕 통키 M 라이브 서비스",
     "company": "스노우파이프",
     "tags": ["C#", "Unity", "Live"],
-    "url": "../posts/portfolio/unity/tongkey.html"
+    "url": "/posts/portfolio/unity/tongkey.html"
   },
   {
     "id": 5,
@@ -60,7 +60,7 @@
     "summary": "수집형 2D RPG 게임",
     "company": "슈퍼앰프드",
     "tags": ["C#", "RPG"],
-    "url": "../posts/portfolio/unity/diadein.html"
+    "url": "/posts/portfolio/unity/diadein.html"
   },
   {
     "id": 6,
@@ -73,7 +73,7 @@
     "summary": "교육 과정 중 팀 프로젝트로 개발한 서부 총잡이 컨셉 VR 게임입니다.",
     "company": "빌런게임즈(팀프로젝트)",
     "tags": ["C#", "Unity", "VR"],
-    "url": "../posts/portfolio/unity/western_gunfight.html"
+    "url": "/posts/portfolio/unity/western_gunfight.html"
   }
  
 ]
