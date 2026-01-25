@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Study - Fake Null</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Syntax Highlighting (Prism.js) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        /* Visual Showcase 테마 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        
+        .section-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .algo-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="logs.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Logs</span>
+                </a>
+                <div class="flex gap-4">
+                    <span class="text-sm font-mono text-emerald-500 border border-emerald-500/30 px-3 py-1 rounded-full bg-emerald-500/10">Unity / Optimization</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="py-16 border-b border-theme relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-slate-900 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">
+                Unity Object의 Fake Null 이해
+            </h1>
+            <p class="text-lg text-sub max-w-2xl">
+                Unity 오브젝트가 파괴(Destroy)될 때 메모리에서 일어나는 일과,<br>
+                Fake Null 상태의 원리, 그리고 올바른 Null 체크 방법에 대해 정리합니다.
+            </p>
+            <div class="flex gap-2 mt-6">
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Unity</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Memory</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Optimization</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 (목차) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit hidden lg:block">
+            <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Contents</h3>
+            <nav class="space-y-1">
+                <a href="#structure" class="toc-link hover:text-white">1. Unity Object의 구조</a>
+                <a href="#destroy" class="toc-link hover:text-white">2. Object Destroy의 진실</a>
+                <a href="#fakenull" class="toc-link hover:text-white">3. Fake Null이란?</a>
+                <a href="#null-state" class="toc-link hover:text-white">4. Unity의 Null 상태</a>
+                <a href="#performance" class="toc-link hover:text-white">5. 성능 문제와 최적화</a>
+            </nav>
+        </aside>
+
+        <!-- 오른쪽: 본문 -->
+        <div class="lg:col-span-9 space-y-12">
+
+            <!-- 1. Unity Object의 구조 -->
+            <section id="structure">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        1. Unity Object의 구조
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4">
+                        유니티의 모든 오브젝트는 <code>UnityEngine.Object</code>를 상속받습니다.
+                        여기서 중요한 점은 유니티 엔진의 핵심 코드는 <strong>C++</strong>로 작성되어 있다는 것입니다.
+                    </p>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700 space-y-2">
+                        <p class="text-sm text-sub">
+                            <span class="text-emerald-400 font-bold">C# (Wrapper)</span>
+                            <br>우리가 스크립트에서 다루는 <code>UnityEngine.Object</code> 객체.
+                        </p>
+                        <div class="flex justify-center my-2">
+                            <i data-lucide="arrow-down" class="w-4 h-4 text-slate-500"></i>
+                        </div>
+                        <p class="text-sm text-sub">
+                            <span class="text-blue-400 font-bold">C++ (Native Object)</span>
+                            <br>엔진 내부에서 실제 동작하는 객체. C# 객체는 이 Native Object의 <strong>주소(Pointer)</strong>를 가지고 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Object Destroy -->
+            <section id="destroy">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        2. Object Destroy의 진실
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4">
+                        <code>Destroy(obj)</code>를 호출하면 어떤 일이 벌어질까요?
+                    </p>
+                    <ul class="list-disc list-inside space-y-3 text-sub ml-2 text-sm">
+                        <li>
+                            <strong class="text-white">C++ (Native Object):</strong> 메모리에서 <span class="highlight-text">즉시 해제</span>됩니다.
+                        </li>
+                        <li>
+                            <strong class="text-white">C# (Wrapper Object):</strong> 메모리에서 즉시 해제되지 않습니다. C# 객체는 <strong>GC(가비지 컬렉터)</strong>가 관리하기 때문에, GC가 수거해가기 전까지는 메모리에 남아있게 됩니다.
+                        </li>
+                    </ul>
+                    <p class="text-sub mt-4 text-sm bg-amber-500/10 p-3 rounded border border-amber-500/20">
+                        👉 즉, C# 객체(Wrapper)는 살아있지만, 그것이 가리키던 C++ 객체(Native)는 사라진 상태가 됩니다. (Wrapper는 <code>null</code>이 아니지만, 내부의 Native Pointer는 <code>null</code>인 상태)
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. Fake Null -->
+            <section id="fakenull">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        3. Fake Null이란?
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4 text-sm">
+                        Destroy된 오브젝트를 <code>==</code> 연산자로 비교하면 <code>"null"</code>이 반환됩니다.
+                        실제 C# 객체는 메모리에 남아있지만(Not Null), 엔진 입장에서는 이미 파괴된 객체이므로 <strong>마치 Null인 것처럼 동작</strong>하게 만드는데, 이를 <strong>Fake Null</strong>이라고 합니다.
+                    </p>
+                    
+                    <h4 class="font-bold text-white mb-2 mt-6 text-sm">Unity 내부 구현 (개념적 코드)</h4>
+                    <pre class="rounded bg-slate-950 p-4 text-xs h-auto border border-slate-700 mb-4"><code class="language-csharp">namespace UnityEngine
+{
+    public class Object
+    {
+        // ...
+        // 연산자 오버로딩을 통해 Native 객체 존재 여부를 확인
+        public static bool operator ==(Object x, Object y);
+        public static bool operator !=(Object x, Object y);
+
+        // 묵시적 형변환 (if(gameObject) 체크 가능)
+        public static implicit operator bool(Object exists);
+    }
+}</code></pre>
+                    <ul class="list-disc list-inside space-y-2 text-sub text-sm">
+                        <li><strong>연산자 오버로딩 (==, !=):</strong> 두 객체를 비교할 때, C# 참조뿐만 아니라 연결된 Native Object의 생존 여부도 확인합니다.</li>
+                        <li><strong>묵시적 형변환 (implicit):</strong> <code>if(gameObject)</code> 처럼 사용할 때, Destroy된 객체는 <code>false</code>를 반환하도록 처리되어 있습니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 4. Null 상태 구분 -->
+            <section id="null-state">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        4. Unity에서의 Null 상태 구분
+                    </h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-secondary p-4 rounded border border-theme">
+                        <h4 class="font-bold text-white mb-2">Real Null (진짜 Null)</h4>
+                        <p class="text-sub">메모리에 아예 할당되지 않은 상태.</p>
+                        <ul class="list-disc list-inside text-xs text-sub mt-2">
+                            <li>초기화되지 않은 지역 변수</li>
+                            <li>Inspector에서 연결되지 않은 <code>public</code> 변수</li>
+                        </ul>
+                    </div>
+                    <div class="bg-secondary p-4 rounded border border-theme">
+                        <h4 class="font-bold text-white mb-2">Fake Null (가짜 Null)</h4>
+                        <p class="text-sub">메모리엔 있지만 Native 객체가 없는 상태.</p>
+                        <ul class="list-disc list-inside text-xs text-sub mt-2">
+                            <li><code>Destroy()</code> 호출 이후의 객체</li>
+                            <li>메모리 할당 후 Destroy된 직후</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 성능 문제와 최적화 -->
+            <section id="performance">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        5. 성능 문제와 최적화
+                    </h2>
+                </div>
+                
+                <div class="algo-box">
+                    <h4 class="font-bold text-white mb-3 text-sm">왜 Unity의 Null 체크는 무거운가?</h4>
+                    <p class="text-sub text-sm mb-4">
+                        Unity의 <code>==</code> 연산자는 단순 참조 비교가 아닙니다.
+                        내부적으로 <strong>Native Object의 생존 여부를 확인</strong>하고, <strong>MonoBehaviour로 캐스팅</strong>하는 등 추가적인 연산 비용이 발생합니다.
+                        또한, C#의 최신 기능인 <code>?.</code>, <code>??</code> 연산자가 의도한 대로 동작하지 않을 수 있습니다.
+                    </p>
+
+                    <h4 class="font-bold text-emerald-400 mb-3 text-sm">🚀 최적화된 Null 체크 방법</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                            <p class="text-white font-bold text-sm mb-1">1. Destroy 후 직접 null 대입</p>
+                            <pre class="bg-transparent p-0 text-xs"><code class="language-csharp">Destroy(obj);
+obj = null; // C# 참조도 끊어서 GC가 빨리 수거하게 하고, Real Null로 만듦</code></pre>
+                        </div>
+
+                        <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                            <p class="text-white font-bold text-sm mb-1">2. ReferenceEquals 사용 (가장 빠름)</p>
+                            <p class="text-xs text-sub mb-2">Fake Null 체크 없이 순수하게 C# 객체 참조만 비교할 때 사용합니다.</p>
+                            <pre class="bg-transparent p-0 text-xs"><code class="language-csharp">if (ReferenceEquals(obj, null)) { ... }</code></pre>
+                        </div>
+
+                        <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                            <p class="text-white font-bold text-sm mb-1">3. 묵시적 형변환 활용 (!obj)</p>
+                            <p class="text-xs text-sub mb-2"><code>==</code> 연산자 오버로딩보다는 빠르다고 알려져 있습니다.</p>
+                            <pre class="bg-transparent p-0 text-xs"><code class="language-csharp">if (!obj) { ... }</code></pre>
+                        </div>
+
+                        <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                            <p class="text-white font-bold text-sm mb-1">4. is null 또는 Equals (Unity 권장)</p>
+                            <p class="text-xs text-sub mb-2">최신 C# 패턴 매칭이나 Equals 메서드가 연산자 오버로딩보다 효율적일 수 있습니다.</p>
+                            <pre class="bg-transparent p-0 text-xs"><code class="language-csharp">if (obj is null) { ... }
+if (obj.Equals(null)) { ... }</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
