@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - Tongkey M (Taiwan)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 상세 페이지 전용 스타일 */
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tech-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
+                </a>
+                <div class="flex gap-4">
+                    <a href="#" class="p-2 text-sub hover:text-white hover:bg-white/10 rounded-full transition" title="Company Website">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-20 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <!-- 배경: 스포츠/액션 느낌의 그라데이션 -->
+            <div class="w-full h-full bg-gradient-to-br from-orange-900 via-red-900 to-slate-900 opacity-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">스노우파이프</span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> 2021.04 - 2022.11
+                </span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4"></i> 클라이언트 파트장
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Project: 피구왕 통키 M (대만)<br>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">Global Launch & Live Service</span>
+            </h1>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-pill">Unity</span>
+                <span class="tech-pill">AndroidX</span>
+                <span class="tech-pill">SVN</span>
+                <span class="tech-pill">3rd Party SDKs</span>
+                <span class="tech-pill">Optimization</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
+            <div>
+                <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
+                <nav class="space-y-1">
+                    <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
+                    <a href="#launch" class="toc-link hover:text-white">글로벌 런칭 관리</a>
+                    <a href="#sdk" class="toc-link hover:text-white">서드파티 SDK 적용</a>
+                    <a href="#technical" class="toc-link hover:text-white">⚡ Tech: 안드로이드 대응</a>
+                    <a href="#troubleshooting" class="toc-link hover:text-white">⚡ Tech: 트러블 슈팅</a>
+                </nav>
+            </div>
+            
+            <div class="p-6 rounded-xl bg-secondary border border-theme" style="background-color: var(--bg-secondary); border-color: var(--border);">
+                <h4 class="font-bold text-white mb-3">내 역할 (Part Leader)</h4>
+                <ul class="text-sm text-sub space-y-2 list-disc list-inside">
+                    <li>대만 출시 빌드 및 스펙 총괄</li>
+                    <li>안드로이드 버전 업그레이드</li>
+                    <li>대만 퍼블리셔 자체 로그인등, 각종 SDK 연동 및 이슈 해결</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 오른쪽: 본문 콘텐츠 -->
+        <div class="lg:col-span-9 space-y-16">
+            
+            <!-- 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="globe" class="w-6 h-6 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub">
+                    <p class="mb-4">
+                        국내에서 서비스 중이던 '피구왕 통키 M'을 <strong>대만 시장에 맞춰 현지화 및 런칭</strong>하고, 약 1년 7개월간 라이브 서비스를 리딩한 프로젝트입니다.
+                        클라이언트 파트장으로서 개발 일정 조율, 빌드 파이프라인 관리, 그리고 기술적인 이슈 해결을 주도했습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 런칭 관리 -->
+            <section id="launch" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Global Launch: 출시 스펙 및 빌드 관리</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        한국 빌드와 대만 빌드의 소스 코드를 효율적으로 분리/병합하기 위해 SVN 브랜치 전략을 수립하고, 퍼블리셔의 요구사항에 맞춰 런칭 스펙을 관리했습니다.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="git-branch" class="w-4 h-4 text-emerald-500"></i> 버전 관리 (SVN)
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>대만 오픈 스펙에 따라 SVN 및 코드 관리.</li>
+                                <li>업데이트 일정에 따라 스펙 오픈.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="check-square" class="w-4 h-4 text-emerald-500"></i> 컨텐츠 현지화
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>대만 퍼블리셔 전용 <strong>로그인 시스템</strong> 구현.</li>
+                                <li>현지 유저 성향에 맞춘 <strong>이벤트</strong> 시스템 추가 개발.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 서드파티 SDK -->
+            <section id="sdk" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Integration: 서드파티 SDK 관리</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        글로벌 서비스를 위해 필수적인 보안, 분석, 로그인 툴을 통합하고 안정성을 확보했습니다.
+                    </p>
+
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <li class="flex items-start gap-3">
+                                <div class="p-2 bg-blue-900/50 rounded-lg"><i data-lucide="shield" class="w-5 h-5 text-blue-400"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">보안 솔루션 (Xigncode)</h4>
+                                    <p class="text-xs text-sub mt-1">메모리 변조 및 해킹 방지를 위한 암호화 툴 적용 및 버전 대응.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="p-2 bg-green-900/50 rounded-lg"><i data-lucide="bar-chart-2" class="w-5 h-5 text-green-400"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">데이터 분석 (AppsFlyer)</h4>
+                                    <p class="text-xs text-sub mt-1">마케팅 효율 분석을 위한 트래킹 SDK 연동 및 퍼블리셔 자체 분석 툴 탑재.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 안드로이드 대응 -->
+            <section id="technical" class="scroll-mt-24">
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Technical Challenge: AndroidX 및 API 대응</h2>
+                </div>
+                <div class="space-y-4 text-sub">
+                    <p>
+                        구글 플레이 스토어 정책 변경에 따라 기존 프로젝트(Android Support Library)를 최신 환경으로 마이그레이션했습니다.
+                    </p>
+                    
+                    <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                        <h4 class="font-bold text-white mb-2">Android Target API 29 → 30 상향</h4>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li><strong>AndroidX 마이그레이션:</strong> 구형 Support 라이브러리를 사용하는 레거시 플러그인들을 AndroidX 호환 버전으로 교체 및 코드 수정.</li>
+                            <li><strong>권한 처리 변경:</strong> 저장소 접근 권한 등 강화된 보안 정책에 맞춰 네이티브 연동 코드 수정.</li>
+                            <li><strong>Gradle 빌드 시스템 개편:</strong> 종속성(Dependencies) 충돌을 해결하기 위해 Custom Gradle Template 재구성.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 트러블 슈팅 -->
+            <section id="troubleshooting" class="scroll-mt-24">
+                <div class="border-l-4 border-red-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Troubleshooting: SDK 충돌 해결</h2>
+                </div>
+                <div class="space-y-4 text-sub">
+                    <h3 class="text-lg font-bold text-white">Issue: Facebook SDK 충돌</h3>
+                    <p class="text-sm">
+                        퍼블리셔의 자체로그인과 연동된 Facebook SDK 와 기사용중인 Facebook SDK 버전 충돌로 인한 오류 수정
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
