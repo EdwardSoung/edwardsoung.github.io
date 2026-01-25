@@ -137,9 +137,9 @@
             <div class="p-6 rounded-xl bg-secondary border border-theme" style="background-color: var(--bg-secondary); border-color: var(--border);">
                 <h4 class="font-bold text-white mb-3">내 역할 (My Role)</h4>
                 <ul class="text-sm text-sub space-y-2 list-disc list-inside">
-                    <li>AR 슈팅 전투 및 스킬 로직 구현</li>
+                    <li>슈팅 전투 및 스킬 로직 구현</li>
                     <li>시네머신 연출 및 미니게임 개발</li>
-                    <li>핵심 시스템(사운드, 로컬라이징, 풀링) 구축</li>
+                    <li>핵심 시스템(사운드, 로컬라이징, 풀링, 에셋번들) 구축</li>
                     <li>유니티 에디터 툴 제작</li>
                 </ul>
             </div>
@@ -155,12 +155,12 @@
                 </h2>
                 <div class="prose prose-invert max-w-none text-sub">
                     <p class="mb-4">
-                        글로벌 IP인 '트랜스포머(Transformers)'를 활용한 AR(증강현실) 기반의 액션 게임 개발 프로젝트입니다. 
+                        글로벌 IP인 '트랜스포머'를 활용한 AR(증강현실) 기반의 액션 게임 개발 프로젝트입니다. 
                         스노우파이프에서 팀원으로 참여하여 2022년 11월부터 2023년 12월까지 약 1년 1개월간 개발을 진행했습니다.
                     </p>
                     <p>
-                        AR 환경에서의 실감 나는 전투 경험을 위한 슈팅 및 스킬 시스템 구현을 주도했으며, 
-                        안정적인 라이브 서비스를 위한 기반 시스템(에셋 로드, IAP, 사운드 등)과 개발 효율을 높이는 내부 툴 제작을 담당했습니다.
+                        전투에 필요한 슈팅 및 스킬 시스템 구현을 담당했으며, 스킬 사용 시 미니게임과 연출을 구현하였습니다.
+                        안정적인 개발을 위한 기반 시스템(에셋 로드, IAP, 사운드 등)과 내부 툴 제작을 담당했습니다.
                     </p>
                 </div>
             </section>
@@ -173,7 +173,7 @@
                 
                 <div class="space-y-6 text-sub">
                     <p>
-                        AR 게임의 핵심 재미인 '슈팅 전투'와 캐릭터성을 강조하는 '스킬 연출' 부분을 중점적으로 구현했습니다.
+                        게임의 핵심 재미인 '슈팅 전투'와 캐릭터성을 강조하는 '스킬 연출' 부분을 중점적으로 구현했습니다.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -183,8 +183,8 @@
                             </h3>
                             <ul class="list-disc list-inside space-y-2 text-sm">
                                 <li><strong>기본 슈팅 전투:</strong> 터치 입력을 기반으로 한 발사체 로직 및 피격 판정 처리.</li>
-                                <li><strong>적 AI 패턴:</strong> 상태 머신 기반의 적 AI(이동, 기본 공격, 스킬 사용) 구현으로 전투 다양성 확보.</li>
-                                <li><strong>스킬 시스템:</strong> 캐릭터별 고유 스킬 로직 구현 및 쿨타임, 데미지 계산 처리.</li>
+                                <li><strong>적 AI 패턴:</strong> 상태 머신 기반의 적 AI(기본 공격, 스킬 사용) 구현으로 전투 다양성 확보.</li>
+                                <li><strong>스킬 시스템:</strong> 캐릭터별 스킬 로직 구현 및 쿨타임, 데미지 계산 처리.</li>
                             </ul>
                         </div>
                         
@@ -193,8 +193,8 @@
                                 <i data-lucide="video" class="w-4 h-4 text-emerald-500"></i> 연출 및 미니게임
                             </h3>
                             <ul class="list-disc list-inside space-y-2 text-sm">
-                                <li><strong>CineMachine 연출:</strong> 스킬 사용 및 태그(캐릭터 교체) 시 Unity CineMachine을 활용한 역동적인 카메라 연출 작업.</li>
-                                <li><strong>스킬 미니게임:</strong> 단순히 버튼을 누르는 것을 넘어, 스킬 발동 시 재미를 더하는 QTE 방식의 미니게임 로직 구현.</li>
+                                <li><strong>CineMachine 연출:</strong> 스킬 사용 및 태그(캐릭터 교체) 시 Unity CineMachine으로 연출 구현.</li>
+                                <li><strong>스킬 미니게임:</strong> 스킬 발동 시 재미를 더하는 QTE 방식의 미니게임 로직 구현.</li>
                             </ul>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                         <li class="bg-secondary p-4 rounded-lg border border-theme">
                             <h4 class="font-bold text-white mb-2">UI/UX 구현</h4>
                             <ul class="list-disc list-inside text-sm space-y-1">
-                                <li>전투 편성 화면 및 결과 화면(Result) 구현.</li>
+                                <li>전투 편성 화면 및 결과 화면 구현.</li>
                                 <li>인게임 설정 UI 리뉴얼 작업.</li>
                                 <li>대량의 리스트를 효율적으로 보여주기 위한 <strong>Infinity ScrollView</strong> 구현 (Github 참조 최적화).</li>
                             </ul>
