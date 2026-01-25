@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - Diadein</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 상세 페이지 전용 스타일 */
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tech-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
+                </a>
+                <div class="flex gap-4">
+                    <a href="#" class="p-2 text-sub hover:text-white hover:bg-white/10 rounded-full transition" title="Company Website">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-20 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <!-- 배경: 판타지 RPG 느낌 -->
+            <div class="w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 opacity-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">슈퍼앰프드</span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> 2019.05 - 2021.02
+                </span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4"></i> 사원 (개발팀)
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Project: 다이아데인<br>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">2D Action RPG Development</span>
+            </h1>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-pill">Unity</span>
+                <span class="tech-pill">Combat System</span>
+                <span class="tech-pill">Addressables</span>
+                <span class="tech-pill">IAP / Billing</span>
+                <span class="tech-pill">Multi-Platform Build</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
+            <div>
+                <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
+                <nav class="space-y-1">
+                    <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
+                    <a href="#combat" class="toc-link hover:text-white">인게임 전투 개발</a>
+                    <a href="#content" class="toc-link hover:text-white">컨텐츠 및 시스템</a>
+                    <a href="#build" class="toc-link hover:text-white">빌드 및 배포 관리</a>
+                    <a href="#others" class="toc-link hover:text-white">기타 리소스 작업</a>
+                </nav>
+            </div>
+            
+            <div class="p-6 rounded-xl bg-secondary border border-theme" style="background-color: var(--bg-secondary); border-color: var(--border);">
+                <h4 class="font-bold text-white mb-3">내 역할 (Role)</h4>
+                <ul class="text-sm text-sub space-y-2 list-disc list-inside">
+                    <li>전투 시스템 및 스킬 구현</li>
+                    <li>주요 컨텐츠(상점, 아레나 등) 개발</li>
+                    <li>결제(IAP) 및 광고 모듈 연동</li>
+                    <li>4대 마켓 빌드 및 검수 관리</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 오른쪽: 본문 콘텐츠 -->
+        <div class="lg:col-span-9 space-y-16">
+            
+            <!-- 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-6 h-6 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub">
+                    <p class="mb-4">
+                        2D 횡스크롤 액션 RPG '다이아데인'의 개발 초기부터 출시까지 참여했습니다. 
+                        핵심인 <strong>전투 시스템 구현</strong>을 포함하여 상점, 퀘스트 등 주요 컨텐츠를 개발했으며, 
+                        다양한 마켓(Google Play, App Store, OneStore, UDP) 출시를 위한 <strong>서드파티 연동 및 빌드 관리</strong> 업무를 수행했습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 전투 개발 -->
+            <section id="combat" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Core Gameplay: 인게임 전투 개발</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        게임의 핵심 재미를 담당하는 전투 로직과 스킬 시스템을 전담하여 구현했습니다.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="sword" class="w-4 h-4 text-emerald-500"></i> 전투 및 스킬
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>캐릭터 기본 전투 로직 및 스킬 발동 시스템 구현.</li>
+                                <li>스킬 사용 시 데미지 판정 및 이펙트 연출 적용.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="cpu" class="w-4 h-4 text-emerald-500"></i> 자동 전투 AI
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>플레이어 편의를 위한 자동 전투(Auto Battle) 기능 개발.</li>
+                                <li>상황에 따른 스킬 자동 사용 및 타겟팅 로직 구현.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 컨텐츠 및 시스템 -->
+            <section id="content" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Content & System: 컨텐츠 및 서드파티</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>
+                        게임의 순환 구조를 담당하는 주요 컨텐츠 UI/로직과 수익화를 위한 시스템을 구축했습니다.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="layout" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">주요 컨텐츠 개발</h4>
+                                <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+                                    <li><strong>상점:</strong> 아이템 구매 및 재화 처리 UI/로직 개발.</li>
+                                    <li><strong>퀘스트 & 아레나:</strong> 미션 시스템 및 PVP 컨텐츠(아레나) 구현.</li>
+                                    <li><strong>모험 준비:</strong> 스테이지 입장 전 파티 편성 및 준비 화면 개발.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-lg bg-secondary border border-theme">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
+                                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">서드파티 및 수익화</h4>
+                                <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+                                    <li><strong>IAP(In-App Purchase):</strong> Unity IAP, 원스토어 결제, UDP(Unity Distribution Portal) 결제 모듈 연동 및 작업.</li>
+                                    <li><strong>인앱 광고:</strong> 보상형 광고 등 광고 SDK 연동 작업.</li>
+                                    <li><strong>리소스 관리:</strong> 어드레서블(Addressables) 번들 시스템 구현을 통한 에셋 관리.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 빌드 및 배포 -->
+            <section id="build" class="scroll-mt-24">
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Deployment: 빌드 및 배포 관리</h2>
+                </div>
+                <div class="space-y-4 text-sub">
+                    <p>
+                        다양한 플랫폼 대응을 위해 마켓별 빌드 프로세스를 관리하고 검수 과정을 전담했습니다.
+                    </p>
+                    
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+                                <span class="text-sm">Google Play Store 빌드 관리</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+                                <span class="text-sm">Apple App Store 빌드 및 검수</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+                                <span class="text-sm">OneStore(원스토어) 출시 대응</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+                                <span class="text-sm">UDP(Unity Distribution Portal) 배포</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 기타 작업 -->
+            <section id="others" class="scroll-mt-24">
+                <div class="border-l-4 border-blue-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Others: 기타 리소스 작업</h2>
+                </div>
+                <div class="space-y-4 text-sub">
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <ul class="list-disc list-inside text-sm space-y-2">
+                            <li><strong>이펙트 수정:</strong> 게임 내 파티클 이펙트 리소스 수정 및 최적화.</li>
+                            <li><strong>사운드 작업:</strong> SFX(효과음) 파일 편집 및 인게임 적용.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
