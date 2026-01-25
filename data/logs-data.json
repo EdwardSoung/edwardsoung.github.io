@@ -17,7 +17,7 @@
     "category": "cs",
     "summary": "루트 노드에서 시작하여 인접한 노드를 먼저 탐색하는 BFS 알고리즘의 개념, 구현 코드(Queue), 그리고 시간 복잡도를 정리했습니다.",
     "tags": ["BFS", "Graph", "Search"],
-    "url": "posts/study/algorithm/algorithm-bfs.html",
+    "url": "../posts/study/algorithm/algorithm-bfs.html",
     "iconType": "lucide",
     "iconValue": "share-2"
   },
@@ -28,7 +28,7 @@
     "category": "cs",
     "summary": "루트 노드에서 시작하여 인접한 노드를 먼저 탐색하는 BFS 알고리즘의 개념, 구현 코드(Queue), 그리고 시간 복잡도를 정리했습니다.",
     "tags": ["DFS", "Graph", "Search"],
-    "url": "posts/study/algorithm/algorithm-dfs.html",
+    "url": "../posts/study/algorithm/algorithm-dfs.html",
     "iconType": "lucide",
     "iconValue": "share-2"
   },
