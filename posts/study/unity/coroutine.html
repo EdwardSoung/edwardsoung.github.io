@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Study - Coroutine</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Syntax Highlighting (Prism.js) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        /* Visual Showcase 테마 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        
+        .section-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .algo-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="logs.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Logs</span>
+                </a>
+                <div class="flex gap-4">
+                    <span class="text-sm font-mono text-emerald-500 border border-emerald-500/30 px-3 py-1 rounded-full bg-emerald-500/10">Unity / Optimization</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="py-16 border-b border-theme relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-slate-900 z-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">
+                Unity Coroutine의 동작 원리와 구현
+            </h1>
+            <p class="text-lg text-sub max-w-2xl">
+                비선점형 멀티태스킹의 개념부터 IEnumerator와 yield return을 통한<br>
+                실행의 지연과 재개 매커니즘을 심층 분석합니다.
+            </p>
+            <div class="flex gap-2 mt-6">
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Unity</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Coroutine</span>
+                <span class="text-xs font-mono bg-slate-800 text-blue-300 px-2 py-1 rounded">#Async</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- 왼쪽: 사이드바 (목차) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit hidden lg:block">
+            <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Contents</h3>
+            <nav class="space-y-1">
+                <a href="#definition" class="toc-link hover:text-white">1. 코루틴이란?</a>
+                <a href="#unity-coroutine" class="toc-link hover:text-white">2. Unity에서의 코루틴</a>
+                <a href="#mechanism" class="toc-link hover:text-white">3. 실행의 지연과 재개</a>
+                <a href="#yield" class="toc-link hover:text-white">4. yield return 동작</a>
+                <a href="#custom" class="toc-link hover:text-white">5. 직접 구현해보기</a>
+            </nav>
+        </aside>
+
+        <!-- 오른쪽: 본문 -->
+        <div class="lg:col-span-9 space-y-12">
+
+            <!-- 1. 코루틴이란? -->
+            <section id="definition">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        1. 코루틴(Coroutine)이란?
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4">
+                        코루틴은 실행의 지연과 재개를 허용함으로써, <span class="highlight-text">비선점형 멀티태스킹</span>을 위한 <span class="highlight-text">서브 루틴</span>을 일반화한 컴퓨터 프로그램 구성요소입니다.
+                    </p>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700 space-y-3 mb-4">
+                        <div>
+                            <h4 class="font-bold text-white text-sm mb-1">비선점형 멀티태스킹 (Non-preemptive Multitasking)</h4>
+                            <p class="text-xs text-sub">
+                                CPU를 사용 중인 쓰레드를 OS가 강제로 뺏어올 수 없는(선점할 수 없는) 형태입니다. 즉, 현재 작업이 스스로 제어권을 반환(Yield)해야만 다른 작업이 실행될 수 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div class="bg-secondary p-4 rounded border border-theme">
+                            <h4 class="font-bold text-white mb-2">병행성 (Concurrency) ✅</h4>
+                            <p class="text-sub text-xs">논리적으로 병렬로 작업이 실행되는 것처럼 보이는 것 (Time Slicing).</p>
+                        </div>
+                        <div class="bg-secondary p-4 rounded border border-theme">
+                            <h4 class="font-bold text-white mb-2">병렬성 (Parallelism) ❌</h4>
+                            <p class="text-sub text-xs">물리적으로(Multi-Core) 실제로 동시에 작업이 실행되는 것.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 text-right">참고: <a href="https://dev.gmarket.com/82" target="_blank" class="underline hover:text-emerald-400">코루틴에 대하여 (Gmarket Tech)</a></p>
+                </div>
+            </section>
+
+            <!-- 2. Unity에서의 코루틴 -->
+            <section id="unity-coroutine">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        2. Unity에서의 코루틴
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4 text-sm">
+                        Unity는 기본적으로 단일 쓰레드 기반(비선점형 멀티태스킹과 유사 환경)으로 동작하며, 코루틴을 사용하여 병행성을 확보합니다.
+                    </p>
+                    
+                    <ul class="list-disc list-inside space-y-2 text-sub text-sm mb-4">
+                        <li><strong>특징:</strong> <code>IEnumerator</code>를 반환하며, 동기식이지만 비동기처럼 동작하는 것처럼 보임.</li>
+                        <li><strong>동작 시점:</strong> Update 호출 완료 후, LateUpdate 호출 전.</li>
+                        <li><strong>조건:</strong> <code>MonoBehaviour</code>를 상속받은 활성화된(Active) 객체에서만 실행 가능.</li>
+                    </ul>
+
+                    <pre class="rounded bg-slate-950 p-4 text-xs h-auto border border-slate-700 mb-4"><code class="language-csharp">private IEnumerator MyCoroutine()
+{
+    // 무한반복일 경우 Update와 유사한 동작을 합니다.
+    while(true)
+    {
+        // 매 프레임 반복 호출 (여기서 대기)
+        yield return null;
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 3. 실행의 지연과 재개 -->
+            <section id="mechanism">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        3. 실행의 지연과 재개 (IEnumerator)
+                    </h2>
+                </div>
+                <div class="algo-box">
+                    <p class="text-sub mb-4 text-sm">
+                        코루틴의 핵심은 <strong>C#의 Iterator(열거자)</strong> 패턴을 활용하여 현재 실행 위치를 저장하고 복원하는 것입니다.
+                    </p>
+                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700 space-y-2 mb-4">
+                        <ul class="list-disc list-inside text-xs text-sub">
+                            <li><strong class="text-emerald-400">Current:</strong> 현재 반환값</li>
+                            <li><strong class="text-emerald-400">MoveNext():</strong> 다음 요소로 이동 (실행 재개)</li>
+                            <li><strong class="text-emerald-400">Reset():</strong> 초기화</li>
+                        </ul>
+                    </div>
+                    <p class="text-sub text-sm">
+                        👉 열거자 구조를 사용하여 <strong>현재 실행 위치를 저장</strong>하고, 다음 프레임(Update 주기)에 저장된 위치부터 <strong>실행을 재개</strong>합니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 4. yield return 동작 -->
+            <section id="yield">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        4. yield return 동작 상세
+                    </h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                        <p class="text-white font-bold text-sm mb-1">1. yield return null</p>
+                        <p class="text-xs text-sub">반환값이 null이므로, 현재 위치만 저장하고 빠져나옵니다. (다음 프레임에 재개)</p>
+                    </div>
+
+                    <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                        <p class="text-white font-bold text-sm mb-1">2. yield return (IEnumerator 반환 메서드)</p>
+                        <p class="text-xs text-sub mb-2">다른 열거형을 반환하는 경우, 해당 열거형(서브 코루틴)을 실행하고 그 위치를 저장합니다.</p>
+                        <pre class="bg-transparent p-0 text-xs"><code class="language-csharp">yield return WaitForSeconds(1f); // 내부적으로 타이머 코루틴 실행</code></pre>
+                    </div>
+
+                    <div class="bg-slate-900 p-4 rounded border border-slate-700">
+                        <p class="text-white font-bold text-sm mb-1">3. yield break</p>
+                        <p class="text-xs text-sub">Enumerator의 실행을 강제로 종료하고 빠져나옵니다. (루프 탈출)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 직접 구현해보기 -->
+            <section id="custom">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        5. 직접 구현해보기 (Custom Wait)
+                    </h2>
+                </div>
+                
+                <div class="algo-box">
+                    <p class="text-sub mb-4 text-sm">
+                        <code>WaitForSeconds</code>와 유사한 기능을 직접 구현해보면 동작 원리를 더 명확히 이해할 수 있습니다.
+                    </p>
+
+                    <pre class="rounded bg-slate-950 p-4 text-xs h-auto border border-slate-700"><code class="language-csharp">private IEnumerator CustomCoroutine()
+{
+    // 1. 여기서 yield return을 만나면 현재 위치 저장
+    // 2. CustomWaitForSeconds 함수 진입
+    yield return CustomWaitForSeconds(1f);
+    // 4. CustomWaitForSeconds가 끝나면(yield break) 여기서부터 다시 실행
+}
+
+// 유니티의 WaitForSeconds와 유사한 동작 구현
+private IEnumerator CustomWaitForSeconds(float time)
+{
+    float timer = 0;
+    while(true)
+    {
+        timer += Time.deltaTime;
+        if(timer >= time)
+        {
+            // 시간이 다 되면 종료 -> 호출한 곳으로 복귀
+            yield break;
+        }
+        else
+        {
+            // 시간이 안 됐으면 다음 프레임까지 대기
+            yield return null;
+        }
+    }
+}</code></pre>
+                    <p class="text-sub mt-4 text-sm bg-emerald-500/10 p-3 rounded border border-emerald-500/20">
+                        <strong>요약:</strong> <code>yield return</code>은 "여기서 멈추고 결과를 반환해라, 나중에 다시 오면 여기서부터 할게"라는 의미입니다.
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
