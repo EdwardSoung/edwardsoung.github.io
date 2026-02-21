@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - FrozenBreak</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 스크롤 페이지 스타일 */
+        h1, h2, h3 {
+            letter-spacing: -0.025em;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tech-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+
+            .toc-link:hover, .toc-link.active {
+                color: var(--accent);
+                border-left-color: var(--accent);
+            }
+
+        /* 미디어 플레이스홀더 */
+        .media-placeholder {
+            width: 100%;
+            background-color: var(--bg-secondary);
+            border: 1px dashed var(--border);
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-sub);
+            font-size: 0.875rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .media-placeholder img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+        /* 코드 블록 스타일 */
+        .cpp-code-block {
+            background-color: #1d1f21;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #c5c8c6;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+
+        .code-label {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--text-sub);
+            }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="/index.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-24 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-sky-950 to-blue-900 opacity-80"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">Team Project</span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4 text-emerald-500"></i> 팀장 / Main Programmer (성현우)
+                </span>
+            </div>
+
+            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                Project: Frozen Break<br>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">혹한의 숲 생존 탈출 게임</span>
+            </h1>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-pill">Unreal Engine 5.5</span>
+                <span class="tech-pill">C++ Architecture</span>
+                <span class="tech-pill">Subsystem</span>
+                <span class="tech-pill">Delegate Pattern</span>
+                <span class="tech-pill">Editor Tool</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <!-- 왼쪽: 사이드바 -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
+            <div>
+                <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
+                <nav class="space-y-1">
+                    <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
+                    <a href="#architecture" class="toc-link hover:text-white">기반 구조 설계 (C++)</a>
+                    <a href="#editor" class="toc-link hover:text-white">맵 세팅 자동화 툴</a>
+                    <a href="#inventory" class="toc-link hover:text-white">인벤토리 & 퀵슬롯</a>
+                    <a href="#ui-work" class="toc-link hover:text-white">UI 작업 상세</a>
+                    <a href="#management" class="toc-link hover:text-white">협업 및 프로젝트 관리</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- 오른쪽: 본문 콘텐츠 -->
+        <div class="lg:col-span-9 space-y-24">
+
+            <!-- 섹션 1: 프로젝트 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-2">
+                    <i data-lucide="info" class="w-8 h-8 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub mb-10 text-lg">
+                    <p>혹한의 숲에 고립되어 탈출을 위해 생존하는 3D 액션 생존 게임입니다. 자원을 채집하고 도구를 제작하며 끝까지 살아남아야 합니다.</p>
+                </div>
+                <div class="media-placeholder" style="aspect-ratio: 16/9;">
+                    <!-- 유튜브 임베드 링크로 변경됨 -->
+                    <iframe src="https://www.youtube.com/watch?v=RMMSezTlGHE" title="Main Gameplay Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </section>
+
+            <!-- 섹션 2: System Architecture (C++ 코드 포함) -->
+            <section id="architecture" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
+                    <h2 class="text-3xl font-bold text-white uppercase">System Architecture</h2>
+                    <p class="text-sub mt-2">GameInstanceSubsystem 기반의 모듈화 및 옵저버 패턴 설계</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-10 text-sub">
+                    <!-- GameManager -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="box" class="w-5 h-5 text-emerald-500"></i> 1. GameManager
+                        </h3>
+                        <p class="text-sm">DataTable, DataAsset 데이터 파일 연결 및 보관 관리. 전역 공통 변수 제어.</p>
+                        <div class="cpp-code-block">
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                                <pre style="margin: 0; line-height: 125%;"><span></span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
+<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span><span style="color: #080; font-weight: bold">class</span><span style="color: #BBB"> </span><span style="color: #B06; font-weight: bold">UDataTable</span><span style="color: #333">&gt;</span><span style="color: #BBB"> </span>WidgetData;
+
+<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
+<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span><span style="color: #080; font-weight: bold">class</span><span style="color: #BBB"> </span><span style="color: #B06; font-weight: bold">UDataTable</span><span style="color: #333">&gt;</span><span style="color: #BBB"> </span>PickupItemTable;
+
+<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
+<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span>UItemDataList<span style="color: #333">&gt;</span><span style="color: #BBB"> </span>ItemDataList;
+
+<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
+<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span>UEquipItemData<span style="color: #333">&gt;</span><span style="color: #BBB"> </span>EquipItemData;
+
+<span style="color: #BBB">	</span><span style="color: #888">// 인게임 시작 시간(0~1 : 0.25 = 6시, 0.5 = 12시, 0.75 = 18시, 1.0 = 00시)</span>
+<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
+<span style="color: #BBB">	</span><span style="color: #339; font-weight: bold">float</span><span style="color: #BBB"> </span>InGameStartTime<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #60E; font-weight: bold">0.5f</span>;
+
+<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;GameData&quot;</span>)
+<span style="color: #BBB">	</span>EGameState<span style="color: #BBB"> </span>CurrentState;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EventSubSystem -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="git-merge" class="w-5 h-5 text-emerald-500"></i> 2. EventSubSystem
+                        </h3>
+                        <p class="text-sm">게임 내 모든 Delegate 통합 관리. 옵저버 패턴을 통해 컴포넌트 간 결합도 최소화.</p>
+                        <div class="cpp-code-block">
+                            <span class="code-label">// EventSubSystem.h</span>
+                            <pre><code>UPROPERTY(BlueprintReadOnly, Category = "Events")
+FCharacterEvents Character;
+
+UPROPERTY(BlueprintReadOnly, Category = "Events")
+FUIEvents UI;</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- UISubSystem -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="monitor" class="w-5 h-5 text-emerald-500"></i> 3. UISubSystem
+                        </h3>
+                        <p class="text-sm">Lazy Initialization을 통한 위젯 생성 및 Visibility 제어. IOpenable 인터페이스 활용.</p>
+                        <div class="cpp-code-block">
+                            <span class="code-label">// UISubSystem.cpp</span>
+                            <pre><code>if (CreatedWidgets.Contains(InWidgetType)) {
+    Widget = CreatedWidgets[InWidgetType];
+} else {
+    Widget = CreateWidget(Controller, WidgetClass);
+    CreatedWidgets.Add(InWidgetType, Widget);
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- ItemFactorySubSystem -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="package-plus" class="w-5 h-5 text-emerald-500"></i> 4. ItemFactorySubSystem
+                        </h3>
+                        <p class="text-sm">월드 아이템 스폰 전담. 기존 아이템 데이터(수량, 내구도)를 재생성 시 그대로 유지.</p>
+                        <div class="cpp-code-block">
+                            <span class="code-label">// ItemFactorySubSystem.cpp</span>
+                            <pre><code>auto SpawnClass = Manager->GetPickupItemClass(InType);
+APickupItem* DropItem = GetWorld()->SpawnActor<APickupItem>(SpawnClass, Location, ...);
+DropItem->SetExistValues(Amount, InDurability);</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 3: Editor Tool (2분할 코드 포함) -->
+            <section id="editor" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
+                    <h2 class="text-3xl font-bold text-white uppercase">Editor Tool: 맵 세팅 자동화</h2>
+                </div>
+                <div class="space-y-8 text-sub">
+                    <div class="media-placeholder" style="aspect-ratio: 21/9;">
+                        <img src="assets/img/frozen_map_editor.png" alt="Editor Tool Screenshot" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[에디터 프롭 생성기 실행 이미지]</span>
+                    </div>
+
+                    <!-- 양분할 코드 블록 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="cpp-code-block">
+                            <span class="code-label">// Spawn Logic (Left)</span>
+                            <pre><code>UFUNCTION(CallInEditor)
+void SpawnActors();
+
+FVector TraceStart = Box->GetComponentLocation();
+// 랜덤 X, Y 좌표 연산 및 라인트레이스 시작점 설정</code></pre>
+                        </div>
+                        <div class="cpp-code-block">
+                            <span class="code-label">// Variety Logic (Right)</span>
+                            <pre><code>NewActor->SetActorRelativeScale3D(FVector::OneVector * RandScale);
+FRotator RandRot = FRotator(0, FMath::RandRange(0, 360), 0);
+NewActor->SetActorRotation(RandRot);</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 4: 인벤토리 및 퀵슬롯 시스템 -->
+            <section id="inventory" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-12">
+                    <h2 class="text-3xl font-bold text-white uppercase">Inventory & Quick Slot System</h2>
+                </div>
+
+                <!-- 인벤토리 로직 -->
+                <div class="space-y-10 mb-20">
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="backpack" class="w-6 h-6 text-emerald-500"></i> Inventory Logic
+                    </h3>
+                    <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 800px;">
+                        <img src="assets/img/frozen_inv_uml.png" alt="Inventory UML" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[인벤토리 시스템 UML 이미지]</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="cpp-code-block">
+                            <span class="code-label">1. 아이템 획득 (Acquisition)</span>
+                            <pre><code>if (TargetItem && TargetItem->IsStackable()) {
+    TargetItem->AddAmount(InAmount);
+} else { Items.Add(CreateNewItem(InType)); }</code></pre>
+                        </div>
+                        <div class="cpp-code-block">
+                            <span class="code-label">2. 아이템 장착 (Equipment)</span>
+                            <pre><code>switch(InType) {
+    case EItemType::Axe: EquipHand(InItem); break;
+    case EItemType::Food: UseConsumable(InItem); break;
+}</code></pre>
+                        </div>
+                        <div class="cpp-code-block">
+                            <span class="code-label">3. 인벤토리 아이템 (Inventory Item Class)</span>
+                            <pre><code>UCLASS()
+class UInventoryItem : public UObject {
+    // DataAsset을 래핑하여 인벤토리에서 실제 데이터를 관리하는 클래스
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 퀵슬롯 로직 -->
+                <div class="space-y-10">
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="layout-grid" class="w-6 h-6 text-emerald-500"></i> Quick Slot Logic
+                    </h3>
+                    <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 800px;">
+                        <img src="assets/img/frozen_quick_uml.png" alt="Quick Slot UML" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[퀵슬롯 시스템 UML 이미지]</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="cpp-code-block">
+                            <span class="code-label">1. 키 입력 처리 (Input)</span>
+                            <pre><code>void OnQuickSlotKeyPressed(int32 SlotNum) {
+    if (IsInventoryOpen()) SetSlot(SlotNum);
+    else UseSlot(SlotNum);
+}</code></pre>
+                        </div>
+                        <div class="cpp-code-block">
+                            <span class="code-label">2. 슬롯 저장 (Save)</span>
+                            <pre><code>selectedItem->QuickSlotNum = numberKey;
+EventSystem->UI.OnSetQuickSlot.Broadcast(numberKey, selectedItem);</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 5: UI 작업 (4개 이미지) -->
+            <section id="ui-work" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
+                    <h2 class="text-3xl font-bold text-white uppercase">UI Implementation</h2>
+                    <p class="text-sub mt-2">인게임 시스템 연동 및 레이아웃 작업</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="media-placeholder" style="aspect-ratio: 16/9;">
+                        <img src="assets/img/ui_1.png" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 1: 인벤토리]</span>
+                    </div>
+                    <div class="media-placeholder" style="aspect-ratio: 16/9;">
+                        <img src="assets/img/ui_2.png" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 2: 메뉴/조합]</span>
+                    </div>
+                    <div class="media-placeholder" style="aspect-ratio: 16/9;">
+                        <img src="assets/img/ui_3.png" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 3: 로비/상태창]</span>
+                    </div>
+                    <div class="media-placeholder" style="aspect-ratio: 16/9;">
+                        <img src="assets/img/ui_4.png" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 4: 퀵슬롯 HUD]</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 6: 협업 및 프로젝트 리딩 (대/소 이미지) -->
+            <section id="management" class="scroll-mt-24 pb-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
+                    <h2 class="text-3xl font-bold text-white uppercase">Team Collaboration & Leading</h2>
+                </div>
+                <div class="space-y-6">
+                    <!-- 큰 이미지 -->
+                    <div class="media-placeholder" style="aspect-ratio: 21/9;">
+                        <img src="assets/img/collab_large.png" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[협업 관리 이미지 - 대 (일정표/업무분배)]</span>
+                    </div>
+                    <!-- 작은 이미지 -->
+                    <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 600px;">
+                        <img src="assets/img/collab_small.png" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[협업 툴 이미지 - 소 (Git/Discord)]</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer 성현우 Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
