@@ -651,23 +651,30 @@ if (IA_QuickSlot5)
                 <div class="border-l-4 border-pink-500 pl-6 py-1 mb-10">
                     <h2 class="text-3xl font-bold text-white uppercase">UI Implementation</h2>
                 </div>
-                <!-- 4개 이미지 그리드 -->
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="media-placeholder" style="aspect-ratio: 3/5;">
-                        <img src="/assets/img/frozen_break/inventory.png" alt="인벤토리 UI" onerror="this.style.display='none'">
+                <!-- 3:5 두 개, 16:9 한 개, 16:5 한 개 조화로운 그리드 배치 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 좌측: 3:5 비율 이미지 2개 (인벤토리, 메뉴 등 세로형 UI) -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="media-placeholder" style="aspect-ratio: 3/5;">
+                            <img src="/assets/img/frozen_break/inventory.png" alt="UI 3:5 첫번째" onerror="this.style.display='none'">
+                            <span class="z-10 text-slate-500 text-center text-xs px-2">[3:5 세로형 UI 1 (인벤토리)]</span>
+                        </div>
+                        <div class="media-placeholder" style="aspect-ratio: 3/5;">
+                            <img src="/assets/img/frozen_break/menu.png" alt="UI 3:5 두번째" onerror="this.style.display='none'">
+                            <span class="z-10 text-slate-500 text-center text-xs px-2">[3:5 세로형 UI 2 (메뉴/조합)]</span>
+                        </div>
                     </div>
-                    <p class="text-sm text-center text-sub">[UI 이미지 1: 인벤토리]</p>
-                    <div class="media-placeholder" style="aspect-ratio: 3/5;">
-                        <img src="/assets/img/frozen_break/menu.png" alt="메뉴 UI" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[UI 이미지 2: 인게임 메뉴]</span>
-                    </div>
-                    <div class="media-placeholder" style="aspect-ratio: 16/9;">
-                        <img src="/assets/img/frozen_break/lobby.png" alt="로비 UI" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[UI 이미지 3: 로비 화면]</span>
-                    </div>
-                    <div class="media-placeholder" style="aspect-ratio: 16/3;">
-                        <img src="/assets/img/frozen_break/quick_slot.png" alt="퀵슬롯 HUD" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[UI 이미지 4: 퀵슬롯 UI]</span>
+
+                    <!-- 우측: 16:9, 16:5 비율 이미지 (로비, 퀵슬롯 등 가로/와이드형 UI) -->
+                    <div class="flex flex-col gap-4 justify-between h-full">
+                        <div class="media-placeholder w-full h-full" style="aspect-ratio: 16/9;">
+                            <img src="/assets/img/frozen_break/lobby.png" alt="UI 16:9" onerror="this.style.display='none'">
+                            <span class="z-10 text-slate-500 text-center text-xs px-2">[16:9 가로형 UI (로비/화면)]</span>
+                        </div>
+                        <div class="media-placeholder w-full h-full" style="aspect-ratio: 16/5;">
+                            <img src="/assets/img/frozen_break/quick_slot.png" alt="UI 16:5" onerror="this.style.display='none'">
+                            <span class="z-10 text-slate-500 text-center text-xs px-2">[16:5 와이드 UI (퀵슬롯/HUD)]</span>
+                        </div>
                     </div>
                 </div>
             </section>
