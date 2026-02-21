@@ -84,10 +84,11 @@
             position: relative;
         }
 
-            .media-placeholder img {
+            /* 영상 및 이미지가 컨테이너에 꽉 차도록 설정 */
+            .media-placeholder img, .media-placeholder iframe {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
+                border: none;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -99,18 +100,20 @@
             border-radius: 0.5rem;
             padding: 1.25rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #c5c8c6;
             overflow-x: auto;
             border: 1px solid var(--border);
+            margin-top: 0.75rem;
         }
 
         .code-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: bold;
             color: var(--accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             display: block;
+            opacity: 0.8;
         }
 
         ::-webkit-scrollbar {
@@ -203,152 +206,373 @@
                 <div class="prose prose-invert max-w-none text-sub mb-10 text-lg">
                     <p>혹한의 숲에 고립되어 탈출을 위해 생존하는 3D 액션 생존 게임입니다. 자원을 채집하고 도구를 제작하며 끝까지 살아남아야 합니다.</p>
                 </div>
-                <div class="aspect-video w-full bg-slate-800 rounded-xl overflow-hidden border border-theme relative group">
-                    <!-- 유튜브 임베드 -->
-                    <iframe class="w-full h-full" src="https://www.youtube.com/watch?v=RMMSezTlGHE" title="Gameplay Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="media-placeholder shadow-2xl" style="aspect-ratio: 16/9;">
+                    <!-- 유튜브 임베드: VIDEO_ID 부분을 실제 영상 ID로 교체하세요 -->
+                    <iframe src="https://www.youtube.com/embed/3aqg8nu79TQ?rel=0&showinfo=0"
+                            title="Main Gameplay Video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                 </div>
-                <p class="text-sm text-center text-sub">▲ 게임 소개 영상</p>
             </section>
 
-            <!-- 섹션 2: System Architecture (C++ 코드 포함) -->
+            <!-- 섹션 2: System Architecture -->
             <section id="architecture" class="scroll-mt-24">
                 <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
                     <h2 class="text-3xl font-bold text-white uppercase">System Architecture</h2>
-                    <p class="text-sub mt-2">GameInstanceSubsystem 기반의 모듈화 및 옵저버 패턴 설계</p>
+                    <p class="text-sub mt-2">핵심 매니저 및 서브시스템의 C++ 아키텍처 설계</p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-10 text-sub">
-                    <!-- GameManager -->
+                <div class="grid grid-cols-1 gap-12 text-sub">
+                    <!-- 1. GameManager -->
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="box" class="w-5 h-5 text-emerald-500"></i> 1. GameManager
+                            <i data-lucide="box" class="w-5 h-5 text-emerald-500"></i> 1. GameManager (Data Manager)
                         </h3>
-                        <p class="text-sm">DataTable, DataAsset 데이터 파일 연결 및 보관 관리. 전역 공통 변수 제어.</p>
+                        <p class="text-sm">DataTable 및 데이터 리스트를 중앙에서 보관하고 인게임 시간을 관리합니다.</p>
                         <div class="cpp-code-block">
+                            <span class="code-label">// GameManager.h - 전역 데이터 및 상태 관리</span>
+                            <pre><code>UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+TObjectPtr&lt;class UDataTable&gt; WidgetData;
 
-                            <span class="code-label">// GameManager.h</span>
-                            <pre><code>UPROPERTY(EditAnywhere, Category = "Data")
-TObjectPtr&lt;UDataTable&gt; WidgetData;
+UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+TObjectPtr&lt;class UDataTable&gt; PickupItemTable;
 
-UPROPERTY(EditAnywhere, Category = "Data")
-TObjectPtr&lt;UDataTable&gt; PickupItemTable;</code></pre>
+UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+TObjectPtr&lt;UItemDataList&gt; ItemDataList;
+
+UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+TObjectPtr&lt;UEquipItemData&gt; EquipItemData;
+
+// 인게임 시작 시간(0~1 : 0.25 = 6시, 0.5 = 12시, 0.75 = 18시, 1.0 = 00시)
+UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+float InGameStartTime = 0.5f;
+
+UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameData")
+EGameState CurrentState;</code></pre>
                         </div>
                     </div>
 
-                    <!-- EventSubSystem -->
+                    <!-- 2. EventSubSystem -->
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="git-merge" class="w-5 h-5 text-emerald-500"></i> 2. EventSubSystem
+                            <i data-lucide="git-merge" class="w-5 h-5 text-emerald-500"></i> 2. EventSubSystem (Observer Pattern)
                         </h3>
-                        <p class="text-sm">게임 내 모든 Delegate 통합 관리. 옵저버 패턴을 통해 컴포넌트 간 결합도 최소화.</p>
-                        <div class="cpp-code-block">
-                            <span class="code-label">// EventSubSystem.h</span>
-                            <pre><code>UPROPERTY(BlueprintReadOnly, Category = "Events")
+                        <p class="text-sm">구조체로 분리된 델리게이트들을 통해 객체 간 결합도를 최소화합니다.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="cpp-code-block">
+                                <span class="code-label">// EventSubSystem.h - 프로퍼티</span>
+                                <pre><code>UPROPERTY(BlueprintReadOnly, Category = "Events")
 FCharacterEvents Character;
 
 UPROPERTY(BlueprintReadOnly, Category = "Events")
+FStatusEvents Status;
+
+UPROPERTY(BlueprintReadOnly, Category = "Events")
 FUIEvents UI;</code></pre>
+                            </div>
+                            <div class="cpp-code-block">
+                                <span class="code-label">// UI 이벤트 구조체 정의</span>
+                                <pre><code>DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnToggleQuitMenu);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemSelected, EItemType, InType);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSetItemToQuickSlot, int32, InIndex, UInventoryItem*, InItem);
+
+USTRUCT(BlueprintType)
+struct FROZENBREAK_API FUIEvents {
+    GENERATED_BODY()
+    UPROPERTY(BlueprintAssignable)
+    FOnToggleQuitMenu OnToggleQuitMenu;
+    
+    // 퀵슬롯 관련 델리게이트 포함
+    FOnSetItemToQuickSlot OnSetItemToQuickSlot;
+    FOnQuickSlotExecute OnQuickSlotExecute;
+    FOnResetQuickSlotItem OnResetQuickSlotItem;
+};</code></pre>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- UISubSystem -->
+                    <!-- 3. UISubSystem -->
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="monitor" class="w-5 h-5 text-emerald-500"></i> 3. UISubSystem
+                            <i data-lucide="monitor" class="w-5 h-5 text-emerald-500"></i> 3. UISubSystem (Widget Management)
                         </h3>
-                        <p class="text-sm">Lazy Initialization을 통한 위젯 생성 및 Visibility 제어. IOpenable 인터페이스 활용.</p>
+                        <p class="text-sm">Lazy Initialization을 통해 위젯을 동적으로 생성하고 인풋 모드를 자동 전환합니다.</p>
                         <div class="cpp-code-block">
-                            <span class="code-label">// UISubSystem.cpp</span>
-                            <pre><code>if (CreatedWidgets.Contains(InWidgetType)) {
-    Widget = CreatedWidgets[InWidgetType];
-} else {
-    Widget = CreateWidget(Controller, WidgetClass);
-    CreatedWidgets.Add(InWidgetType, Widget);
+                            <span class="code-label">// UISubSystem.cpp - ShowWidget 로직</span>
+                            <pre><code>UUserWidget* UUISubSystem::ShowWidget(EWidgetType InWidgetType, EInputModeType InInputMode) {
+    // 컨트롤러에 붙여주기 때문에 없으면 다시 연결 시도
+    if (CurrentPlayerController.IsValid() == false) {
+        CurrentPlayerController = GetWorld()->GetFirstPlayerController();
+    }
+
+    UUserWidget* Widget = nullptr;
+
+    // 생성된 적이 있으면 켜주고, 없으면 생성[Lazy Initialziation]
+    if (CreatedWidgets.Contains(InWidgetType)) {
+        Widget = CreatedWidgets[InWidgetType];
+        if (Widget->IsInViewport() == false) {
+            Widget->AddToViewport();
+        }
+        if (Widget->Implements&lt;UOpenable&gt;()) {
+            IOpenable::Execute_OpenWidget(Widget);
+        } else {
+            Widget->SetVisibility(ESlateVisibility::Visible);
+        }
+    } else {
+        if (UGameManager* GameMgr = UGameManager::Get(this)) {
+            TSubclassOf&lt;UUserWidget&gt; WidgetClass = GameMgr->GetWidgetClass(InWidgetType);
+            if (WidgetClass) Widget = CreateWidget(CurrentPlayerController.Get(), WidgetClass);
+        }
+        if (Widget) {
+            CreatedWidgets.Add(InWidgetType, Widget);
+            Widget->AddToViewport();
+        }
+    }
+    // 인풋 모드 처리 (GameAndUI / UIOnly) 로직 생략...
+    return Widget;
 }</code></pre>
                         </div>
                     </div>
 
-                    <!-- ItemFactorySubSystem -->
+                    <!-- 4. ItemFactorySubSystem -->
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="package-plus" class="w-5 h-5 text-emerald-500"></i> 4. ItemFactorySubSystem
+                            <i data-lucide="package-plus" class="w-5 h-5 text-emerald-500"></i> 4. ItemFactorySubSystem (Factory Pattern)
                         </h3>
-                        <p class="text-sm">월드 아이템 스폰 전담. 기존 아이템 데이터(수량, 내구도)를 재생성 시 그대로 유지.</p>
+                        <p class="text-sm">데이터 값을 유지하며 필드 아이템 및 인벤토리 아이템 객체를 생성합니다.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="cpp-code-block">
+                                <span class="code-label">// Header - Spawn 선언</span>
+                                <pre><code>UFUNCTION(BlueprintCallable)
+APickupItem* Spawn(EItemType InType, FVector Location, int32 Amount = 1, float InDurability = 0.0f);
+
+UInventoryItem* Spawn(EItemType InType, int32 Amount = 1, float InDurability = 0.0f);
+
+UFUNCTION(BlueprintCallable)
+class AToolActor* SpawnTool(EItemType InType, float InDurability);</code></pre>
+                            </div>
+                            <div class="cpp-code-block">
+                                <span class="code-label">// Implementation - 필드 스폰</span>
+                                <pre><code>APickupItem* UItemFactorySubSystem::Spawn(EItemType InType, FVector Location, int32 Amount, float InDurability) {
+    if (UGameManager* Manager = UGameManager::Get(this)) {
+        auto spawnClass = Manager->GetPickupItemClass(InType);
+        APickupItem* DropItem = GetWorld()->SpawnActor&lt;APickupItem&gt;(spawnClass, Location, FRotator::ZeroRotator);
+        DropItem->SetExistValues(Amount, InDurability);
+        return DropItem;
+    }
+    return nullptr;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. FrozenForestGameState -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="layers" class="w-5 h-5 text-emerald-500"></i> 5. GameState & Level Transition
+                        </h3>
+                        <p class="text-sm">게임 상태값 관리를 통한 안정적인 레벨 전환 및 결과 처리 로직을 담당합니다. 레벨 전환 시 유지를 위해 현재 상태값은 <code>GameManager</code>에서 함께 관리합니다.</p>
                         <div class="cpp-code-block">
-                            <span class="code-label">// ItemFactorySubSystem.cpp</span>
-                            <pre><code>auto SpawnClass = Manager->GetPickupItemClass(InType);
-APickupItem* DropItem = GetWorld()->SpawnActor<APickupItem>(SpawnClass, Location, ...);
-DropItem->SetExistValues(Amount, InDurability);</code></pre>
+                            <span class="code-label">// FrozenForestGameState.cpp - 상태 변경 핸들러</span>
+                            <pre><code>void AFrozenForestGameState::OnGameStateChanged(EGameState InState) {
+    switch (InState) {
+        case EGameState::Lobby:
+            UGameplayStatics::OpenLevel(this, "Lobby", true);
+            break;
+        case EGameState::Playing:
+            if (UUISubSystem* UISystem = UUISubSystem::Get(this)) {
+                UISystem->HideWidget(EWidgetType::Lobby);
+            }
+            if (UGameManager* Manager = UGameManager::Get(this)) {
+                UGameplayStatics::OpenLevelBySoftObjectPtr(this, Manager->PlayMap);
+            }
+            break;
+        case EGameState::Success:
+            if (UUISubSystem* UISystem = UUISubSystem::Get(this)) {
+                UISystem->HideAllWiget();
+                auto Result = Cast&lt;UPlayResultWidget&gt;(UISystem->ShowWidget(EWidgetType::PlayResult));
+                Result->SetResult(true)->UpdateRecord(TimeToText());
+            }
+            break;
+        case EGameState::Fail:
+            // 사망 시 / 재시작 UI
+            if (UUISubSystem* UISystem = UUISubSystem::Get(this)) {
+                UISystem->HideAllWiget();
+                auto Result = Cast&lt;UPlayResultWidget&gt;(UISystem->ShowWidget(EWidgetType::PlayResult));
+                Result->SetResult(false)->UpdateRecord(TimeToText());
+            }
+            break;
+    }
+}</code></pre>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 섹션 3: Editor Tool (2분할 코드 포함) -->
+            <!-- 섹션 4: Editor Tool (맵 세팅) -->
             <section id="editor" class="scroll-mt-24">
-                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-10">
                     <h2 class="text-3xl font-bold text-white uppercase">Editor Tool: 맵 세팅 자동화</h2>
                 </div>
                 <div class="space-y-8 text-sub">
                     <div class="media-placeholder" style="aspect-ratio: 21/9;">
-                        <img src="assets/img/frozen_map_editor.png" alt="Editor Tool Screenshot" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[에디터 프롭 생성기 실행 이미지]</span>
+                        <!-- 이미지 대신 동영상(Video) 태그로 변경 -->
+                        <video src="/assets/img/frozen_break/PropSpawner.mp4" controls autoplay muted loop class="w-full h-full object-cover absolute top-0 left-0" style="z-index: 5;"></video>
+                        <span class="z-10 text-slate-500 text-center pointer-events-none">에디터 프롭 생성기 실행 동영상<br><small>(오브젝트 자동 배치 툴)</small></span>
                     </div>
 
-                    <!-- 양분할 코드 블록 -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <div class="cpp-code-block">
-                            <span class="code-label">// Spawn Logic (Left)</span>
-                            <pre><code>UFUNCTION(CallInEditor)
-void SpawnActors();
+                            <span class="code-label">// APropSpawner::SpawnActors</span>
+                            <pre><code>void APropSpawner::SpawnActors()
+{
+    if (ActorToSpawn.Num() &lt;= 0) return;
 
-FVector TraceStart = Box->GetComponentLocation();
-// 랜덤 X, Y 좌표 연산 및 라인트레이스 시작점 설정</code></pre>
-                        </div>
-                        <div class="cpp-code-block">
-                            <span class="code-label">// Variety Logic (Right)</span>
-                            <pre><code>NewActor->SetActorRelativeScale3D(FVector::OneVector * RandScale);
-FRotator RandRot = FRotator(0, FMath::RandRange(0, 360), 0);
-NewActor->SetActorRotation(RandRot);</code></pre>
+    // 박스 가져오기
+    FVector Origin = SpawnVolume-&gt;GetComponentLocation();
+    FVector BoxExtent = SpawnVolume-&gt;GetScaledBoxExtent();
+
+    for (int32 i = 0; i &lt; SpawnCount; i++)
+    {
+        // 1. 박스 범위 안에서 랜덤한 X, Y 좌표 뽑기
+        float RandomX = FMath::RandRange(Origin.X - BoxExtent.X, Origin.X + BoxExtent.X);
+        float RandomY = FMath::RandRange(Origin.Y - BoxExtent.Y, Origin.Y + BoxExtent.Y);
+
+        FVector TraceStart = FVector(RandomX, RandomY, Origin.Z + BoxExtent.Z);
+        FVector TraceEnd = FVector(RandomX, RandomY, Origin.Z - BoxExtent.Z - 2000.f);
+
+        FHitResult HitResult;
+        FCollisionQueryParams Params;
+        //자기자신은 무시
+        Params.AddIgnoredActor(this);
+
+        bool bHit = GetWorld()-&gt;LineTraceSingleByChannel(
+            HitResult,
+            TraceStart,
+            TraceEnd,
+            ECC_GameTraceChannel2,
+            Params
+        );
+
+        if (bHit)
+        {
+            GEngine-&gt;AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
+                FString::Printf(TEXT("Hit Actor: %s"), *HitResult.GetActor()-&gt;GetName()));
+            //회전값 설정
+            FRotator SpawnRotation = FRotator::ZeroRotator;
+            if (bRandomYaw)
+            {
+                SpawnRotation.Yaw = FMath::RandRange(0.0f, 360.0f);
+            }
+            
+            //랜덤 한개 가져오기
+            int32 RandomIndex = FMath::RandRange(0, ActorToSpawn.Num() - 1);
+            auto SpawnActor = ActorToSpawn[RandomIndex];
+
+            AActor* NewActor = GetWorld()-&gt;SpawnActor&lt;AActor&gt;(SpawnActor, HitResult.Location, SpawnRotation);
+
+            if (NewActor)
+            {
+                float RandScale = FMath::FRandRange(MinScaleSize, MaxScaleSize);
+                NewActor-&gt;SetActorRelativeScale3D(FVector::OneVector * RandScale);
+                NewActor-&gt;AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+                SpawnedActors.Add(NewActor);
+            }
+        }
+    }
+}</code></pre>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 섹션 4: 인벤토리 및 퀵슬롯 시스템 -->
+            <!-- 섹션 5: 인벤토리 및 퀵슬롯 시스템 -->
             <section id="inventory" class="scroll-mt-24">
-                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-12">
+                <div class="border-l-4 border-purple-500 pl-6 py-1 mb-12">
                     <h2 class="text-3xl font-bold text-white uppercase">Inventory & Quick Slot System</h2>
                 </div>
 
                 <!-- 인벤토리 로직 -->
                 <div class="space-y-10 mb-20">
                     <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="backpack" class="w-6 h-6 text-emerald-500"></i> Inventory Logic
+                        <i data-lucide="backpack" class="w-6 h-6 text-purple-400"></i> Inventory Logic
                     </h3>
                     <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 800px;">
                         <img src="assets/img/frozen_inv_uml.png" alt="Inventory UML" onerror="this.style.display='none'">
                         <span class="z-10 text-slate-500">[인벤토리 시스템 UML 이미지]</span>
                     </div>
-                    <div class="grid grid-cols-1 gap-4">
+                    <div class="grid grid-cols-1 gap-4 text-sub">
                         <div class="cpp-code-block">
-                            <span class="code-label">1. 아이템 획득 (Acquisition)</span>
-                            <pre><code>if (TargetItem && TargetItem->IsStackable()) {
-    TargetItem->AddAmount(InAmount);
-} else { Items.Add(CreateNewItem(InType)); }</code></pre>
-                        </div>
-                        <div class="cpp-code-block">
-                            <span class="code-label">2. 아이템 장착 (Equipment)</span>
-                            <pre><code>switch(InType) {
-    case EItemType::Axe: EquipHand(InItem); break;
-    case EItemType::Food: UseConsumable(InItem); break;
+                            <span class="code-label">1. 아이템 획득 (AddItem)</span>
+                            <pre><code>void UInventoryComponent::AddItem(EItemType InType, int32 InAmount, float InDurability) {
+    if (CurrentWeight >= InventoryMaxWeight) return; // 무게 초과 시 습득 불가
+
+    UInventoryItem* TargetItem = GetItem(InType);
+    if (TargetItem && TargetItem->GetData()->IsStackable) {
+        // 누적 가능한 아이템이면 개수 증가 후 Delegate 전송
+        TargetItem->AddAmount(InAmount);
+        if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
+            EventSystem->Character.OnUpdateInventoryItem.Broadcast(InType);
+        }
+    } else {
+        // 새로운 아이템 생성
+        if (UItemFactorySubSystem* ItemFactory = UItemFactorySubSystem::Get(this)) {
+            UInventoryItem* NewItem = ItemFactory->Spawn(InType, InAmount, InDurability);
+            Items.Add(NewItem);
+            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
+                EventSystem->Character.OnAddItemToInventoryUI.Broadcast(NewItem);
+            }
+        }
+    }
 }</code></pre>
                         </div>
                         <div class="cpp-code-block">
-                            <span class="code-label">3. 인벤토리 아이템 (Inventory Item Class)</span>
+                            <span class="code-label">2. 아이템 장착 (UseItem)</span>
+                            <pre><code>void UInventoryComponent::UseInventoryItem(UInventoryItem* InItem) {
+    if (!InItem) return;
+    
+    EItemType InType = InItem->GetType();
+    switch(InType) {
+        case EItemType::Knife:
+        case EItemType::Axe:
+        case EItemType::Pickaxe:
+            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
+                EventSystem->Character.OnEquipHandItem.Broadcast(InItem);
+            }
+            break;
+        case EItemType::Jaket:
+            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
+                EventSystem->Character.OnEquipBodyItem.Broadcast(InItem);
+            }
+            break;
+        // 요리, 모닥불 등 기타 소모품 로직 생략...
+    }
+    
+    // 사용 후 공통적으로 해당 아이템 개수 감소 처리
+    UseItem(InItem->GetUID());
+}</code></pre>
+                        </div>
+                        <div class="cpp-code-block">
+                            <span class="code-label">3. 인벤토리 아이템 (UInventoryItem Class)</span>
                             <pre><code>UCLASS()
-class UInventoryItem : public UObject {
-    // DataAsset을 래핑하여 인벤토리에서 실제 데이터를 관리하는 클래스
+class FROZENBREAK_API UInventoryItem : public UObject {
+    GENERATED_BODY()
+public:
+    inline UItemData* GetData() { return Data.Get(); }
+    inline float GetWeight() { return Data.Get()->ItemWeight * Amount; }
+    inline int32 GetAmount() { return Amount; }
+    inline EItemType GetType() { return Data.Get()->ItemType; }
+    
+    void AddAmount(int32 InAmount);
+    void SetAmount(int32 InAmount);
+    
+    int32 QuickSlotNum = 0;
+private:
+    uint32 UID = 0;
+    TObjectPtr&lt;UItemData&gt; Data;
+    int32 Amount = 0;
+    float Durability = 0.0f;
+    float MaxDurability = 0.0f;
 };</code></pre>
                         </div>
                     </div>
@@ -357,70 +581,112 @@ class UInventoryItem : public UObject {
                 <!-- 퀵슬롯 로직 -->
                 <div class="space-y-10">
                     <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="layout-grid" class="w-6 h-6 text-emerald-500"></i> Quick Slot Logic
+                        <i data-lucide="layout-grid" class="w-6 h-6 text-purple-400"></i> Quick Slot Logic
                     </h3>
                     <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 800px;">
                         <img src="assets/img/frozen_quick_uml.png" alt="Quick Slot UML" onerror="this.style.display='none'">
                         <span class="z-10 text-slate-500">[퀵슬롯 시스템 UML 이미지]</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 text-sub">
                         <div class="cpp-code-block">
-                            <span class="code-label">1. 키 입력 처리 (Input)</span>
-                            <pre><code>void OnQuickSlotKeyPressed(int32 SlotNum) {
-    if (IsInventoryOpen()) SetSlot(SlotNum);
-    else UseSlot(SlotNum);
-}</code></pre>
+                            <span class="code-label">1. 키 입력 처리 (PlayerController)</span>
+                            <pre><code>if (IA_QuickSlot1)
+    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot1, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnOneStarted);
+if (IA_QuickSlot2)
+    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot2, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnTwoStarted);
+if (IA_QuickSlot3)
+    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot3, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnThreeStarted);
+if (IA_QuickSlot4)
+    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot4, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnFourStarted);
+if (IA_QuickSlot5)
+    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot5, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnFiveStarted);</code></pre>
                         </div>
                         <div class="cpp-code-block">
-                            <span class="code-label">2. 슬롯 저장 (Save)</span>
-                            <pre><code>selectedItem->QuickSlotNum = numberKey;
-EventSystem->UI.OnSetQuickSlot.Broadcast(numberKey, selectedItem);</code></pre>
+                            <span class="code-label">2. 슬롯 저장 및 동기화 (InventoryWidget)</span>
+                            <pre><code>FReply UInventoryWidget::NativeOnKeyDown(const FGeometry&amp; InGeometry, const FKeyEvent&amp; InKeyEvent)
+{
+    int32 numberKey = 0;
+    
+    if (InKeyEvent.GetKey() == EKeys::One)
+        numberKey = 1;
+    else if (InKeyEvent.GetKey() == EKeys::Two)
+        numberKey = 2;
+    else if (InKeyEvent.GetKey() == EKeys::Three)
+        numberKey = 3;
+    else if (InKeyEvent.GetKey() == EKeys::Four)
+        numberKey = 4;
+    else if (InKeyEvent.GetKey() == EKeys::Five)
+        numberKey = 5;
+
+    if (numberKey &gt; 0)
+    {
+        auto Selected = InventoryList-&gt;GetSelectedItem();
+
+        if (Selected)
+        {
+            //이거 하기전에 현재 인벤토리에서 이 번호 아이템 있으면 슬롯 지워야함
+
+            //퀵슬롯 등록
+            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this))
+            {
+                EventSystem-&gt;UI.OnResetQuickSlotItem.Broadcast(numberKey);
+
+                UInventoryItem* selectedItem = Cast&lt;UInventoryItem&gt;(Selected);
+                selectedItem-&gt;QuickSlotNum = numberKey;
+                EventSystem-&gt;UI.OnSetItemToQuickSlot.Broadcast(numberKey, selectedItem);
+            }
+        }
+        return FReply::Handled();
+    }
+    // 다른 키는 부모 클래스 루틴 따름 (Unhandled 반환)
+    return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
+}</code></pre>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 섹션 5: UI 작업 (4개 이미지) -->
+            <!-- 섹션 6: UI 작업 -->
             <section id="ui-work" class="scroll-mt-24">
-                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
+                <div class="border-l-4 border-pink-500 pl-6 py-1 mb-10">
                     <h2 class="text-3xl font-bold text-white uppercase">UI Implementation</h2>
-                    <p class="text-sub mt-2">인게임 시스템 연동 및 레이아웃 작업</p>
                 </div>
+                <!-- 4개 이미지 그리드 -->
                 <div class="grid grid-cols-2 gap-6">
                     <div class="media-placeholder" style="aspect-ratio: 16/9;">
-                        <img src="assets/img/ui_1.png" onerror="this.style.display='none'">
+                        <img src="/assets/img/frozen_break/inventory.png" alt="인벤토리 UI" onerror="this.style.display='none'">
                         <span class="z-10 text-slate-500">[UI 이미지 1: 인벤토리]</span>
                     </div>
                     <div class="media-placeholder" style="aspect-ratio: 16/9;">
-                        <img src="assets/img/ui_2.png" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[UI 이미지 2: 메뉴/조합]</span>
+                        <img src="/assets/img/frozen_break/menu.png" alt="메뉴 UI" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 2: 인게임 메뉴]</span>
                     </div>
                     <div class="media-placeholder" style="aspect-ratio: 16/9;">
-                        <img src="assets/img/ui_3.png" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[UI 이미지 3: 로비/상태창]</span>
+                        <img src="/assets/img/frozen_break/lobby.png" alt="로비 UI" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 3: 로비 화면]</span>
                     </div>
                     <div class="media-placeholder" style="aspect-ratio: 16/9;">
-                        <img src="assets/img/ui_4.png" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[UI 이미지 4: 퀵슬롯 HUD]</span>
+                        <img src="/assets/img/frozen_break/quick_slot.png" alt="퀵슬롯 HUD" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500">[UI 이미지 4: 퀵슬롯 UI]</span>
                     </div>
                 </div>
             </section>
 
-            <!-- 섹션 6: 협업 및 프로젝트 리딩 (대/소 이미지) -->
+            <!-- 섹션 7: 협업 및 프로젝트 리딩 -->
             <section id="management" class="scroll-mt-24 pb-24">
                 <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
                     <h2 class="text-3xl font-bold text-white uppercase">Team Collaboration & Leading</h2>
                 </div>
                 <div class="space-y-6">
-                    <!-- 큰 이미지 -->
+                    <!-- 큰 이미지 1개 -->
                     <div class="media-placeholder" style="aspect-ratio: 21/9;">
-                        <img src="assets/img/collab_large.png" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[협업 관리 이미지 - 대 (일정표/업무분배)]</span>
+                        <img src="/assets/img/frozen_break/task.png" alt="업무 분배 일정표" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500 text-center">인원 별 업무 분배 및 내용 정리<br><small>(Excel)</small></span>
                     </div>
-                    <!-- 작은 이미지 -->
+                    <!-- 작은 이미지 1개 -->
                     <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 600px;">
-                        <img src="assets/img/collab_small.png" onerror="this.style.display='none'">
-                        <span class="z-10 text-slate-500">[협업 툴 이미지 - 소 (Git/Discord)]</span>
+                        <img src="/assets/img/frozen_break/schedule.png" alt="일정 관리" onerror="this.style.display='none'">
+                        <span class="z-10 text-slate-500 text-center">인원 별 업무 및 일정 관리<br><small>(Excel)</small></span>
                     </div>
                 </div>
             </section>
@@ -440,3 +706,4 @@ EventSystem->UI.OnSetQuickSlot.Broadcast(numberKey, selectedItem);</code></pre>
     </script>
 </body>
 </html>
+```
