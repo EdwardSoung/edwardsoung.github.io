@@ -257,23 +257,25 @@
             lucide.createIcons();
         });
 
-        // 1. 프로젝트 데이터 가져오기 (상위 3개만 표시)
         async function loadProjects() {
             try {
-                // 캐시 방지를 위해 timestamp 추가
-                const response = await fetch('data/projects-data.json?t=' + Date.now());
-                if (!response.ok) throw new Error('Failed to load projects');
-                
-                const projects = await response.json();
+                // 프리뷰 환경에서 JSON 파일을 fetch할 수 없으므로 하드코딩된 데이터 사용
+                const projects = mockProjects;
+
                 const container = document.getElementById('portfolio-grid');
                 container.innerHTML = ''; // 초기화
 
-                // Tech 제외 및 상위 3개만 자르기
-                const recentProjects = projects.filter(p => p.category !== 'tech').slice(0, 3);
+                // Unity 카테고리 상위 3개 추출
+                const unityProjects = projects.filter(p => p.category === 'unity').slice(0, 3);
+                // Unreal 카테고리 상위 3개 추출
+                const unrealProjects = projects.filter(p => p.category === 'unreal').slice(0, 3);
+
+                // 두 배열을 하나로 합치기
+                const recentProjects = [...unityProjects, ...unrealProjects];
 
                 recentProjects.forEach((proj, index) => {
                     // 태그 HTML 생성
-                    const tagsHtml = proj.tags.slice(0, 3).map(tag => 
+                    const tagsHtml = proj.tags.slice(0, 3).map(tag =>
                         `<span class="tech-tag">${tag}</span>`
                     ).join('');
 
@@ -297,14 +299,14 @@
                         </div>`;
                     }
 
-                    // [수정] 이미지 렌더링 로직 추가 (이미지 유무에 따른 분기)
+                    // 이미지 렌더링 로직 추가 (이미지 유무에 따른 분기)
                     let imageContentHtml = '';
                     if (proj.image) {
-                        imageContentHtml = `<img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover card-img">`;
+                        imageContentHtml = `<img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover card-img" onerror="this.style.display='none'">`;
                     } else {
                         imageContentHtml = `
                             <div class="w-full h-full bg-gradient-to-br ${proj.gradient || 'from-slate-800 to-black'} flex items-center justify-center project-img">
-                                <span class="text-white font-bold text-2xl">${proj.imageText}</span>
+                                <span class="text-white font-bold text-xl">${proj.imageText}</span>
                             </div>
                         `;
                     }
@@ -312,9 +314,10 @@
                     const html = `
                          <article class="project-card rounded-xl overflow-hidden bg-secondary border border-theme flex flex-col h-full" 
                              style="animation-delay: ${index * 0.05}s; background-color: var(--bg-secondary);">
-                        <a href="${proj.url}" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container">
+                        <a href="${proj.url}" class="block h-56 overflow-hidden bg-gray-900 relative project-img-container flex items-center justify-center">
                             ${imageContentHtml}
                             ${badgesHtml}
+                            ${proj.image ? `<span class="absolute text-slate-500 text-xs z-0 pointer-events-none">[썸네일 이미지]</span>` : ''}
                         </a>
                         <div class="p-6 flex flex-col flex-grow">
                             <a href="${proj.url}" class="group">
