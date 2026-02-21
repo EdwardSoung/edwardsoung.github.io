@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - 3D Zombie Survival</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 상세 페이지 전용 스타일 */
+        h1, h2, h3 {
+            letter-spacing: -0.025em;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tech-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s;
+        }
+
+            .toc-link:hover, .toc-link.active {
+                color: var(--accent);
+                border-left-color: var(--accent);
+            }
+
+        /* 미디어 플레이스홀더 */
+        .media-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: var(--bg-secondary);
+            border: 1px dashed var(--border);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-center;
+            color: var(--text-sub);
+            font-size: 0.875rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .media-placeholder img, .media-placeholder iframe {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--text-sub);
+            }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-20 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <!-- 배경: 아포칼립스 느낌의 그라데이션 -->
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-gray-900 to-green-950 opacity-80"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">Personal Project</span>
+                <span class="text-sub text-sm font-mono flex items-center gap-2">
+                    <i data-lucide="code-2" class="w-4 h-4"></i> Blueprint -> C++ 전환 진행 중
+                </span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Project: 3D Zombie Survival<br>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">Unreal Engine 5.5 Action RPG</span>
+            </h1>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-pill">Unreal Engine 5.5</span>
+                <span class="tech-pill">Blueprint & C++</span>
+                <span class="tech-pill">Enhanced Input</span>
+                <span class="tech-pill">AI Perception</span>
+                <span class="tech-pill">Behavior Tree</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <!-- 왼쪽: 사이드바 -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
+            <div>
+                <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
+                <nav class="space-y-1">
+                    <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
+                    <a href="#controls" class="toc-link hover:text-white">조작 및 전투 시스템</a>
+                    <a href="#interaction" class="toc-link hover:text-white">상호작용 및 아웃라인</a>
+                    <a href="#ai" class="toc-link hover:text-white">AI 및 Behavior Tree</a>
+                    <a href="#system" class="toc-link hover:text-white">시스템: 건물 진입 & 데이터</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- 오른쪽: 본문 콘텐츠 -->
+        <div class="lg:col-span-9 space-y-16">
+
+            <!-- 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="info" class="w-6 h-6 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub">
+                    <p class="mb-4">
+                        'Project Zomboid'를 타겟팅하여 3D로 제작한 도심형 좀비 생존 게임입니다.
+                        도심에서 좀비를 피해 생존하며, 진열대나 시체에서 무기와 소모형 아이템을 획득하고 활용하는 것이 핵심입니다.
+                    </p>
+                    <p>
+                        현재 언리얼 엔진 5.5 환경에서 <strong>블루프린트 기반으로 프로토타이핑을 완료</strong>하였으며, 성능 확보와 구조화를 위해 <strong>C++ 코드로의 전환 작업</strong>을 진행하고 있습니다.
+                    </p>
+                </div>
+
+                <!-- [이미지/영상 위치] 메인 게임 플레이 스크린샷 -->
+                <div class="media-placeholder mt-6">
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="image" class="w-8 h-8 mb-2 opacity-50"></i>
+                        <span>[게임 로고]</span>
+                        <img src="assets/img/practice_zomboid/Logo.png" alt="Gameplay">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 조작 및 전투 -->
+            <section id="controls" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Controls & Combat: 조작 및 전투 시스템</h2>
+                </div>
+
+                <div class="space-y-6 text-sub">
+                    <p>언리얼의 <strong>Enhanced Input System</strong>을 활용하여 확장성 있는 조작 체계를 구현했습니다.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="gamepad-2" class="w-4 h-4 text-emerald-500"></i> 기본 이동 및 조작
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>이동:</strong> WSAD 키보드 입력 매핑.</li>
+                                <li><strong>회전:</strong> 마우스 커서 방향을 실시간으로 추적하여 캐릭터가 해당 방향을 바라보도록 회전 로직 구현.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="swords" class="w-4 h-4 text-emerald-500"></i> 애니메이션 및 공격
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>마우스 좌클릭 시 공격 실행.</li>
+                                <li><strong>무기 상태값 분기:</strong> 현재 장착된 무기(맨손, 근접 무기, 총기)의 상태값을 체크.</li>
+                                <li>각 무기 타입에 맞는 <strong>Animation Montage</strong>를 세팅하여 자연스러운 공격 연출 제어.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 조작 및 전투 시스템: 작은 사이즈 동영상(GIF) 5개 -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/move.gif" alt="이동 영상" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="video" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[이동 영상]</span>
+                        </div>
+                    </div>
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/rotation.gif" alt="회전 영상" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="video" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[회전 영상]</span>
+                        </div>
+                    </div>
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/attack_normal.gif" alt="맨손 공격" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="video" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[맨손 공격]</span>
+                        </div>
+                    </div>
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/attack_sword.gif" alt="근접 공격" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="video" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[근접 공격]</span>
+                        </div>
+                    </div>
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/attack_gun.gif" alt="권총 공격" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="video" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[권총 공격]</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 상호작용 및 아웃라인 -->
+            <section id="interaction" class="scroll-mt-24">
+                <div class="border-l-4 border-blue-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Interaction: 상호작용 및 시각적 피드백</h2>
+                </div>
+
+                <div class="space-y-4 text-sub">
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <h4 class="font-bold text-white mb-3 text-lg">마우스 오버 아웃라인 (Post Process)</h4>
+                        <p class="text-sm mb-4">플레이어가 상호작용 가능한 객체를 직관적으로 인지할 수 있도록 머터리얼과 커스텀 뎁스를 활용했습니다.</p>
+
+                        <ul class="list-disc list-inside text-sm space-y-2">
+                            <li><strong>거리 및 타겟팅:</strong> 상호작용 가능한 액터가 일정 거리 내에 들어왔을 때, 마우스 커서 위치에 해당 물체가 있으면 획득 활성화.</li>
+                            <li><strong>Custom Depth:</strong> 활성화된 액터의 <code>Set Render Custom Depth</code> 속성을 켜서 렌더 패스에 등록.</li>
+                            <li><strong>포스트 프로세스 (Post Process):</strong> 화면 전체에 등록된 아웃라인 머터리얼을 통해 테두리 생성. 텍스처를 상하좌우로 이동시켜 마스킹 처리하여 역동적인 아웃라인 연출.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/interaction_1.gif" alt="건물 상호작용" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="mouse-pointer-click" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[건물 상호작용]</span>
+                        </div>
+                    </div>
+                    <div class="media-placeholder">
+                        <img src="assets/img/practice_zomboid/interaction_2.gif" alt="시체 상호작용" onerror="this.style.display='none'">
+                        <div class="flex flex-col items-center">
+                            <i data-lucide="mouse-pointer-click" class="w-6 h-6 mb-2 opacity-50"></i>
+                            <span class="text-xs text-center">[시체 상호작용]</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- AI 및 Behavior Tree -->
+            <section id="ai" class="scroll-mt-24">
+                <div class="border-l-4 border-red-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">AI System: 좀비 인공지능</h2>
+                </div>
+
+                <div class="space-y-4 text-sub">
+                    <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <li>
+                                <h4 class="font-bold text-white text-sm mb-2"><i data-lucide="eye" class="w-4 h-4 inline text-emerald-500 mr-1"></i> AI Perception</h4>
+                                <p class="text-sm">청각(듣기) 및 시각(시야) 센싱을 통해 플레이어를 타겟팅하도록 구현.</p>
+                            </li>
+                            <li>
+                                <h4 class="font-bold text-white text-sm mb-2"><i data-lucide="crosshair" class="w-4 h-4 inline text-emerald-500 mr-1"></i> 거리 기반 감지</h4>
+                                <p class="text-sm">퍼셉션 외에도 아주 가까운 근접 거리에 플레이어가 있을 경우, 거리 계산을 통해 타겟을 강제로 추가 체크하는 로직 보완.</p>
+                            </li>
+                            <li class="col-span-1 md:col-span-2">
+                                <h4 class="font-bold text-white text-sm mb-2"><i data-lucide="git-merge" class="w-4 h-4 inline text-emerald-500 mr-1"></i> Behavior Tree (행동 트리)</h4>
+                                <p class="text-sm">비헤이비어 트리에 <strong>타겟 체크 서비스(Service)</strong>를 등록. 주기적으로 <code>Get Known Perceived Actors</code> 노드를 활용하여 시야나 청각에 들어온 타겟을 검색 및 추적 상태로 전환.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="media-placeholder mt-6">
+                    <img src="assets/img/practice_zomboid/behavior_tree.png" alt="AI Behavior" onerror="this.style.display='none'">
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="users-2" class="w-8 h-8 mb-2 opacity-50"></i>
+                        <span>[좀비 인식 및 추적 Behaivior Tree]</span>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 시스템 처리 및 트러블 슈팅 -->
+            <section id="system" class="scroll-mt-24">
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">System Architecture & Troubleshooting</h2>
+                </div>
+
+                <div class="space-y-6 text-sub">
+
+                    <!-- 카메라 가림 처리 트러블 슈팅 -->
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <h3 class="font-bold text-white mb-4 text-lg">💡 건물 진입 시 카메라 처리 (Troubleshooting)</h3>
+
+                        <div class="space-y-4 text-sm">
+                            <div class="p-4 bg-slate-900/50 rounded border border-slate-700">
+                                <span class="font-bold text-red-400 block mb-1">Issue (최초 시도)</span>
+                                캐릭터가 건물 내부에 진입할 때 카메라의 시야를 가리는 외벽을 처리하기 위해 <strong>카메라에서 캐릭터로 Line Trace</strong>를 쏘아 충돌한 물체를 투명화(Hide) 처리하려 시도.
+                                하지만, 투명화해야 할 건물 외벽과 유지해야 할 내부 구조물을 Line Trace만으로 명확히 구분하기 어려워 개발 지연 우려.
+                            </div>
+
+                            <div class="p-4 bg-emerald-900/20 rounded border border-emerald-900/50">
+                                <span class="font-bold text-emerald-400 block mb-1">Resolution (구현 완료)</span>
+                                충돌 범위(Collision Box/Sphere)를 기반으로 방식을 선회. 캐릭터가 특정 <strong>건물 충돌 범위 내부에 진입(Begin Overlap)</strong> 시, 미리 등록해둔 외벽 및 지붕 등의 물체들을 직접 숨김(Hide) 처리하여 구조의 안정성과 확실한 시야 확보를 달성함.
+                            </div>
+                        </div>
+
+                        <!-- [추가] 건물 진입 시 카메라 처리: 이미지 1개 -->
+                        <div class="media-placeholder mt-4">
+                            <img src="assets/img/practice_zomboid/building_enter.png" alt="Gameplay">
+                            <div class="flex flex-col items-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-2 opacity-50"></i>
+                                <span class="text-xs text-center">[건물 진입시 처리]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 아이템 데이터 관리 -->
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <h3 class="font-bold text-white mb-2 text-lg">💾 아이템 데이터 처리 (Data Asset)</h3>
+                        <p class="text-sm">
+                            다양한 무기와 소모품의 관리를 용이하게 하기 위해 <strong>Data Asset</strong>을 활용했습니다.
+                            아이템의 스탯, 메쉬, 몽타주 정보 등을 포함한 데이터 구조체를 언리얼 에디터 상에서 미리 등록하여, 데이터 수정과 게임 로직을 분리하는 방식으로 관리 효율성을 높였습니다.
+                        </p>
+
+                        <!-- [추가] 아이템 데이터 처리: 이미지 1개 -->
+                        <div class="media-placeholder mt-4">
+                            <img src="assets/img/practice_zomboid/item_data.png" alt="Gameplay">
+                            <div class="flex flex-col items-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-2 opacity-50"></i>
+                                <span class="text-xs text-center">[Data Asset 세팅 화면 이미지]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
