@@ -5,10 +5,10 @@
     "category": "unity",
     "image": "../assets/img/tiger-online.png",
     "gradient": "from-green-800 to-slate-900",
-    "badges": ["Unity", "OBT", "CBT"],
+    "badges": [ "Unity", "OBT", "CBT" ],
     "summary": "모바일 2D MMORPG. 컨텐츠 시스템 개발 및 레거시 코드 리팩토링, 최적화 작업을 수행했습니다.",
     "company": "슈퍼캣",
-    "tags": ["C#", "Optimization"],
+    "tags": [ "C#", "Optimization" ],
     "url": "/posts/portfolio/unity/tigeronline.html"
   },
   {
@@ -17,10 +17,10 @@
     "category": "unity",
     "imageText": "트랜스포머 얼라이언스",
     "gradient": "from-indigo-900 to-purple-900",
-    "badges": ["Unity", "Dev"],
+    "badges": [ "Unity", "Dev" ],
     "summary": "트랜스포머 IP를 사용한 수집형 AR 게임으로, 개발 초기에 참여했습니다.",
     "company": "스노우파이프",
-    "tags": ["C#", "AR", "Unity"],
+    "tags": [ "C#", "AR", "Unity" ],
     "url": "/posts/portfolio/unity/tf-alience.html"
   },
   {
@@ -30,10 +30,10 @@
     "image": "../assets/img/Tongkey_Taiwan.jpg",
     "imageText": "피구왕 통키",
     "gradient": "from-indigo-900 to-purple-900",
-    "badges": ["Unity", "Dev"],
+    "badges": [ "Unity", "Dev" ],
     "summary": "피구왕 통키M 대만 런칭 및 라이브 서비스",
     "company": "스노우파이프",
-    "tags": ["C#", "Unity", "3rd Party", "Live"],
+    "tags": [ "C#", "Unity", "3rd Party", "Live" ],
     "url": "/posts/portfolio/unity/tongkey_taiwan.html"
   },
   {
@@ -43,10 +43,10 @@
     "image": "../assets/img/Tongkey.jpg",
     "imageText": "",
     "gradient": "from-indigo-900 to-purple-900",
-    "badges": ["Unity", "Dev"],
+    "badges": [ "Unity", "Dev" ],
     "summary": "피구왕 통키 M 라이브 서비스",
     "company": "스노우파이프",
-    "tags": ["C#", "Unity", "Live"],
+    "tags": [ "C#", "Unity", "Live" ],
     "url": "/posts/portfolio/unity/tongkey.html"
   },
   {
@@ -56,10 +56,10 @@
     "image": "../assets/img/Diadein.jpg",
     "imageText": "다이아데인",
     "gradient": "from-gray-900 to-blue-900",
-    "badges": ["Unity"],
+    "badges": [ "Unity" ],
     "summary": "수집형 2D RPG 게임",
     "company": "슈퍼앰프드",
-    "tags": ["C#", "RPG"],
+    "tags": [ "C#", "RPG" ],
     "url": "/posts/portfolio/unity/diadein.html"
   },
   {
@@ -69,11 +69,24 @@
     "image": "../assets/img/western_gunfight.jpg",
     "imageText": "Western Gunfight",
     "gradient": "from-slate-900 to-gray-700",
-    "badges": ["Unity", "VR"],
+    "badges": [ "Unity", "VR" ],
     "summary": "교육 과정 중 팀 프로젝트로 개발한 서부 총잡이 컨셉 VR 게임입니다.",
     "company": "빌런게임즈(팀프로젝트)",
-    "tags": ["C#", "Unity", "VR"],
+    "tags": [ "C#", "Unity", "VR" ],
     "url": "/posts/portfolio/unity/western_gunfight.html"
+  },
+  {
+    "id": 6,
+    "title": "Practice Zomboid",
+    "category": "unreal",
+    "image": "../assets/img/practice_zomboid/Logo.png",
+    "imageText": "Practice Zomboid",
+    "gradient": "from-slate-900 to-gray-700",
+    "badges": [ "Unreal", "Blueprint" ],
+    "summary": "교육 과정에서 개발한 개인 프로젝트 입니다.",
+    "company": "개인 프로젝트",
+    "tags": [ "Unreal", "Blueprint" ],
+    "url": "/posts/portfolio/unreal/practice_zomboid.html"
   }
- 
+
 ]
