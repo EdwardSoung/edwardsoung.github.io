@@ -203,10 +203,11 @@
                 <div class="prose prose-invert max-w-none text-sub mb-10 text-lg">
                     <p>혹한의 숲에 고립되어 탈출을 위해 생존하는 3D 액션 생존 게임입니다. 자원을 채집하고 도구를 제작하며 끝까지 살아남아야 합니다.</p>
                 </div>
-                <div class="media-placeholder" style="aspect-ratio: 16/9;">
-                    <!-- 유튜브 임베드 링크로 변경됨 -->
-                    <iframe src="https://www.youtube.com/watch?v=RMMSezTlGHE" title="Main Gameplay Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="aspect-video w-full bg-slate-800 rounded-xl overflow-hidden border border-theme relative group">
+                    <!-- 유튜브 임베드 -->
+                    <iframe class="w-full h-full" src="https://www.youtube.com/watch?v=RMMSezTlGHE" title="Gameplay Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                <p class="text-sm text-center text-sub">▲ 게임 소개 영상</p>
             </section>
 
             <!-- 섹션 2: System Architecture (C++ 코드 포함) -->
@@ -224,27 +225,13 @@
                         </h3>
                         <p class="text-sm">DataTable, DataAsset 데이터 파일 연결 및 보관 관리. 전역 공통 변수 제어.</p>
                         <div class="cpp-code-block">
-                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-                                <pre style="margin: 0; line-height: 125%;"><span></span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
-<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span><span style="color: #080; font-weight: bold">class</span><span style="color: #BBB"> </span><span style="color: #B06; font-weight: bold">UDataTable</span><span style="color: #333">&gt;</span><span style="color: #BBB"> </span>WidgetData;
 
-<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
-<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span><span style="color: #080; font-weight: bold">class</span><span style="color: #BBB"> </span><span style="color: #B06; font-weight: bold">UDataTable</span><span style="color: #333">&gt;</span><span style="color: #BBB"> </span>PickupItemTable;
+                            <span class="code-label">// GameManager.h</span>
+                            <pre><code>UPROPERTY(EditAnywhere, Category = "Data")
+TObjectPtr&lt;UDataTable&gt; WidgetData;
 
-<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
-<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span>UItemDataList<span style="color: #333">&gt;</span><span style="color: #BBB"> </span>ItemDataList;
-
-<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
-<span style="color: #BBB">	</span>TObjectPtr<span style="color: #333">&lt;</span>UEquipItemData<span style="color: #333">&gt;</span><span style="color: #BBB"> </span>EquipItemData;
-
-<span style="color: #BBB">	</span><span style="color: #888">// 인게임 시작 시간(0~1 : 0.25 = 6시, 0.5 = 12시, 0.75 = 18시, 1.0 = 00시)</span>
-<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;Data&quot;</span>)
-<span style="color: #BBB">	</span><span style="color: #339; font-weight: bold">float</span><span style="color: #BBB"> </span>InGameStartTime<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="color: #60E; font-weight: bold">0.5f</span>;
-
-<span style="color: #BBB">	</span>UPROPERTY(EditAnywhere,<span style="color: #BBB"> </span>BlueprintReadOnly,<span style="color: #BBB"> </span>Category<span style="color: #BBB"> </span><span style="color: #333">=</span><span style="color: #BBB"> </span><span style="background-color: #FFF0F0">&quot;GameData&quot;</span>)
-<span style="color: #BBB">	</span>EGameState<span style="color: #BBB"> </span>CurrentState;
-</pre>
-                            </div>
+UPROPERTY(EditAnywhere, Category = "Data")
+TObjectPtr&lt;UDataTable&gt; PickupItemTable;</code></pre>
                         </div>
                     </div>
 
