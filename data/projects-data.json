@@ -76,7 +76,7 @@
     "url": "/posts/portfolio/unity/western_gunfight.html"
   },
   {
-    "id": 6,
+    "id": 7,
     "title": "Practice Zomboid",
     "category": "unreal",
     "image": "../assets/img/practice_zomboid/Logo.png",
@@ -89,7 +89,7 @@
     "url": "/posts/portfolio/unreal/practice_zomboid.html"
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "Frozen Break",
     "category": "unreal",
     "image": "../assets/img/frozen_break/Logo.png",
@@ -100,6 +100,19 @@
     "company": "팀 프로젝트",
     "tags": [ "Unreal", "C++", "팀장" ],
     "url": "/posts/portfolio/unreal/frozen_break.html"
+  },
+  {
+    "id": 9,
+    "title": "Valkyrie War",
+    "category": "unreal",
+    "image": "../assets/img/valkyrie_war/Logo.png",
+    "imageText": "Valkyrie War",
+    "gradient": "from-slate-900 to-gray-700",
+    "badges": [ "Unreal", "C++", "팀장" ],
+    "summary": "연계 기업에서 제공한 미션을 기반으로 제작한 포트폴리오 입니다.",
+    "company": "팀 프로젝트",
+    "tags": [ "Unreal", "C++", "팀장" ],
+    "url": "/posts/portfolio/unreal/valkyrie_war.html"
   }
 
 ]
