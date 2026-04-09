@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valkyrie War - Core System Architecture</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="valkyrie_war.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Project</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-16 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 opacity-80"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-4">
+                <i data-lucide="network" class="w-6 h-6 text-blue-400"></i>
+                <span class="text-blue-400 font-bold tracking-wider uppercase text-sm">System Architecture Document</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                Valkyrie War 코어 시스템 설계
+            </h1>
+            <p class="text-sub text-lg">
+                안정적인 게임 흐름과 체계적인 데이터 관리를 위해 언리얼 엔진의 GameInstance 및 Subsystem을 적극 활용하여 구현한 매니저 시스템 구조입니다.
+            </p>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <div class="grid grid-cols-1 gap-8">
+
+            <!-- 1. GameManager -->
+            <div class="bg-secondary border border-theme rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-emerald-500/50 transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="box" class="w-24 h-24 text-emerald-500"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-700 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="box" class="w-6 h-6 text-emerald-400"></i> GameManager
+                        </h2>
+                        <span class="code-font text-xs text-emerald-300 bg-emerald-900/30 px-3 py-1 rounded-full border border-emerald-500/30">Inherits: UGameInstance</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sub space-y-2">
+                        <li>전역에서 공통으로 사용되는 테이블 데이터 및 위젯 등의 데이터 보관 및 접근 포인트 제공.</li>
+                        <li>아이템, 캐릭터 등 게임 내 주요 객체들의 고유 식별자(UID) 생성 역할 수행.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. DataManager -->
+            <div class="bg-secondary border border-theme rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-blue-500/50 transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="database" class="w-24 h-24 text-blue-500"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-700 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="database" class="w-6 h-6 text-blue-400"></i> DataManager
+                        </h2>
+                        <span class="code-font text-xs text-blue-300 bg-blue-900/30 px-3 py-1 rounded-full border border-blue-500/30">Inherits: UGameInstanceSubsystem</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sub space-y-2">
+                        <li>정적인 테이블 데이터와 동적인 저장 데이터를 메모리에 적재하여 런타임에 활용.</li>
+                        <li>각 도메인별 데이터를 <strong>Module</strong>이라는 단위로 분리하여 효율적으로 관리.</li>
+                        <li><span class="code-font text-xs bg-slate-900 px-2 py-1 rounded text-gray-300">예시) UItemModule : UObject</span> 형태를 통해 기능별 데이터 응집도 향상.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. LevelManager -->
+            <div class="bg-secondary border border-theme rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-purple-500/50 transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="layers" class="w-24 h-24 text-purple-500"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-700 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="layers" class="w-6 h-6 text-purple-400"></i> LevelManager
+                        </h2>
+                        <span class="code-font text-xs text-purple-300 bg-purple-900/30 px-3 py-1 rounded-full border border-purple-500/30">Inherits: UGameInstanceSubsystem</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sub space-y-2">
+                        <li>끊김 없는 사용자 경험을 위한 <strong>비동기 레벨 로드(Async Level Loading)</strong> 기능 구현.</li>
+                        <li>다양한 레벨(로비, 던전, 전투 맵 등) 간의 부드러운 전환 및 트랜지션 처리 전담.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. SaveManager -->
+            <div class="bg-secondary border border-theme rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-amber-500/50 transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="save" class="w-24 h-24 text-amber-500"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-700 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="save" class="w-6 h-6 text-amber-400"></i> SaveManager
+                        </h2>
+                        <span class="code-font text-xs text-amber-300 bg-amber-900/30 px-3 py-1 rounded-full border border-amber-500/30">Inherits: UGameInstanceSubsystem</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sub space-y-2">
+                        <li>언리얼 엔진의 기본 클래스인 <code class="code-font text-xs text-slate-300">USaveGame</code>을 기반으로 세이브 데이터를 관리.</li>
+                        <li>로컬 저장 데이터의 보안을 위해 데이터를 <strong>직렬화(Serialization)</strong>하고 <strong>AES 암호화</strong>를 적용하여 저장 및 로드 수행.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. UIManager -->
+            <div class="bg-secondary border border-theme rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-pink-500/50 transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="monitor" class="w-24 h-24 text-pink-500"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-700 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="monitor" class="w-6 h-6 text-pink-400"></i> UIManager
+                        </h2>
+                        <span class="code-font text-xs text-pink-300 bg-pink-900/30 px-3 py-1 rounded-full border border-pink-500/30">Inherits: UGameInstanceSubsystem</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sub space-y-2">
+                        <li>UI 위젯을 동적으로 생성하고, 불필요한 파괴를 막기 위해 메모리에 캐싱(Caching)하여 관리.</li>
+                        <li>통일된 템플릿(인터페이스) 구조를 사용하여 다양한 형태의 위젯을 일관된 로직으로 여닫아 주는 기능 구현.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. WorldEventSystem -->
+            <div class="bg-secondary border border-theme rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="git-merge" class="w-24 h-24 text-cyan-500"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-700 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="git-merge" class="w-6 h-6 text-cyan-400"></i> WorldEventSystem
+                        </h2>
+                        <span class="code-font text-xs text-cyan-300 bg-cyan-900/30 px-3 py-1 rounded-full border border-cyan-500/30">Inherits: UWorldSubsystem</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sub space-y-2">
+                        <li>월드 내에서 발생하는 각종 Delegate(이벤트 콜백)를 중앙에서 통합하여 관리.</li>
+                        <li>다수의 팀원이 작업할 때 발생할 수 있는 이벤트 중복 선언 및 호출을 방지하기 위한 목적.</li>
+                        <li><strong>충돌 방지 구조:</strong> 동시 수정 시 발생하는 Git 충돌(Conflict)을 최소화하기 위해, 시스템 내부에 구조체(Struct) 단위로 이벤트 정의를 모듈화하여 분리.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-5xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. Valkyrie War Project Docs.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
