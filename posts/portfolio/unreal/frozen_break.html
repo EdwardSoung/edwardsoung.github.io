@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Detail - FrozenBreak</title>
+    <title>Project Detail - Frozen Break</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
+    
     <style>
         /* Visual Showcase 테마 고정 변수 */
         :root {
@@ -29,14 +29,8 @@
             line-height: 1.6;
         }
 
-        /* 스크롤 페이지 스타일 */
-        h1, h2, h3 {
-            letter-spacing: -0.025em;
-        }
-
-        .code-font {
-            font-family: 'JetBrains Mono', monospace;
-        }
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
 
         nav {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -62,11 +56,10 @@
             padding-left: 1rem;
             transition: all 0.2s;
         }
-
-            .toc-link:hover, .toc-link.active {
-                color: var(--accent);
-                border-left-color: var(--accent);
-            }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
 
         /* 미디어 플레이스홀더 */
         .media-placeholder {
@@ -83,55 +76,19 @@
             overflow: hidden;
             position: relative;
         }
-
-            /* 영상 및 이미지가 컨테이너에 꽉 차도록 설정 */
-            .media-placeholder img, .media-placeholder iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-        /* 코드 블록 스타일 */
-        .cpp-code-block {
-            background-color: #1d1f21;
-            border-radius: 0.5rem;
-            padding: 1.25rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: #c5c8c6;
-            overflow-x: auto;
-            border: 1px solid var(--border);
-            margin-top: 0.75rem;
+        .media-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
-        .code-label {
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 0.25rem;
-            display: block;
-            opacity: 0.8;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
-        }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: var(--text-sub);
-            }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -140,7 +97,7 @@
     <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <a href="/index.html" class="flex items-center gap-2 group">
+                <a href="index.html" class="flex items-center gap-2 group">
                     <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
                     <span class="font-medium text-sub group-hover:text-white transition">Back to Home</span>
                 </a>
@@ -149,757 +106,235 @@
     </nav>
 
     <!-- 히어로 섹션 -->
-    <header class="relative py-24 overflow-hidden border-b border-theme">
+    <header class="relative py-20 overflow-hidden border-b border-theme">
         <div class="absolute inset-0 z-0">
+            <!-- 배경: 혹한의 숲 느낌의 푸른빛 그라데이션 -->
             <div class="w-full h-full bg-gradient-to-br from-slate-900 via-sky-950 to-blue-900 opacity-80"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
         </div>
-
+        
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-end gap-6 mb-6">
                 <span class="px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase tracking-wider border border-white/20">Team Project</span>
                 <span class="text-sub text-sm font-mono flex items-center gap-2">
-                    <i data-lucide="user" class="w-4 h-4 text-emerald-500"></i> 팀장 / Main Programmer (성현우)
+                    <i data-lucide="users" class="w-4 h-4 text-emerald-500"></i> 팀장 / 코어 프로그래머 (4인 개발)
                 </span>
             </div>
-
-            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Project: Frozen Break<br>
-                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">혹한의 숲 생존 탈출 게임</span>
+                <span class="text-sub text-2xl md:text-3xl font-normal block mt-2">3D 액션 생존 게임</span>
             </h1>
+            
+             <div class="flex flex-wrap gap-4 mb-8">
+                <a href="https://youtu.be/3aqg8nu79TQ" target="_blank" class="p-3 bg-red-600 hover:bg-red-500 text-white rounded-full transition shadow-lg shadow-red-900/20" title="게임 소개 영상">
+                    <img src="https://cdn.simpleicons.org/youtube/white" alt="YouTube" class="w-6 h-6">
+                </a>
+                <a href="https://github.com/EdwardSoung/FrozenBreak" target="_blank" class="p-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white rounded-full transition shadow-lg" title="GitHub 저장소">
+                    <img src="https://cdn.simpleicons.org/github/white" alt="GitHub" class="w-6 h-6">
+                </a>
+            </div>
 
             <div class="flex flex-wrap gap-3">
-                <span class="tech-pill">Unreal Engine 5.5</span>
-                <span class="tech-pill">C++ Architecture</span>
-                <span class="tech-pill">Subsystem</span>
-                <span class="tech-pill">Delegate Pattern</span>
+                <span class="tech-pill">System Architecture</span>
                 <span class="tech-pill">Editor Tool</span>
+                <span class="tech-pill">Inventory System</span>
+                <span class="tech-pill">Project Leading</span>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
-
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
         <!-- 왼쪽: 사이드바 -->
         <aside class="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-8 hidden lg:block">
             <div>
                 <h3 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-4">Table of Contents</h3>
                 <nav class="space-y-1">
                     <a href="#overview" class="toc-link hover:text-white">프로젝트 개요</a>
-                    <a href="#architecture" class="toc-link hover:text-white">기반 구조 설계 (C++)</a>
-                    <a href="#editor" class="toc-link hover:text-white">맵 세팅 자동화 툴</a>
-                    <a href="#inventory" class="toc-link hover:text-white">인벤토리 & 퀵슬롯</a>
-                    <a href="#ui-work" class="toc-link hover:text-white">UI 작업 상세</a>
-                    <a href="#management" class="toc-link hover:text-white">협업 및 프로젝트 관리</a>
+                    <a href="#architecture" class="toc-link hover:text-white">기본 시스템 설계</a>
+                    <a href="#editor" class="toc-link hover:text-white">오브젝트 자동 배치 툴</a>
+                    <a href="#inventory" class="toc-link hover:text-white">인벤토리 및 퀵슬롯</a>
+                    <a href="#ui" class="toc-link hover:text-white">기본 UI 작업</a>
+                    <a href="#management" class="toc-link hover:text-white">팀 리딩 및 협업 관리</a>
                 </nav>
+            </div>
+            
+            <div class="p-6 rounded-xl bg-secondary border border-theme" style="background-color: var(--bg-secondary); border-color: var(--border);">
+                <h4 class="font-bold text-white mb-3">담당 작업 (Role)</h4>
+                <ul class="text-sm text-sub space-y-2 list-disc list-inside">
+                    <li>코어 매니저 시스템 설계</li>
+                    <li>나무 오브젝트 자동 생성기 구현</li>
+                    <li>컴포넌트 기반 인벤토리/퀵슬롯</li>
+                    <li>팀 리딩 및 문서화 관리</li>
+                </ul>
             </div>
         </aside>
 
         <!-- 오른쪽: 본문 콘텐츠 -->
-        <div class="lg:col-span-9 space-y-24">
-
-            <!-- 섹션 1: 프로젝트 개요 -->
-            <section id="overview" class="scroll-mt-24">
-                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-2">
-                    <i data-lucide="info" class="w-8 h-8 text-emerald-500"></i> 프로젝트 개요
-                </h2>
-                <div class="prose prose-invert max-w-none text-sub mb-10 text-lg">
-                    <p>혹한의 숲에 고립되어 탈출을 위해 생존하는 3D 액션 생존 게임입니다. 자원을 채집하고 도구를 제작하며 끝까지 살아남아야 합니다.</p>
-                </div>
-                <div class="media-placeholder shadow-2xl" style="aspect-ratio: 16/9;">
-                    <!-- 유튜브 임베드: VIDEO_ID 부분을 실제 영상 ID로 교체하세요 -->
-                    <iframe src="https://www.youtube.com/embed/3aqg8nu79TQ?rel=0&showinfo=0"
-                            title="Main Gameplay Video"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                </div>
-            </section>
-
-            <!-- 섹션 NEW: 게임플레이 기능 -->
-            <section id="gameplay" class="scroll-mt-24">
-                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
-                    <h2 class="text-3xl font-bold text-white uppercase">Gameplay Features</h2>
-                    <p class="text-sub mt-2">핵심 게임플레이 기능 및 시연 영상</p>
-                </div>
-
-                <!-- 일반 기능 8개 (1열 그리드로 넓게, 각 항목당 영상 2개가 절반씩 차지) -->
-                <div class="grid grid-cols-1 gap-10 mb-16">
-
-                    <!-- 1. 캐릭터 이동 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">1. 캐릭터 이동</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/move.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">이동</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/run.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">달리기</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. 상호작용 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">2. 상호작용</h3>
-                        <h5 class="text-xl font-bold text-white">일정 거리 내에 있을때만 반응( 반응 키와 체력 표기)</h5>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/axe.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">벌목</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/pickaxe.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">채석</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. 제작 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">3. 제작</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/craft_tool.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">도구 제작</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/cook.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">요리</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. 인벤토리 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">4. 인벤토리</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/inventory_use.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">선택 및 사용</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/inventory_throw.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">버리기</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. 무게 영향 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">5. 인벤토리 무게 영향</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/weight_heavy.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">이동속도 감소</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/weight_full.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">이동 불가</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 6. 퀵슬롯 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">6. 퀵슬롯</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/quickslot_add.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">등록</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/quickslot_use.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">사용</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 7. 캐릭터 상태 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">7. 캐릭터 상태</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/stamina.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">행동력</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/hunger.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">포만감</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 8. 동물 -->
-                    <div class="space-y-4 p-6 bg-slate-900/50 rounded-xl border border-theme">
-                        <h3 class="text-xl font-bold text-white">8. 동물</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/animal_move.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">이동</p>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                    <video src="/assets/img/frozen_break/animal_combat.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                                </div>
-                                <p class="text-sm text-center text-sub font-medium">전투</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- 9. 캐릭터 상태값 3개 영상 (여기도 비율을 키워 시원하게 배치) -->
-                <div class="bg-secondary p-8 rounded-xl border border-theme">
-                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-4">
-                        <i data-lucide="activity" class="w-6 h-6 text-red-400"></i> 9. 캐릭터 상태 시스템
-                    </h3>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- 체력 -->
-                        <div class="space-y-4">
-                            <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                <video src="/assets/img/frozen_break/death.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                            </div>
-                            <h4 class="text-lg font-bold text-red-400">8-1. 체력 (HP)</h4>
-                            <ul class="text-sm text-sub list-disc list-inside space-y-1">
-                                <li>적에게 피격 시 수치 감소</li>
-                                <li>0이 되면 캐릭터 사망 처리</li>
-                            </ul>
-                        </div>
-
-                        <!-- 스탯 감소 -->
-                        <div class="space-y-4">
-                            <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                <video src="/assets/img/frozen_break/stat_reduce.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                            </div>
-                            <h4 class="text-lg font-bold text-blue-400">8-2. 스탯 감소 (3종)</h4>
-                            <ul class="text-sm text-sub list-disc list-inside space-y-1">
-                                <li><strong>행동력:</strong> 인터렉션 작업 시 소모</li>
-                                <li><strong>추위:</strong> 야외 환경에서 지속 감소</li>
-                                <li><strong>배고픔:</strong> 시간에 따라 지속 감소</li>
-                            </ul>
-                        </div>
-
-                        <!-- 체력 대신 소모 패널티 -->
-                        <div class="space-y-4">
-                            <div class="media-placeholder shadow-lg" style="aspect-ratio: 16/9;">
-                                <video src="/assets/img/frozen_break/stat_panelty.mp4" controls muted loop class="w-full h-full object-cover absolute top-0 left-0"></video>
-                            </div>
-                            <h4 class="text-lg font-bold text-purple-400">8-3. 상태 이상 패널티</h4>
-                            <ul class="text-sm text-sub list-disc list-inside space-y-1">
-                                <li><strong>배고픔</strong> 수치가 바닥일 때 체력 소모</li>
-                                <li><strong>추위</strong> 수치가 바닥일 때 체력 소모</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 섹션 2: System Architecture -->
-            <section id="architecture" class="scroll-mt-24">
-                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
-                    <h2 class="text-3xl font-bold text-white uppercase">System Architecture</h2>
-                    <p class="text-sub mt-2">핵심 매니저 및 서브시스템의 C++ 아키텍처 설계</p>
-                </div>
-
-                <div class="grid grid-cols-1 gap-12 text-sub">
-                    <!-- 1. GameManager -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="box" class="w-5 h-5 text-emerald-500"></i> 1. GameManager (Data Manager)
-                        </h3>
-                        <p class="text-sm">DataTable 및 데이터 리스트를 중앙에서 보관하고 인게임 시간을 관리합니다.</p>
-                        <div class="cpp-code-block">
-                            <span class="code-label">// GameManager.h - 전역 데이터 및 상태 관리</span>
-                            <pre><code>UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
-TObjectPtr&lt;class UDataTable&gt; WidgetData;
-
-UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
-TObjectPtr&lt;class UDataTable&gt; PickupItemTable;
-
-UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
-TObjectPtr&lt;UItemDataList&gt; ItemDataList;
-
-UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
-TObjectPtr&lt;UEquipItemData&gt; EquipItemData;
-
-// 인게임 시작 시간(0~1 : 0.25 = 6시, 0.5 = 12시, 0.75 = 18시, 1.0 = 00시)
-UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
-float InGameStartTime = 0.5f;
-
-UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameData")
-EGameState CurrentState;</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- 2. EventSubSystem -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="git-merge" class="w-5 h-5 text-emerald-500"></i> 2. EventSubSystem (Observer Pattern)
-                        </h3>
-                        <p class="text-sm">구조체로 분리된 델리게이트들을 통해 객체 간 결합도를 최소화합니다.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="cpp-code-block">
-                                <span class="code-label">// EventSubSystem.h - 프로퍼티</span>
-                                <pre><code>UPROPERTY(BlueprintReadOnly, Category = "Events")
-FCharacterEvents Character;
-
-UPROPERTY(BlueprintReadOnly, Category = "Events")
-FStatusEvents Status;
-
-UPROPERTY(BlueprintReadOnly, Category = "Events")
-FUIEvents UI;</code></pre>
-                            </div>
-                            <div class="cpp-code-block">
-                                <span class="code-label">// UI 이벤트 구조체 정의</span>
-                                <pre><code>DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnToggleQuitMenu);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemSelected, EItemType, InType);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSetItemToQuickSlot, int32, InIndex, UInventoryItem*, InItem);
-
-USTRUCT(BlueprintType)
-struct FROZENBREAK_API FUIEvents {
-    GENERATED_BODY()
-    UPROPERTY(BlueprintAssignable)
-    FOnToggleQuitMenu OnToggleQuitMenu;
-    
-    // 퀵슬롯 관련 델리게이트 포함
-    FOnSetItemToQuickSlot OnSetItemToQuickSlot;
-    FOnQuickSlotExecute OnQuickSlotExecute;
-    FOnResetQuickSlotItem OnResetQuickSlotItem;
-};</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. UISubSystem -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="monitor" class="w-5 h-5 text-emerald-500"></i> 3. UISubSystem (Widget Management)
-                        </h3>
-                        <p class="text-sm">Lazy Initialization을 통해 위젯을 동적으로 생성하고 인풋 모드를 자동 전환합니다.</p>
-                        <div class="cpp-code-block">
-                            <span class="code-label">// UISubSystem.cpp - ShowWidget 로직</span>
-                            <pre><code>UUserWidget* UUISubSystem::ShowWidget(EWidgetType InWidgetType, EInputModeType InInputMode) {
-    // 컨트롤러에 붙여주기 때문에 없으면 다시 연결 시도
-    if (CurrentPlayerController.IsValid() == false) {
-        CurrentPlayerController = GetWorld()->GetFirstPlayerController();
-    }
-
-    UUserWidget* Widget = nullptr;
-
-    // 생성된 적이 있으면 켜주고, 없으면 생성[Lazy Initialziation]
-    if (CreatedWidgets.Contains(InWidgetType)) {
-        Widget = CreatedWidgets[InWidgetType];
-        if (Widget->IsInViewport() == false) {
-            Widget->AddToViewport();
-        }
-        if (Widget->Implements&lt;UOpenable&gt;()) {
-            IOpenable::Execute_OpenWidget(Widget);
-        } else {
-            Widget->SetVisibility(ESlateVisibility::Visible);
-        }
-    } else {
-        if (UGameManager* GameMgr = UGameManager::Get(this)) {
-            TSubclassOf&lt;UUserWidget&gt; WidgetClass = GameMgr->GetWidgetClass(InWidgetType);
-            if (WidgetClass) Widget = CreateWidget(CurrentPlayerController.Get(), WidgetClass);
-        }
-        if (Widget) {
-            CreatedWidgets.Add(InWidgetType, Widget);
-            Widget->AddToViewport();
-        }
-    }
-    // 인풋 모드 처리 (GameAndUI / UIOnly) 로직 생략...
-    return Widget;
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- 4. ItemFactorySubSystem -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="package-plus" class="w-5 h-5 text-emerald-500"></i> 4. ItemFactorySubSystem (Factory Pattern)
-                        </h3>
-                        <p class="text-sm">데이터 값을 유지하며 필드 아이템 및 인벤토리 아이템 객체를 생성합니다.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="cpp-code-block">
-                                <span class="code-label">// Header - Spawn 선언</span>
-                                <pre><code>UFUNCTION(BlueprintCallable)
-APickupItem* Spawn(EItemType InType, FVector Location, int32 Amount = 1, float InDurability = 0.0f);
-
-UInventoryItem* Spawn(EItemType InType, int32 Amount = 1, float InDurability = 0.0f);
-
-UFUNCTION(BlueprintCallable)
-class AToolActor* SpawnTool(EItemType InType, float InDurability);</code></pre>
-                            </div>
-                            <div class="cpp-code-block">
-                                <span class="code-label">// Implementation - 필드 스폰</span>
-                                <pre><code>APickupItem* UItemFactorySubSystem::Spawn(EItemType InType, FVector Location, int32 Amount, float InDurability) {
-    if (UGameManager* Manager = UGameManager::Get(this)) {
-        auto spawnClass = Manager->GetPickupItemClass(InType);
-        APickupItem* DropItem = GetWorld()->SpawnActor&lt;APickupItem&gt;(spawnClass, Location, FRotator::ZeroRotator);
-        DropItem->SetExistValues(Amount, InDurability);
-        return DropItem;
-    }
-    return nullptr;
-}</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. FrozenForestGameState -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="layers" class="w-5 h-5 text-emerald-500"></i> 5. GameState & Level Transition
-                        </h3>
-                        <p class="text-sm">게임 상태값 관리를 통한 안정적인 레벨 전환 및 결과 처리 로직을 담당합니다. 레벨 전환 시 유지를 위해 현재 상태값은 <code>GameManager</code>에서 함께 관리합니다.</p>
-                        <div class="cpp-code-block">
-                            <span class="code-label">// FrozenForestGameState.cpp - 상태 변경 핸들러</span>
-                            <pre><code>void AFrozenForestGameState::OnGameStateChanged(EGameState InState) {
-    switch (InState) {
-        case EGameState::Lobby:
-            UGameplayStatics::OpenLevel(this, "Lobby", true);
-            break;
-        case EGameState::Playing:
-            if (UUISubSystem* UISystem = UUISubSystem::Get(this)) {
-                UISystem->HideWidget(EWidgetType::Lobby);
-            }
-            if (UGameManager* Manager = UGameManager::Get(this)) {
-                UGameplayStatics::OpenLevelBySoftObjectPtr(this, Manager->PlayMap);
-            }
-            break;
-        case EGameState::Success:
-            if (UUISubSystem* UISystem = UUISubSystem::Get(this)) {
-                UISystem->HideAllWiget();
-                auto Result = Cast&lt;UPlayResultWidget&gt;(UISystem->ShowWidget(EWidgetType::PlayResult));
-                Result->SetResult(true)->UpdateRecord(TimeToText());
-            }
-            break;
-        case EGameState::Fail:
-            // 사망 시 / 재시작 UI
-            if (UUISubSystem* UISystem = UUISubSystem::Get(this)) {
-                UISystem->HideAllWiget();
-                auto Result = Cast&lt;UPlayResultWidget&gt;(UISystem->ShowWidget(EWidgetType::PlayResult));
-                Result->SetResult(false)->UpdateRecord(TimeToText());
-            }
-            break;
-    }
-}</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 섹션 4: Editor Tool (맵 세팅) -->
-            <section id="editor" class="scroll-mt-24">
-                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-10">
-                    <h2 class="text-3xl font-bold text-white uppercase">Editor Tool: 맵 세팅 자동화</h2>
-                </div>
-                <div class="space-y-8 text-sub">
-                    <div class="media-placeholder" style="aspect-ratio: 21/9;">
-                        <!-- 이미지 대신 동영상(Video) 태그로 변경 -->
-                        <video src="/assets/img/frozen_break/PropSpawner.mp4" controls autoplay muted loop class="w-full h-full object-cover absolute top-0 left-0" style="z-index: 5;"></video>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="cpp-code-block">
-                            <span class="code-label">// APropSpawner::SpawnActors</span>
-                            <pre><code>void APropSpawner::SpawnActors()
-{
-    if (ActorToSpawn.Num() &lt;= 0) return;
-
-    // 박스 가져오기
-    FVector Origin = SpawnVolume-&gt;GetComponentLocation();
-    FVector BoxExtent = SpawnVolume-&gt;GetScaledBoxExtent();
-
-    for (int32 i = 0; i &lt; SpawnCount; i++)
-    {
-        // 1. 박스 범위 안에서 랜덤한 X, Y 좌표 뽑기
-        float RandomX = FMath::RandRange(Origin.X - BoxExtent.X, Origin.X + BoxExtent.X);
-        float RandomY = FMath::RandRange(Origin.Y - BoxExtent.Y, Origin.Y + BoxExtent.Y);
-
-        FVector TraceStart = FVector(RandomX, RandomY, Origin.Z + BoxExtent.Z);
-        FVector TraceEnd = FVector(RandomX, RandomY, Origin.Z - BoxExtent.Z - 2000.f);
-
-        FHitResult HitResult;
-        FCollisionQueryParams Params;
-        //자기자신은 무시
-        Params.AddIgnoredActor(this);
-
-        bool bHit = GetWorld()-&gt;LineTraceSingleByChannel(
-            HitResult,
-            TraceStart,
-            TraceEnd,
-            ECC_GameTraceChannel2,
-            Params
-        );
-
-        if (bHit)
-        {
-            GEngine-&gt;AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
-                FString::Printf(TEXT("Hit Actor: %s"), *HitResult.GetActor()-&gt;GetName()));
-            //회전값 설정
-            FRotator SpawnRotation = FRotator::ZeroRotator;
-            if (bRandomYaw)
-            {
-                SpawnRotation.Yaw = FMath::RandRange(0.0f, 360.0f);
-            }
+        <div class="lg:col-span-9 space-y-16">
             
-            //랜덤 한개 가져오기
-            int32 RandomIndex = FMath::RandRange(0, ActorToSpawn.Num() - 1);
-            auto SpawnActor = ActorToSpawn[RandomIndex];
+            <!-- 개요 -->
+            <section id="overview" class="scroll-mt-24">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="info" class="w-6 h-6 text-emerald-500"></i> 프로젝트 개요
+                </h2>
+                <div class="prose prose-invert max-w-none text-sub">
+                    <p class="text-lg leading-relaxed">
+                        <strong>Frozen Break</strong>는 혹한의 숲에 고립되어 탈출을 위해 생존하는 3D 액션 생존 게임입니다. 
+                        가혹한 환경 속에서 플레이어는 자원을 채집하고 생존 도구를 제작하며 끝까지 살아남아야 합니다.
+                        총 4인이 참여한 프로젝트로, 팀장 역할을 맡아 개발의 전반적인 기반 구조 설계와 핵심 로직 구현을 주도했습니다.
+                    </p>
+                </div>
+            </section>
 
-            AActor* NewActor = GetWorld()-&gt;SpawnActor&lt;AActor&gt;(SpawnActor, HitResult.Location, SpawnRotation);
+            <!-- 기본 시스템 코드 설계 -->
+            <section id="architecture" class="scroll-mt-24">
+                <div class="border-l-4 border-blue-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">System Architecture: 기본 시스템 코드 설계</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>게임의 뼈대가 되는 매니저 시스템과 레벨 전환 구조를 체계적으로 설계했습니다.</p>
 
-            if (NewActor)
-            {
-                float RandScale = FMath::FRandRange(MinScaleSize, MaxScaleSize);
-                NewActor-&gt;SetActorRelativeScale3D(FVector::OneVector * RandScale);
-                NewActor-&gt;AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-                SpawnedActors.Add(NewActor);
-            }
-        }
-    }
-}</code></pre>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme hover:border-blue-500/50 transition">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="database" class="w-5 h-5 text-blue-400"></i> GameManager
+                            </h3>
+                            <p class="text-sm">게임 내 <code>DataTable</code>을 연결하여 중앙에서 데이터를 관리하고, 전역으로 참조해야 하는 주요 변수들을 안전하게 보관합니다.</p>
+                        </div>
+                        
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme hover:border-blue-500/50 transition">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="git-merge" class="w-5 h-5 text-blue-400"></i> EventSubSystem
+                            </h3>
+                            <p class="text-sm">각종 이벤트(Delegate)를 중앙에서 통합 관리하여, 시스템 간의 결합도를 낮추고 모듈화된 통신을 지원합니다.</p>
+                        </div>
+
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme hover:border-blue-500/50 transition">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="layout" class="w-5 h-5 text-blue-400"></i> UISubSystem
+                            </h3>
+                            <p class="text-sm">위젯을 동적으로 생성하고 캐싱(Caching)합니다. UI를 열고 닫을 때 이미 캐싱된 객체가 있다면 불필요한 생성 없이 바로 화면에 켜주도록 구현했습니다.</p>
+                        </div>
+
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme hover:border-blue-500/50 transition">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="package-plus" class="w-5 h-5 text-blue-400"></i> ItemFactory & GameState
+                            </h3>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li><strong>ItemFactory:</strong> 인게임 아이템 객체의 생성을 전담하여 처리.</li>
+                                <li><strong>GameState:</strong> 레벨 전환 관리 및 플레이 진행 시 현재 상태값을 추적하고 관리.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 섹션 5: 인벤토리 및 퀵슬롯 시스템 -->
+            <hr class="border-gray-700">
+
+            <!-- 맵 에디터 툴 -->
+            <section id="editor" class="scroll-mt-24">
+                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Editor Tool: 맵 나무 오브젝트 자동 생성 및 배치</h2>
+                </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>방대한 혹한의 숲 맵을 일일이 수작업으로 채우는 비효율을 해결하기 위해, 에디터 상에서 나무 오브젝트를 자동으로 자연스럽게 배치하는 툴을 제작했습니다.</p>
+
+                    <div class="bg-secondary p-6 rounded-xl border border-theme">
+                        <ul class="list-disc list-inside space-y-3">
+                            <li><strong class="text-emerald-400">볼륨 내 좌표 획득:</strong> 에디터에서 지정된 박스 볼륨(Box Volume) 영역의 내부 범위 안에서 무작위로 X, Y 좌표를 추출합니다.</li>
+                            <li><strong class="text-emerald-400">LineTrace 지형 인식:</strong> 추출된 좌표의 상단에서 하단으로 LineTrace를 쏴서 바닥(Terrain)과 충돌하는 지점을 계산해 해당 Z 좌표로 오브젝트를 이동시킵니다.</li>
+                            <li><strong class="text-emerald-400">랜덤 스폰 및 로테이션:</strong> 타겟이 되는 여러 나무 오브젝트 메쉬들 중 하나를 랜덤으로 선택하여 생성하고, 숲이 자연스럽게 보이도록 임의의 회전값(Yaw)을 적용합니다.</li>
+                        </ul>
+                    </div>
+
+                    <div class="media-placeholder" style="aspect-ratio: 21/9;">
+                        <video src="assets/img/frozen_break/PropSpawner.mp4" autoplay loop muted playsinline class="z-20 w-full h-full" style="object-fit: contain; background-color: var(--bg-secondary);"></video>
+                        <div class="flex flex-col items-center absolute z-10">
+                            <i data-lucide="trees" class="w-8 h-8 mb-2 opacity-50 text-emerald-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-700">
+
+            <!-- 인벤토리 및 퀵슬롯 -->
             <section id="inventory" class="scroll-mt-24">
-                <div class="border-l-4 border-purple-500 pl-6 py-1 mb-12">
-                    <h2 class="text-3xl font-bold text-white uppercase">Inventory & Quick Slot System</h2>
+                <div class="border-l-4 border-amber-500 pl-6 py-1 mb-8">
+                    <h2 class="text-2xl font-bold text-white">Inventory & Quick Slot: 인벤토리 및 퀵슬롯 구현</h2>
                 </div>
+                
+                <div class="space-y-6 text-sub">
+                    <p>플레이어블 캐릭터에 <strong>Component</strong> 형태로 부착하여 사용하는 재사용성 높은 인벤토리 로직을 설계했습니다.</p>
 
-                <!-- 인벤토리 로직 -->
-                <div class="space-y-10 mb-20">
-                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="backpack" class="w-6 h-6 text-purple-400"></i> Inventory Logic
-                    </h3>
-                    <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 800px;">
-                        <img src="/assets/img/frozen_break/inventory_uml.png" alt="Inventory UML" onerror="this.style.display='none'">
-                    </div>
-                    <div class="grid grid-cols-1 gap-4 text-sub">
-                        <div class="cpp-code-block">
-                            <span class="code-label">1. 아이템 획득 (AddItem)</span>
-                            <pre><code>void UInventoryComponent::AddItem(EItemType InType, int32 InAmount, float InDurability) {
-    if (CurrentWeight >= InventoryMaxWeight) return; // 무게 초과 시 습득 불가
-
-    UInventoryItem* TargetItem = GetItem(InType);
-    if (TargetItem && TargetItem->GetData()->IsStackable) {
-        // 누적 가능한 아이템이면 개수 증가 후 Delegate 전송
-        TargetItem->AddAmount(InAmount);
-        if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
-            EventSystem->Character.OnUpdateInventoryItem.Broadcast(InType);
-        }
-    } else {
-        // 새로운 아이템 생성
-        if (UItemFactorySubSystem* ItemFactory = UItemFactorySubSystem::Get(this)) {
-            UInventoryItem* NewItem = ItemFactory->Spawn(InType, InAmount, InDurability);
-            Items.Add(NewItem);
-            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
-                EventSystem->Character.OnAddItemToInventoryUI.Broadcast(NewItem);
-            }
-        }
-    }
-}</code></pre>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="backpack" class="w-5 h-5 text-amber-400"></i> 인벤토리 로직
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>필드 아이템 획득, 캐릭터 장비 장착, 소지품 제거(버리기) 기능 구현.</li>
+                                <li>UI와 분리된 데이터 처리 로직으로 안정성 확보.</li>
+                            </ul>
                         </div>
-                        <div class="cpp-code-block">
-                            <span class="code-label">2. 아이템 장착 (UseItem)</span>
-                            <pre><code>void UInventoryComponent::UseInventoryItem(UInventoryItem* InItem) {
-    if (!InItem) return;
-    
-    EItemType InType = InItem->GetType();
-    switch(InType) {
-        case EItemType::Knife:
-        case EItemType::Axe:
-        case EItemType::Pickaxe:
-            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
-                EventSystem->Character.OnEquipHandItem.Broadcast(InItem);
-            }
-            break;
-        case EItemType::Jaket:
-            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this)) {
-                EventSystem->Character.OnEquipBodyItem.Broadcast(InItem);
-            }
-            break;
-        // 요리, 모닥불 등 기타 소모품 로직 생략...
-    }
-    
-    // 사용 후 공통적으로 해당 아이템 개수 감소 처리
-    UseItem(InItem->GetUID());
-}</code></pre>
-                        </div>
-                        <div class="cpp-code-block">
-                            <span class="code-label">3. 인벤토리 아이템 (UInventoryItem Class)</span>
-                            <pre><code>UCLASS()
-class FROZENBREAK_API UInventoryItem : public UObject {
-    GENERATED_BODY()
-public:
-    inline UItemData* GetData() { return Data.Get(); }
-    inline float GetWeight() { return Data.Get()->ItemWeight * Amount; }
-    inline int32 GetAmount() { return Amount; }
-    inline EItemType GetType() { return Data.Get()->ItemType; }
-    
-    void AddAmount(int32 InAmount);
-    void SetAmount(int32 InAmount);
-    
-    int32 QuickSlotNum = 0;
-private:
-    uint32 UID = 0;
-    TObjectPtr&lt;UItemData&gt; Data;
-    int32 Amount = 0;
-    float Durability = 0.0f;
-    float MaxDurability = 0.0f;
-};</code></pre>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- 퀵슬롯 로직 -->
-                <div class="space-y-10">
-                    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="layout-grid" class="w-6 h-6 text-purple-400"></i> Quick Slot Logic
-                    </h3>
-                    <div class="media-placeholder" style="aspect-ratio: 16/9; max-width: 800px;">
-                        <img src="/assets/img/frozen_break/quick_slot_uml.png" alt="Quick Slot UML" onerror="this.style.display='none'">
-                    </div>
-                    <div class="grid grid-cols-1 gap-4 text-sub">
-                        <div class="cpp-code-block">
-                            <span class="code-label">1. 키 입력 처리 (PlayerController)</span>
-                            <pre><code>if (IA_QuickSlot1)
-    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot1, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnOneStarted);
-if (IA_QuickSlot2)
-    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot2, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnTwoStarted);
-if (IA_QuickSlot3)
-    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot3, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnThreeStarted);
-if (IA_QuickSlot4)
-    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot4, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnFourStarted);
-if (IA_QuickSlot5)
-    EnhancedInputComponent-&gt;BindAction(IA_QuickSlot5, ETriggerEvent::Started, this, &amp;AThirdPersonPlayerController::OnFiveStarted);</code></pre>
-                        </div>
-                        <div class="cpp-code-block">
-                            <span class="code-label">2. 슬롯 저장 및 동기화 (InventoryWidget)</span>
-                            <pre><code>FReply UInventoryWidget::NativeOnKeyDown(const FGeometry&amp; InGeometry, const FKeyEvent&amp; InKeyEvent)
-{
-    int32 numberKey = 0;
-    
-    if (InKeyEvent.GetKey() == EKeys::One)
-        numberKey = 1;
-    else if (InKeyEvent.GetKey() == EKeys::Two)
-        numberKey = 2;
-    else if (InKeyEvent.GetKey() == EKeys::Three)
-        numberKey = 3;
-    else if (InKeyEvent.GetKey() == EKeys::Four)
-        numberKey = 4;
-    else if (InKeyEvent.GetKey() == EKeys::Five)
-        numberKey = 5;
-
-    if (numberKey &gt; 0)
-    {
-        auto Selected = InventoryList-&gt;GetSelectedItem();
-
-        if (Selected)
-        {
-            //이거 하기전에 현재 인벤토리에서 이 번호 아이템 있으면 슬롯 지워야함
-
-            //퀵슬롯 등록
-            if (UEventSubSystem* EventSystem = UEventSubSystem::Get(this))
-            {
-                EventSystem-&gt;UI.OnResetQuickSlotItem.Broadcast(numberKey);
-
-                UInventoryItem* selectedItem = Cast&lt;UInventoryItem&gt;(Selected);
-                selectedItem-&gt;QuickSlotNum = numberKey;
-                EventSystem-&gt;UI.OnSetItemToQuickSlot.Broadcast(numberKey, selectedItem);
-            }
-        }
-        return FReply::Handled();
-    }
-    // 다른 키는 부모 클래스 루틴 따름 (Unhandled 반환)
-    return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
-}</code></pre>
+                        <div class="bg-slate-900 p-6 rounded-xl border border-theme">
+                            <h3 class="font-bold text-white mb-3 flex items-center gap-2">
+                                <i data-lucide="layout-grid" class="w-5 h-5 text-amber-400"></i> 상태 기반 퀵슬롯 처리
+                            </h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong class="text-white">인벤토리 오픈 시:</strong> 단축키 입력을 확인하여 선택된 아이템을 퀵슬롯 번호에 <strong>등록</strong>합니다.</li>
+                                <li><strong class="text-white">인벤토리 클로즈 시:</strong> 단축키 입력을 확인하여 퀵슬롯에 등록된 아이템을 <strong>사용/장착</strong> 처리합니다.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 섹션 6: UI 작업 -->
-            <section id="ui-work" class="scroll-mt-24">
-                <div class="border-l-4 border-pink-500 pl-6 py-1 mb-10">
-                    <h2 class="text-3xl font-bold text-white uppercase">UI Implementation</h2>
-                </div>
-                <!-- 3:5 두 개, 16:9 한 개, 16:5 한 개 조화로운 그리드 배치 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- 좌측: 3:5 비율 이미지 2개 (인벤토리, 메뉴 등 세로형 UI) -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="media-placeholder" style="aspect-ratio: 3/5;">
-                            <img src="/assets/img/frozen_break/inventory.png" alt="UI 3:5 첫번째" onerror="this.style.display='none'">
-                        </div>
-                        <div class="media-placeholder" style="aspect-ratio: 3/5;">
-                            <img src="/assets/img/frozen_break/menu.png" alt="UI 3:5 두번째" onerror="this.style.display='none'">
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
+                <!-- 기본 UI -->
+                <section id="ui" class="scroll-mt-24 flex flex-col">
+                    <div class="border-l-4 border-purple-500 pl-6 py-1 mb-6">
+                        <h2 class="text-2xl font-bold text-white">UI Implementation</h2>
                     </div>
+                    <div class="bg-secondary p-6 rounded-xl border border-theme flex-grow">
+                        <p class="text-sub text-sm mb-4">
+                            <code>UISubSystem</code>을 활용하여 게임 내 핵심 화면들의 위젯을 구성하고 제어했습니다.
+                        </p>
+                        <ul class="list-disc list-inside text-sm text-sub space-y-2">
+                            <li><strong>로비 화면:</strong> 게임 시작 및 기본 설정 UI</li>
+                            <li><strong>인벤토리 화면:</strong> 획득 아이템 목록 및 상태 표시 UI</li>
+                            <li><strong>인게임 메뉴:</strong> 시스템 옵션 및 종료 메뉴 처리</li>
+                        </ul>
+                    </div>
+                </section>
 
-                    <!-- 우측: 16:9, 16:5 비율 이미지 (로비, 퀵슬롯 등 가로/와이드형 UI) -->
-                    <div class="flex flex-col gap-4 justify-between h-full">
-                        <div class="media-placeholder w-full h-full" style="aspect-ratio: 16/9;">
-                            <img src="/assets/img/frozen_break/lobby.png" alt="UI 16:9" onerror="this.style.display='none'">
-                        </div>
-                        <div class="media-placeholder w-full h-full" style="aspect-ratio: 16/5;">
-                            <img src="/assets/img/frozen_break/quick_slot.png" alt="UI 16:5" onerror="this.style.display='none'">
-                        </div>
+                <!-- 팀 리딩 -->
+                <section id="management" class="scroll-mt-24 flex flex-col">
+                    <div class="border-l-4 border-red-500 pl-6 py-1 mb-6">
+                        <h2 class="text-2xl font-bold text-white">Team Leading</h2>
                     </div>
-                </div>
-            </section>
-
-            <!-- 섹션 7: 협업 및 프로젝트 리딩 -->
-            <section id="management" class="scroll-mt-24 pb-24">
-                <div class="border-l-4 border-emerald-500 pl-6 py-1 mb-10">
-                    <h2 class="text-3xl font-bold text-white uppercase">Team Collaboration & Leading</h2>
-                </div>
-                <div class="space-y-6">
-                    <!-- 큰 이미지 1개 -->
-                    <div class="media-placeholder" style="aspect-ratio: 5/5; max-width: 600px;">
-                        <img src="/assets/img/frozen_break/task.png" alt="업무 분배 일정표" onerror="this.style.display='none'">
+                    <div class="bg-secondary p-6 rounded-xl border border-theme flex-grow">
+                        <p class="text-sub text-sm mb-4">
+                            4인 팀의 팀장으로서, 원활한 협업과 일정 준수를 위한 관리 체계를 확립했습니다.
+                        </p>
+                        <ul class="space-y-3 text-sm text-sub">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-square" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>
+                                <span><strong>일감 생성 및 분배:</strong> 기획 문서를 바탕으로 개발 태스크를 세분화하고 팀원들의 역량에 맞춰 문서를 통해 분배.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="bar-chart" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>
+                                <span><strong>진행상황 공유:</strong> 정기적인 회의 및 문서 업데이트를 통해 프로젝트 병목을 파악하고 일정을 관리.</span>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- 작은 이미지 1개 -->
-                    <div class="media-placeholder" style="aspect-ratio: 16/9; ">
-                        <img src="/assets/img/frozen_break/schedule.png" alt="일정 관리" onerror="this.style.display='none'">
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
 
         </div>
     </main>
@@ -907,7 +342,7 @@ if (IA_QuickSlot5)
     <!-- Footer -->
     <footer class="py-12 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
         <div class="max-w-7xl mx-auto px-4">
-            <p>&copy; 2026 Game Developer 성현우 Portfolio. All rights reserved.</p>
+            <p>&copy; 2026 Game Developer Portfolio. All rights reserved.</p>
         </div>
     </footer>
 
@@ -916,4 +351,3 @@ if (IA_QuickSlot5)
     </script>
 </body>
 </html>
-```
