@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valkyrie War - Table-based GAS Setup</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* 미디어 플레이스홀더 */
+        .media-placeholder {
+            width: 100%;
+            background-color: var(--bg-secondary);
+            border: 1px dashed var(--border);
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-sub);
+            font-size: 0.875rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="project_detail_valkyrie.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Project</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-16 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 opacity-80"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-4">
+                <i data-lucide="database" class="w-6 h-6 text-emerald-400"></i>
+                <span class="text-emerald-400 font-bold tracking-wider uppercase text-sm">System Architecture Document</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                테이블 기반 GAS 세팅 구조
+            </h1>
+            <p class="text-sub text-lg">
+                하드코딩을 배제하고 언리얼 엔진의 데이터 테이블(DataTable)과 GAS(Gameplay Ability System)를 결합하여, 유연하고 확장성 높은 어빌리티 부여 및 데미지 연산 시스템을 구축했습니다.
+            </p>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+        
+        <!-- 1. 핵심 데이터 구조 및 클래스 -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-3">
+                <i data-lucide="layout-template" class="w-6 h-6 text-emerald-500"></i> 1. 데이터 관리 및 기반 클래스
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 테이블 데이터 -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-emerald-500/50 transition-colors">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">테이블 데이터 (UDataTable)</h3>
+                        <i data-lucide="table" class="w-5 h-5 text-sub"></i>
+                    </div>
+                    <p class="text-sub text-sm mb-4">
+                        어빌리티 및 이펙트 세팅에 필요한 각종 필수 데이터를 <code>UDataTable</code> 기반으로 저장하여 관리합니다.
+                    </p>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2">
+                        <li><code class="text-emerald-400 bg-slate-900 px-1 py-0.5 rounded text-xs">EGameplayEffectDurationType</code>: 이펙트의 지속 시간 타입 설정</li>
+                        <li><code class="text-emerald-400 bg-slate-900 px-1 py-0.5 rounded text-xs">FGameplayTagContainer</code>: 어빌리티의 고유 식별 및 조건 처리를 위한 태그 컨테이너</li>
+                        <li>기타 GameplayEffect 설정용 수치 및 데이터 일괄 보관</li>
+                    </ul>
+                </div>
+
+                <!-- 베이스 어빌리티 클래스 -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-emerald-500/50 transition-colors">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">기반 클래스 (Base Ability)</h3>
+                        <i data-lucide="layers" class="w-5 h-5 text-sub"></i>
+                    </div>
+                    <p class="text-sub text-sm mb-4">
+                        모든 어빌리티는 공통된 규격으 <code class="text-emerald-400 bg-slate-900 px-1 py-0.5 rounded">UBaseGameplayAbility</code> 클래스를 사용하여 생성됩니다.
+                    </p>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2">
+                        <li>중복 코드 최소화 및 통합 관리 용이성 확보</li>
+                        <li>생성 시 전달받은 테이블 데이터를 내부 프로퍼티로 파싱 및 세팅하는 공통 로직 포함</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 어빌리티 부여 및 실행 흐름 -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-3">
+                <i data-lucide="activity" class="w-6 h-6 text-blue-500"></i> 2. 어빌리티 부여 및 실행 메커니즘
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- 부여 단계 -->
+                <div class="flex flex-col md:flex-row gap-6 items-start bg-slate-900/50 p-6 rounded-xl border border-theme">
+                    <div class="p-3 bg-blue-500/20 rounded-lg shrink-0 mt-1">
+                        <i data-lucide="user-plus" class="w-6 h-6 text-blue-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">캐릭터 정보 세팅 (어빌리티 부여)</h3>
+                        <p class="text-sub text-sm leading-relaxed">
+                            캐릭터 초기화 시, 테이블에서 읽어온 데이터를 <code class="text-blue-300 bg-slate-800 px-1 py-0.5 rounded">FGameplayAbilitySpec</code> 객체에 함께 담아 전달합니다. 
+                            이 과정을 통해 캐릭터에게 알맞은 어빌리티(Ability)가 <code class="text-blue-300 bg-slate-800 px-1 py-0.5 rounded">GiveAbility</code> 되며, 해당 어빌리티를 식별할 수 있는 <strong>고유 태그(Tag)</strong>가 함께 세팅됩니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 적용 단계 -->
+                <div class="flex flex-col md:flex-row gap-6 items-start bg-slate-900/50 p-6 rounded-xl border border-theme">
+                    <div class="p-3 bg-red-500/20 rounded-lg shrink-0 mt-1">
+                        <i data-lucide="swords" class="w-6 h-6 text-red-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">공격 시점 어빌리티 적용</h3>
+                        <p class="text-sub text-sm leading-relaxed">
+                            실제 공격 타이밍에 부여된 태그(Tag)를 통해 대상 어빌리티를 검색합니다. 검색된 어빌리티는 타겟 객체에게 직접 <strong>Trigger(실행)</strong> 시키거나, 생성되는 발사체(Projectile)에 어빌리티 정보를 넘겨주어 충돌 시점에 적용되도록 설계되었습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 데미지 연산 -->
+                <div class="flex flex-col md:flex-row gap-6 items-start bg-slate-900/50 p-6 rounded-xl border border-theme">
+                    <div class="p-3 bg-amber-500/20 rounded-lg shrink-0 mt-1">
+                        <i data-lucide="calculator" class="w-6 h-6 text-amber-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-2">데미지 계산 처리 (Execution Calculation)</h3>
+                        <p class="text-sub text-sm leading-relaxed">
+                            어빌리티 실행으로 인해 <code>GameplayEffect</code>가 생성될 때, <code class="text-amber-300 bg-slate-800 px-1 py-0.5 rounded">UGameplayEffectExecutionCalculation</code> 클래스를 추가하여 상대 방어력에 따른 공격력 처리를 하는 커스텀 데미지 연산 로직을 실행합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 시스템 흐름도 (UML) -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-3">
+                <i data-lucide="git-commit" class="w-6 h-6 text-purple-500"></i> 3. GAS 로직 실행 흐름도 (UML)
+            </h2>
+            
+            <div class="bg-secondary p-8 rounded-xl border border-theme">
+                
+                <!-- 텍스트 기반 다이어그램 (초기화) -->
+                <h4 class="font-bold text-emerald-400 mb-4 text-sm uppercase tracking-wider">Phase 1: 어빌리티 초기화 및 부여</h4>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-2 mb-10 text-center md:text-left text-sm font-mono relative">
+                    <!-- 노드 1 -->
+                    <div class="bg-slate-900 border border-slate-600 p-4 rounded-lg w-full md:w-1/3 relative z-10 shadow-lg">
+                        <p class="text-emerald-400 font-bold mb-1">Character</p>
+                        <p class="text-xs text-sub leading-tight">CreateAbility<br><span class="text-gray-500">(FGameplayAbilitySpec 생성)</span><br>↓<br>GiveAbility</p>
+                    </div>
+                    <!-- 화살표 -->
+                    <div class="hidden md:flex text-slate-500"><i data-lucide="arrow-right" class="w-6 h-6"></i></div>
+                    <div class="flex md:hidden text-slate-500 my-2"><i data-lucide="arrow-down" class="w-6 h-6"></i></div>
+                    <!-- 노드 2 -->
+                    <div class="bg-slate-900 border border-slate-600 p-4 rounded-lg w-full md:w-1/3 relative z-10 shadow-lg">
+                        <p class="text-blue-400 font-bold mb-1">UBaseGameplayAbility</p>
+                        <p class="text-xs text-sub leading-tight">OnAvatarSet 호출</p>
+                    </div>
+                    <!-- 화살표 -->
+                    <div class="hidden md:flex text-slate-500"><i data-lucide="arrow-right" class="w-6 h-6"></i></div>
+                    <div class="flex md:hidden text-slate-500 my-2"><i data-lucide="arrow-down" class="w-6 h-6"></i></div>
+                    <!-- 노드 3 -->
+                    <div class="bg-slate-900 border border-emerald-600 p-4 rounded-lg w-full md:w-1/3 relative z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                        <p class="text-emerald-400 font-bold mb-1">Data Setup Complete</p>
+                        <p class="text-xs text-sub leading-tight">생성 시 전달받은 데이터로<br><span class="text-amber-200">FAbilityTriggerData</span> 및<br><span class="text-amber-200">GameplayEffect</span> 세팅 완료</p>
+                    </div>
+                </div>
+
+                <!-- 텍스트 기반 다이어그램 (실행) -->
+                <h4 class="font-bold text-red-400 mb-4 text-sm uppercase tracking-wider">Phase 2: 공격 및 어빌리티 적용</h4>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-2 mb-8 text-center md:text-left text-sm font-mono relative">
+                    <!-- 노드 1 -->
+                    <div class="bg-slate-900 border border-slate-600 p-4 rounded-lg w-full md:w-1/3 relative z-10 shadow-lg">
+                        <p class="text-red-400 font-bold mb-1">OnAttack</p>
+                        <p class="text-xs text-sub leading-tight">공격 이벤트 발생</p>
+                    </div>
+                    <!-- 화살표 -->
+                    <div class="hidden md:flex text-slate-500"><i data-lucide="arrow-right" class="w-6 h-6"></i></div>
+                    <div class="flex md:hidden text-slate-500 my-2"><i data-lucide="arrow-down" class="w-6 h-6"></i></div>
+                    <!-- 노드 2 -->
+                    <div class="bg-slate-900 border border-slate-600 p-4 rounded-lg w-full md:w-1/3 relative z-10 shadow-lg">
+                        <p class="text-blue-400 font-bold mb-1">Ability Search</p>
+                        <p class="text-xs text-sub leading-tight"><span class="text-blue-200">GetActivatableAbilities()</span><br>내에서 해당 태그(Tag)로<br>발동할 어빌리티 체크</p>
+                    </div>
+                    <!-- 화살표 -->
+                    <div class="hidden md:flex text-slate-500"><i data-lucide="arrow-right" class="w-6 h-6"></i></div>
+                    <div class="flex md:hidden text-slate-500 my-2"><i data-lucide="arrow-down" class="w-6 h-6"></i></div>
+                    <!-- 노드 3 -->
+                    <div class="bg-slate-900 border border-red-600 p-4 rounded-lg w-full md:w-1/3 relative z-10 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                        <p class="text-red-400 font-bold mb-1">Ability Trigger</p>
+                        <p class="text-xs text-sub leading-tight"><span class="text-amber-200">TriggerAbilityFromGameplayEvent</span><br>로 어빌리티 적용<br>(타겟 데이터 전달)</p>
+                    </div>
+                </div>
+
+                <!-- 실제 UML 이미지 플레이스홀더 -->
+                <div class="mt-8 border-t border-slate-700 pt-8">
+                    <p class="text-sm font-bold text-sub mb-3"><i data-lucide="image" class="w-4 h-4 inline-block align-text-bottom mr-1"></i> 통합 UML 다이어그램</p>
+                    <div class="media-placeholder" style="aspect-ratio: 21/9; max-width: 100%;">
+                        <img src="assets/img/valkyrie_war/gas_uml.png" alt="[Image of UML]" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-5xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. Valkyrie War Project Docs.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
