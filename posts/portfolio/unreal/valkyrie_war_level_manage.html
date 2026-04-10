@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valkyrie War - Level Management</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Visual Showcase 테마 고정 변수 */
+        :root {
+            --bg-primary: #0f172a; /* Slate 900 */
+            --bg-secondary: #1e293b; /* Slate 800 */
+            --text-main: #f8fafc; /* Slate 50 */
+            --text-sub: #cbd5e1; /* Slate 300 */
+            --accent: #10b981; /* Emerald 500 */
+            --border: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { letter-spacing: -0.025em; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        nav {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-sub); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-50 bg-opacity-90 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="valkyrie_war.html" class="flex items-center gap-2 group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 text-sub group-hover:text-white transition"></i>
+                    <span class="font-medium text-sub group-hover:text-white transition">Back to Project</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative py-16 overflow-hidden border-b border-theme">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 opacity-80"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-4">
+                <i data-lucide="layers" class="w-6 h-6 text-purple-400"></i>
+                <span class="text-purple-400 font-bold tracking-wider uppercase text-sm">System Architecture Document</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                레벨 관리 구조화
+            </h1>
+            <p class="text-sub text-lg max-w-3xl">
+                각 레벨(Login, Lobby, Battle)의 성격에 맞춰 역할을 명확히 분리하고, <code class="bg-slate-800 px-1 py-0.5 rounded text-emerald-400 text-sm">GameMode</code> - <code class="bg-slate-800 px-1 py-0.5 rounded text-emerald-400 text-sm">GameState</code> - <code class="bg-slate-800 px-1 py-0.5 rounded text-emerald-400 text-sm">PlayerController</code> 구조를 통해 체계적으로 관리하는 시스템입니다.
+            </p>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+        
+        <!-- 1. Login Level -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-3">
+                <i data-lucide="log-in" class="w-6 h-6 text-blue-400"></i> 1. Login Level (접속 및 초기화)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- GameMode -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-blue-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="settings" class="w-5 h-5 text-blue-400"></i>
+                        <h3 class="text-lg font-bold text-white">LoginGameMode</h3>
+                    </div>
+                    <p class="text-sm text-sub flex-grow">
+                        레벨 진입 시 해당 씬에서 사용할 <strong>Controller</strong>와 <strong>State</strong> 클래스를 세팅하고 초기화하기 위해 추가된 기반 클래스입니다.
+                    </p>
+                </div>
+                <!-- GameState -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-blue-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="activity" class="w-5 h-5 text-blue-400"></i>
+                        <h3 class="text-lg font-bold text-white">LoginGameState</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>상태값에 따른 <strong>UI 표기</strong> 및 <strong>데이터 로드</strong> 제어.</li>
+                        <li>유저 <strong>계정 체크 및 생성</strong> 로직 처리.</li>
+                        <li>인증 완료 후 본격적인 <strong>게임 시작(레벨 전환)</strong> 기능 구현.</li>
+                    </ul>
+                </div>
+                <!-- PlayerController -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-blue-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="gamepad-2" class="w-5 h-5 text-blue-400"></i>
+                        <h3 class="text-lg font-bold text-white">LoginPlayerController</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>레벨이 시작되면 <strong>State 초기화</strong> 진행.</li>
+                        <li>초기화 및 로그인 과정 중 <strong>상태 변경 호출</strong> 전담.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Lobby Level -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-3">
+                <i data-lucide="home" class="w-6 h-6 text-emerald-400"></i> 2. Lobby Level (로비 및 소환)
+            </h2>
+            
+            <!-- SubLevel 강조 박스 -->
+            <div class="bg-emerald-900/20 border-l-4 border-emerald-500 p-4 rounded-r-lg mb-6 flex items-start gap-4">
+                <i data-lucide="layers" class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5"></i>
+                <div>
+                    <h4 class="text-white font-bold mb-1">SubLevel 구조를 활용한 맵 전환</h4>
+                    <p class="text-sm text-sub">
+                        로비 화면과 소환(Gacha) 화면 간의 레벨 전환 시 데이터 공유 및 원할한 전환을 위해, 빈(Empty) 레벨을 베이스로 두고 그 안에 <strong>Lobby 레벨과 Gacha 레벨을 SubLevel로 배치</strong>하여 상황에 따라 동적으로 로드 및 언로드 되도록 구현했습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- GameMode -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-emerald-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="settings" class="w-5 h-5 text-emerald-400"></i>
+                        <h3 class="text-lg font-bold text-white">LobbyGameMode</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>로비 내 캐릭터 배치를 위해 레벨 상의 <code class="text-emerald-300">PlayerStart</code> 액터를 탐색.</li>
+                        <li>해당 위치를 기준으로 <strong>캐릭터를 동기화하여 생성 및 배치</strong>.</li>
+                    </ul>
+                </div>
+                <!-- GameState -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-emerald-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="activity" class="w-5 h-5 text-emerald-400"></i>
+                        <h3 class="text-lg font-bold text-white">LobbyGameState</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>현재 상태값(로비/소환 등)에 따라 메인 <strong>Lobby HUD</strong> 제어.</li>
+                        <li>던전 진입을 위한 <strong>스테이지 UI 표기</strong> 등의 작업 진행.</li>
+                    </ul>
+                </div>
+                <!-- PlayerController -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-emerald-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="gamepad-2" class="w-5 h-5 text-emerald-400"></i>
+                        <h3 class="text-lg font-bold text-white">LobbyPlayerController</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>로비 및 소환 레벨의 <strong>Load/Unload 작업 제어</strong>.</li>
+                        <li>전환 완료 시 <strong>카메라 Actor 배치 및 Blending</strong> 연출 구현.</li>
+                        <li>로비에 배치된 캐릭터 정보 및 <strong>장비 변경(외형) 세팅</strong> 처리.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Battle Level -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2 border-b border-border pb-3">
+                <i data-lucide="swords" class="w-6 h-6 text-red-400"></i> 3. Battle Level (인게임 전투)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- GameMode -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-red-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="settings" class="w-5 h-5 text-red-400"></i>
+                        <h3 class="text-lg font-bold text-white truncate">AValkyrieWarGameMode</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>전투 시작 시 전투 맵의 <code class="text-red-300">PlayerStart</code> 위치 확인.</li>
+                        <li>참여하는 <strong>캐릭터(플레이어 및 적군) 생성 및 초기화</strong> 주도.</li>
+                    </ul>
+                </div>
+                <!-- GameState -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-red-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="activity" class="w-5 h-5 text-red-400"></i>
+                        <h3 class="text-lg font-bold text-white">BattleGameState</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>현재 진행 중인 <strong>전투 상태값</strong> 관리.</li>
+                        <li>상태에 따른 전투 인게임 <strong>UI 세팅 및 업데이트</strong>.</li>
+                        <li>승패 결정 후 <strong>전투 결과 UI 표기</strong> 제어.</li>
+                    </ul>
+                </div>
+                <!-- PlayerController -->
+                <div class="bg-secondary border border-theme rounded-xl p-6 hover:border-red-500/50 transition-colors flex flex-col">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="gamepad-2" class="w-5 h-5 text-red-400"></i>
+                        <h3 class="text-lg font-bold text-white truncate text-sm sm:text-lg">AValkyrieCharacterController</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-sub space-y-2 flex-grow">
+                        <li>디펜스 RPG 환경에 맞춘 <strong>캐릭터 조작 및 이동</strong> 관리.</li>
+                        <li>시야 확보 및 연출을 위한 <strong>카메라 이동 제어</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-theme text-center text-sm text-sub bg-[#0b1120]">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>&copy; 2026 Game Developer Portfolio. Valkyrie War Project Docs.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
